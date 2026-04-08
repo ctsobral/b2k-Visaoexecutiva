@@ -1,6 +1,4 @@
-# b2k-Visaoexecutiva
-Migração B2K — Visão Executiva
-[index.html](https://github.com/user-attachments/files/26577046/index.html)
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
