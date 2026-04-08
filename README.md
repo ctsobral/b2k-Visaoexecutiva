@@ -1,4 +1,4 @@
-
+[b2k-executivo.html](https://github.com/user-attachments/files/26578255/b2k-executivo.html)
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
