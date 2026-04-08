@@ -1,2 +1,968 @@
 # b2k-Visaoexecutiva
 Migração B2K — Visão Executiva
+[index.html](https://github.com/user-attachments/files/26577046/index.html)
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Migração B2K — Visão Executiva</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0E1A;--bg2:#0D1220;--bg3:#111827;
+  --card:rgba(255,255,255,.04);--card2:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.15);
+  --text:#F0F0F5;--muted:#8B8FA3;--dim:#3D4160;
+  --done:#21C25E;--build:#3B82F6;--pri:#F59E0B;
+  --disc:#A855F7;--wish:#64748B;--cancel:#EF4444;--pink:#EC4899;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased;}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:200;background:rgba(10,14,26,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);height:54px;display:flex;align-items:center;padding:0 40px;gap:16px;}
+.nav-brand{font-weight:800;font-size:14px;display:flex;align-items:center;gap:8px;white-space:nowrap;}
+.nav-accent{color:#21C25E;}
+.nav-links{display:flex;gap:4px;overflow-x:auto;}
+.nav-links::-webkit-scrollbar{display:none;}
+.nav-link{font-size:12px;color:var(--muted);text-decoration:none;padding:5px 12px;border-radius:8px;white-space:nowrap;transition:all .18s;}
+.nav-link:hover,.nav-link.active{background:var(--card2);color:var(--text);}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.nav-jira{font-size:11px;color:var(--muted);text-decoration:none;padding:4px 10px;border:1px solid var(--border);border-radius:6px;transition:all .18s;}
+.nav-jira:hover{border-color:var(--border2);color:var(--text);}
+.nav-date{font-size:11px;color:var(--dim);}
+
+/* ── SLIDE WRAPPER ── */
+.slides{display:flex;flex-direction:column;gap:0;}
+.slide{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:60px 40px;max-width:1400px;margin:0 auto;width:100%;border-bottom:1px solid var(--border);}
+.slide:last-child{border-bottom:none;}
+.slide-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.slide-tag::before{content:'';width:3px;height:14px;border-radius:2px;}
+.slide-title{font-size:clamp(28px,4vw,48px);font-weight:900;line-height:1.1;margin-bottom:12px;}
+.slide-sub{font-size:15px;color:var(--muted);max-width:720px;line-height:1.7;margin-bottom:36px;}
+.grad-text{background:linear-gradient(135deg,#21C25E,#3B82F6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.grad-text2{background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+
+/* ── SLIDE 1 · CAPA ── */
+#s1{background:radial-gradient(ellipse at 20% 50%,rgba(33,194,94,.06) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(59,130,246,.06) 0%,transparent 60%),var(--bg);}
+.capa-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.capa-left h1{font-size:clamp(36px,5vw,64px);font-weight:900;line-height:1.05;margin-bottom:20px;}
+.capa-left p{font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:32px;max-width:520px;}
+.capa-meta{display:flex;flex-direction:column;gap:10px;}
+.meta-row{display:flex;align-items:center;gap:10px;font-size:13px;}
+.meta-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.meta-label{color:var(--muted);font-size:11px;}
+.meta-val{font-weight:600;}
+.capa-right{display:flex;flex-direction:column;gap:16px;}
+.big-stat{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:24px 28px;}
+.big-stat-num{font-size:56px;font-weight:900;line-height:1;}
+.big-stat-lbl{font-size:13px;color:var(--muted);margin-top:6px;}
+.big-stat-sub{font-size:11px;color:var(--dim);margin-top:3px;}
+.capa-chips{display:flex;gap:8px;flex-wrap:wrap;}
+.capa-chip{font-size:11px;padding:5px 14px;border-radius:100px;font-weight:700;border:1px solid;}
+
+/* STATUS colors */
+.c-done{background:rgba(33,194,94,.12);border-color:rgba(33,194,94,.3);color:#4ADE80;}
+.c-build{background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.3);color:#60A5FA;}
+.c-pri{background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.3);color:#FCD34D;}
+.c-disc{background:rgba(168,85,247,.12);border-color:rgba(168,85,247,.3);color:#C084FC;}
+.c-wish{background:rgba(100,116,139,.1);border-color:rgba(100,116,139,.3);color:#94A3B8;}
+.c-cancel{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2);color:#FCA5A5;}
+.c-disc-q{background:rgba(236,72,153,.12);border-color:rgba(236,72,153,.3);color:#F472B6;}
+.c-warn{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2);color:#FCA5A5;}
+.c-ok{background:rgba(33,194,94,.08);border-color:rgba(33,194,94,.2);color:#86EFAC;}
+.c-info{background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.2);color:#93C5FD;}
+
+/* ── SLIDE 2 · STATUS ── */
+.status-donut-area{display:grid;grid-template-columns:300px 1fr;gap:48px;align-items:center;}
+.donut-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
+.donut-center{position:absolute;text-align:center;}
+.donut-pct{font-size:42px;font-weight:900;color:var(--done);}
+.donut-lbl{font-size:12px;color:var(--muted);}
+.status-list{display:flex;flex-direction:column;gap:14px;}
+.sl-row{display:flex;align-items:center;gap:12px;}
+.sl-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0;}
+.sl-label{font-size:14px;flex:1;}
+.sl-bar-wrap{flex:2;height:8px;background:rgba(255,255,255,.05);border-radius:100px;overflow:hidden;}
+.sl-bar{height:100%;border-radius:100px;transition:width 1s ease;}
+.sl-num{font-size:14px;font-weight:700;width:32px;text-align:right;}
+.sl-pct{font-size:11px;color:var(--muted);width:40px;text-align:right;}
+
+/* ── SLIDE 3 · TIMELINE MVP ── */
+.mvp-timeline{display:flex;flex-direction:column;gap:0;position:relative;}
+.mvp-timeline::before{content:'';position:absolute;left:140px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--done),var(--build),var(--pri),var(--disc),var(--wish));opacity:.3;}
+.mvp-row{display:grid;grid-template-columns:140px 1fr;gap:0;position:relative;}
+.mvp-label{padding:20px 24px 20px 0;text-align:right;display:flex;flex-direction:column;gap:4px;justify-content:flex-start;padding-top:24px;}
+.mvp-badge{font-size:13px;font-weight:800;}
+.mvp-period{font-size:10px;color:var(--muted);}
+.mvp-content{border-left:none;padding:16px 0 16px 32px;position:relative;}
+.mvp-dot{position:absolute;left:-7px;top:24px;width:14px;height:14px;border-radius:50%;border:2px solid;}
+.mvp-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px 20px;transition:all .2s;}
+.mvp-card:hover{border-color:var(--border2);}
+.mvp-card-title{font-size:14px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.mvp-card-body{font-size:12px;color:var(--muted);line-height:1.6;}
+.mvp-epics{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
+.mvp-chip{font-size:10px;padding:2px 9px;border-radius:100px;font-weight:600;text-decoration:none;transition:all .15s;}
+.mvp-chip:hover{transform:translateY(-1px);}
+.status-pill{font-size:10px;padding:2px 8px;border-radius:100px;font-weight:700;}
+
+/* ── SLIDE 4 · FRENTES ── */
+.frentes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.frente-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px 20px;transition:all .2s;}
+.frente-card:hover{border-color:var(--border2);transform:translateY(-2px);}
+.frente-card.span2{grid-column:span 2;}
+.fc-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.fc-num{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;}
+.fc-title{font-size:13px;font-weight:700;flex:1;}
+.fc-status{font-size:9px;padding:2px 7px;border-radius:100px;font-weight:700;flex-shrink:0;}
+.fc-items{display:flex;flex-direction:column;gap:7px;}
+.fc-item{font-size:11px;color:var(--muted);display:flex;align-items:flex-start;gap:7px;line-height:1.5;}
+.fc-item b{color:var(--text);}
+.fc-item-icon{flex-shrink:0;font-size:10px;margin-top:1px;}
+.area-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;}
+.at{font-size:9px;padding:2px 7px;border-radius:100px;font-weight:600;}
+.at-red{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#FCA5A5;}
+.at-yellow{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#FCD34D;}
+.at-green{background:rgba(33,194,94,.1);border:1px solid rgba(33,194,94,.2);color:#86EFAC;}
+
+/* ── SLIDE 5 · RISCOS ── */
+.risks-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.risk-card{border-radius:12px;padding:20px 22px;border:1px solid;}
+.risk-card.r-high{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.2);}
+.risk-card.r-med{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.2);}
+.risk-card.r-low{background:rgba(33,194,94,.05);border-color:rgba(33,194,94,.18);}
+.risk-card.r-info{background:rgba(59,130,246,.05);border-color:rgba(59,130,246,.18);}
+.risk-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.risk-level{font-size:9px;padding:2px 8px;border-radius:100px;font-weight:700;}
+.rl-high{background:rgba(239,68,68,.2);color:#FCA5A5;}
+.rl-med{background:rgba(245,158,11,.2);color:#FCD34D;}
+.rl-low{background:rgba(33,194,94,.2);color:#86EFAC;}
+.rl-info{background:rgba(59,130,246,.2);color:#93C5FD;}
+.risk-title{font-size:14px;font-weight:700;}
+.risk-body{font-size:12px;color:var(--muted);line-height:1.6;}
+.risk-action{font-size:11px;margin-top:10px;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,.04);}
+.risk-action b{color:var(--text);}
+
+/* ── SLIDE 6 · SQUADS ── */
+.squads-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.squad-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
+.sq-name{font-size:16px;font-weight:800;margin-bottom:4px;}
+.sq-count{font-size:28px;font-weight:900;}
+.sq-lbl{font-size:11px;color:var(--muted);}
+.sq-bar{height:4px;border-radius:100px;margin-top:12px;background:rgba(255,255,255,.05);}
+.sq-fill{height:100%;border-radius:100px;}
+
+/* ── SLIDE 7 · PRÓXIMOS PASSOS ── */
+.proximos-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.px-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:24px 26px;}
+.px-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.px-icon{font-size:22px;}
+.px-title{font-size:16px;font-weight:800;}
+.px-period{font-size:11px;color:var(--muted);padding:2px 8px;border-radius:6px;background:var(--card);border:1px solid var(--border);}
+.px-items{display:flex;flex-direction:column;gap:10px;}
+.px-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--muted);line-height:1.5;}
+.px-bullet{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px;}
+.px-item b{color:var(--text);}
+
+/* ── PROGRESS BAR ── */
+.prog-wrap{background:rgba(255,255,255,.05);border-radius:100px;height:10px;overflow:hidden;margin-bottom:8px;}
+.prog-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,#21C25E,#3B82F6);transition:width 1.2s ease;}
+.prog-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);}
+
+/* ── UTILS ── */
+.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:100px;font-size:11px;font-weight:700;border:1px solid;}
+.pulse-dot{width:7px;height:7px;border-radius:50%;animation:pd 2s infinite;flex-shrink:0;}
+@keyframes pd{0%,100%{opacity:1}50%{opacity:.3}}
+.divider{height:1px;background:var(--border);margin:40px 0;}
+a{color:inherit;text-decoration:none;}
+a:hover{opacity:.8;}
+
+/* ── PRINT/SCROLL HINT ── */
+.scroll-hint{display:flex;justify-content:center;gap:8px;padding:20px;font-size:11px;color:var(--dim);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">&#x1F680; <span class="nav-accent">Migração B2K</span></div>
+  <div class="nav-links">
+    <a class="nav-link active" href="#s1">Capa</a>
+    <a class="nav-link" href="#s4">Frentes de Trabalho</a>
+    <a class="nav-link" href="#s2">Status dos E&#769;picos</a>
+    <a class="nav-link" href="#s3">Timeline MVP</a>
+    <a class="nav-link" href="#s5">Riscos</a>
+    <a class="nav-link" href="#s6">Squads</a>
+    <a class="nav-link" href="#s7">Pro&#769;ximos Passos</a>
+    <a class="nav-link" href="#s8" style="color:#EF4444;font-weight:700">&#x1F680; Tombamento Q1/27</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-date">06/abr/2026</span>
+    <a class="nav-jira" href="https://picpay.atlassian.net/browse/BUCS-345" target="_blank">BUCS-345 ↗</a>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════
+     SLIDE 1 · CAPA
+     ════════════════════════════════════════ -->
+<div class="slide" id="s1">
+  <div class="slide-tag" style="--c:#21C25E"><span style="background:#21C25E" class=""></span>Iniciativa Estratégica · BUCS-345 · Squad PHD</div>
+  <div class="capa-grid">
+    <div class="capa-left">
+      <h1>Migração<br><span class="grad-text">Vision+</span><br>para B2K</h1>
+      <p>Migração das funcionalidades do Vision+ para a nova plataforma B2K, garantindo continuidade dos serviços e maior independência da FIS.</p>
+      <div class="capa-meta">
+        <div class="meta-row">
+          <div class="meta-icon" style="background:rgba(245,158,11,.12)">&#x1F4C5;</div>
+          <div><div class="meta-label">Período</div><div class="meta-val">Jul 2025 → Abr 2027</div></div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-icon" style="background:rgba(59,130,246,.12)">&#x1F464;</div>
+          <div><div class="meta-label">Responsável</div><div class="meta-val">Vitor Marques Gaspar · Squad PHD</div></div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-icon" style="background:rgba(33,194,94,.12)">&#x1F4CB;</div>
+          <div><div class="meta-label">Motivação</div><div class="meta-val">Contrato com processadora — migração obrigatória</div></div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-icon" style="background:rgba(168,85,247,.12)">&#x1F3D7;</div>
+          <div><div class="meta-label">Status atual</div><div class="meta-val">MVP4 em andamento</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="capa-right">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="big-stat" style="border-top:3px solid var(--text)">
+          <div class="big-stat-num">77</div>
+          <div class="big-stat-lbl">Épicos totais</div>
+          <div class="big-stat-sub">na iniciativa</div>
+        </div>
+        <div class="big-stat" style="border-top:3px solid var(--done)">
+          <div class="big-stat-num" style="color:var(--done)">23</div>
+          <div class="big-stat-lbl">Concluídos</div>
+          <div class="big-stat-sub">30% do total</div>
+        </div>
+        <div class="big-stat" style="border-top:3px solid var(--build)">
+          <div class="big-stat-num" style="color:var(--build)">6</div>
+          <div class="big-stat-lbl">Em Build</div>
+          <div class="big-stat-sub">MVP4 · Q2 2026</div>
+        </div>
+        <div class="big-stat" style="border-top:3px solid var(--cancel)">
+          <div class="big-stat-num" style="color:var(--cancel);font-size:32px">Abr/27</div>
+          <div class="big-stat-lbl">Deadline</div>
+          <div class="big-stat-sub">~12 meses restantes</div>
+        </div>
+      </div>
+      <!-- Progress -->
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px 20px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
+          <span style="font-size:13px;font-weight:700;">Progresso Geral</span>
+          <span style="font-size:20px;font-weight:900;color:var(--done)">30%</span>
+        </div>
+        <div class="prog-wrap"><div class="prog-fill" id="progMain" style="width:0%"></div></div>
+        <div class="prog-labels"><span>MVPs 1, 2 e 3 concluídos</span><span>MVP4 em andamento</span></div>
+      </div>
+      <div class="capa-chips">
+        <span class="capa-chip c-done">✅ 23 Done</span>
+        <span class="capa-chip c-build">🏗️ 6 Build</span>
+        <span class="capa-chip c-pri">🔜 10 Prioritized</span>
+        <span class="capa-chip c-disc">🔍 1 Discovery</span>
+        <span class="capa-chip c-wish">📋 35 Backlog</span>
+        <span class="capa-chip c-cancel">❌ 2 Cancelled</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SLIDE 2 · STATUS DOS ÉPICOS
+     ════════════════════════════════════════ -->
+<div class="slide" id="s4">
+  <div class="slide-tag">Frentes de Trabalho</div>
+  <h2 class="slide-title">O que está em <span class="grad-text">paralelo</span></h2>
+  <p class="slide-sub">7 frentes identificadas além das funcionalidades — algumas ainda pendentes de definição e aprovação</p>
+
+  <div class="frentes-grid">
+
+    <div class="frente-card">
+      <div class="fc-header">
+        <div class="fc-num" style="background:rgba(33,194,94,.15);color:#21C25E">1</div>
+        <span class="fc-title">Funcionalidades</span>
+        <span class="fc-status" style="background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.25);color:#93C5FD">Em andamento</span>
+      </div>
+      <div class="fc-items">
+        <div class="fc-item"><span class="fc-item-icon">✅</span><span>77 épicos mapeados no roadmap</span></div>
+        <div class="fc-item"><span class="fc-item-icon">⚠️</span><span><b>Lista não exaustiva</b> — áreas ainda descobrindo impactos</span></div>
+        <div class="fc-item"><span class="fc-item-icon">›</span><span>6 squads ativas: CAB2K, B2KTRA, CAC, TRFSCC, TRCSLS, CARCN</span></div>
+      </div>
+    </div>
+
+    <div class="frente-card span2">
+      <div class="fc-header">
+        <div class="fc-num" style="background:rgba(239,68,68,.15);color:#EF4444">2</div>
+        <span class="fc-title">Áreas Impactadas — Mapeamento</span>
+        <span class="fc-status" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#FCA5A5">Incompleto</span>
+      </div>
+      <div class="fc-items">
+        <div class="fc-item"><span class="fc-item-icon">✅</span><span><b>Mapeadas:</b> BU Cartões (todas as squads PHD)</span></div>
+        <div class="fc-item"><span class="fc-item-icon">⚠️</span><span><b>Não mapeadas ainda:</b></span></div>
+      </div>
+      <div class="area-tags" style="margin-top:10px">
+        <span class="at at-red">Cobrança de Seguro</span>
+        <span class="at at-red">Bonificação</span>
+        <span class="at at-red">Cobrança</span>
+        <span class="at at-red">Renovação Cartão (troca de BIN)</span>
+        <span class="at at-red">Bandeira</span>
+        <span class="at at-yellow">Prev. Fraude</span>
+        <span class="at at-yellow">Canais Atendimento + Service View</span>
+        <span class="at at-yellow">Open Finance</span>
+        <span class="at at-yellow">Growth</span>
+        <span class="at at-yellow">Contábil</span>
+      </div>
+    </div>
+
+    <div class="frente-card">
+      <div class="fc-header">
+        <div class="fc-num" style="background:rgba(168,85,247,.15);color:#A855F7">3</div>
+        <span class="fc-title">Plano de Teste de Carga</span>
+        <span class="fc-status" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#FCA5A5">Não iniciado</span>
+      </div>
+      <div class="fc-items">
+        <div class="fc-item"><span class="fc-item-icon">📅</span><span><b>Previsão de início:</b> Out/2026</span></div>
+        <div class="fc-item"><span class="fc-item-icon">›</span><span><b>Objetivo:</b> Avaliar cenários, volume, possíveis desvios e teste de carga</span></div>
+        <div class="fc-item"><span class="fc-item-icon">›</span><span>Escopo: todas as squads BU Cartões</span></div>
+        <div class="fc-item"><span class="fc-item-icon">⚠️</span><span>Demais BUs ainda <b>a mapear</b></span></div>
+      </div>
+    </div>
+
+    <div class="frente-card">
+      <div class="fc-header">
+        <div class="fc-num" style="background:rgba(245,158,11,.15);color:#F59E0B">4</div>
+        <span class="fc-title">Plano de Tombamento</span>
+        <span class="fc-status" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#FCA5A5">Não iniciado · Sem previsão</span>
+      </div>
+      <div class="fc-items">
+        <div class="fc-item"><span class="fc-item-icon">📅</span><span><b>Previsão:</b> Sem data definida</span></div>
+        <div class="fc-item"><span class="fc-item-icon">⚠️</span><span><b>Estratégia</b> de tombamento — a definir</span></div>
+        <div class="fc-item"><span class="fc-item-icon">⚠️</span><span><b>Plano de Backup</b> — a definir</span></div>
+        <div class="fc-item"><span class="fc-item-icon">⚠️</span><span><b>Validações</b> — a definir</span></div>
+      </div>
+    </div>
+
+    <div class="frente-card">
+      <div class="fc-header">
+        <div class="fc-num" style="background:rgba(239,68,68,.15);color:#EF4444">5</div>
+        <span class="fc-title">Tombamento Original → PicPay</span>
+        <span class="fc-status" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#FCA5A5">Não iniciado</span>
+      </div>
+      <div class="fc-items">
+        <div class="fc-item"><span class="fc-item-icon">📅</span><span><b>Janela prevista:</b> Abr/2026 até Jun/2026</span></div>
+        <div class="fc-item"><span class="fc-item-icon">⚠️</span><span>Plano de tombamento de clientes do Original para PicPay <b>ainda pendente</b></span></div>
+        <div class="fc-item"><span class="fc-item-icon">›</span><span>Épico: <a href="https://picpay.atlassian.net/browse/CAB2K-1063" target="_blank" style="color:#60A5FA">CAB2K-1063 · Tombamento de Clientes</a></span></div>
+      </div>
+    </div>
+
+    <div class="frente-card">
+      <div class="fc-header">
+        <div class="fc-num" style="background:rgba(236,72,153,.15);color:#EC4899">6</div>
+        <span class="fc-title">Clientes do Consignado</span>
+        <span class="fc-status" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#FCA5A5">Pendente</span>
+      </div>
+      <div class="fc-items">
+        <div class="fc-item"><span class="fc-item-icon">⚠️</span><span>Definição de estratégia para clientes do Consignado <b>pendente</b></span></div>
+        <div class="fc-item"><span class="fc-item-icon">›</span><span>Épico: <a href="https://picpay.atlassian.net/browse/CARCN-355" target="_blank" style="color:#60A5FA">CARCN-355 · Q3 2026</a></span></div>
+      </div>
+    </div>
+
+    <div class="frente-card">
+      <div class="fc-header">
+        <div class="fc-num" style="background:rgba(100,116,139,.15);color:#94A3B8">7</div>
+        <span class="fc-title">Controle dos Gaps</span>
+        <span class="fc-status" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);color:#93C5FD">Em acompanhamento</span>
+      </div>
+      <div class="fc-items">
+        <div class="fc-item"><span class="fc-item-icon">⚠️</span><span><b>Data de congelamento</b> de novos itens no Vision+ — a definir</span></div>
+        <div class="fc-item"><span class="fc-item-icon">›</span><span>Acompanhamento contínuo de itens fora do escopo</span></div>
+      </div>
+        <div class="fc-item" style="margin-top:8px"><span class="fc-item-icon">&#x1F4CA;</span><span>Saldo atual: <b style="font-size:20px;color:#EF4444;vertical-align:middle">83</b> <b>GAPs</b> identificados entre Vision+ e B2K</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SLIDE 5 · RISCOS
+     ════════════════════════════════════════ -->
+<div class="slide" id="s2">
+  <div class="slide-tag">Status dos Épicos</div>
+  <h2 class="slide-title">Como está o <span class="grad-text">programa hoje</span></h2>
+  <p class="slide-sub">Distribuição dos 77 épicos por status e por quarter de entrega</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;">
+
+    <!-- Status breakdown -->
+    <div>
+      <div style="font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:20px;">Por Status</div>
+      <div class="status-list">
+        <div class="sl-row">
+          <div class="sl-dot" style="background:var(--done)"></div>
+          <span class="sl-label">Done</span>
+          <div class="sl-bar-wrap"><div class="sl-bar" data-w="30" style="background:var(--done);width:0%"></div></div>
+          <span class="sl-num" style="color:var(--done)">23</span>
+          <span class="sl-pct">30%</span>
+        </div>
+        <div class="sl-row">
+          <div class="sl-dot" style="background:var(--wish)"></div>
+          <span class="sl-label">Backlog / Wishlist</span>
+          <div class="sl-bar-wrap"><div class="sl-bar" data-w="45" style="background:var(--wish);width:0%"></div></div>
+          <span class="sl-num" style="color:var(--wish)">35</span>
+          <span class="sl-pct">45%</span>
+        </div>
+        <div class="sl-row">
+          <div class="sl-dot" style="background:var(--pri)"></div>
+          <span class="sl-label">Prioritized</span>
+          <div class="sl-bar-wrap"><div class="sl-bar" data-w="13" style="background:var(--pri);width:0%"></div></div>
+          <span class="sl-num" style="color:var(--pri)">10</span>
+          <span class="sl-pct">13%</span>
+        </div>
+        <div class="sl-row">
+          <div class="sl-dot" style="background:var(--build)"></div>
+          <span class="sl-label">Build</span>
+          <div class="sl-bar-wrap"><div class="sl-bar" data-w="8" style="background:var(--build);width:0%"></div></div>
+          <span class="sl-num" style="color:var(--build)">6</span>
+          <span class="sl-pct">8%</span>
+        </div>
+        <div class="sl-row">
+          <div class="sl-dot" style="background:var(--disc)"></div>
+          <span class="sl-label">Discovery</span>
+          <div class="sl-bar-wrap"><div class="sl-bar" data-w="1" style="background:var(--disc);width:0%"></div></div>
+          <span class="sl-num" style="color:var(--disc)">1</span>
+          <span class="sl-pct">1%</span>
+        </div>
+        <div class="sl-row">
+          <div class="sl-dot" style="background:var(--cancel);opacity:.5"></div>
+          <span class="sl-label" style="opacity:.5">Cancelled</span>
+          <div class="sl-bar-wrap"><div class="sl-bar" data-w="3" style="background:var(--cancel);opacity:.5;width:0%"></div></div>
+          <span class="sl-num" style="color:var(--cancel);opacity:.5">2</span>
+          <span class="sl-pct" style="opacity:.5">3%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Por Quarter -->
+    <div>
+      <div style="font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:20px;">Por Quarter (Fix Version)</div>
+      <div class="status-list">
+        <div class="sl-row">
+          <div class="sl-dot" style="background:var(--done);border-radius:50%"></div>
+          <span class="sl-label">Q3 2025 <span style="font-size:10px;color:var(--done)">✅</span></span>
+          <div class="sl-bar-wrap"><div class="sl-bar" data-w="5" style="background:var(--done);width:0%"></div></div>
+          <span class="sl-num" style="color:var(--done)">4</span><span class="sl-pct">5%</span>
+        </div>
+        <div class="sl-row">
+          <div class="sl-dot" style="background:var(--done);border-radius:50%"></div>
+          <span class="sl-label">Q4 2025 <span style="font-size:10px;color:var(--done)">✅</span></span>
+          <div class="sl-bar-wrap"><div class="sl-bar" data-w="17" style="background:var(--done);width:0%"></div></div>
+          <span class="sl-num" style="color:var(--done)">13</span><span class="sl-pct">17%</span>
+        </div>
+        <div class="sl-row">
+          <div class="sl-dot" style="background:var(--build);border-radius:50%"></div>
+          <span class="sl-label">Q1 2026 <span style="font-size:10px;color:#86EFAC">~done</span></span>
+          <div class="sl-bar-wrap"><div class="sl-bar" data-w="12" style="background:var(--build);width:0%"></div></div>
+          <span class="sl-num" style="color:var(--build)">9</span><span class="sl-pct">12%</span>
+        </div>
+        <div class="sl-row">
+          <div class="sl-dot" style="background:var(--pri);border-radius:50%;animation:pd 2s infinite"></div>
+          <span class="sl-label">Q2 2026 — MVP4 <span style="font-size:10px;color:#FCD34D">🔴 risco</span></span>
+          <div class="sl-bar-wrap"><div class="sl-bar" data-w="14" style="background:var(--pri);width:0%"></div></div>
+          <span class="sl-num" style="color:var(--pri)">11</span><span class="sl-pct">14%</span>
+        </div>
+        <div class="sl-row">
+          <div class="sl-dot" style="background:var(--pink);border-radius:50%"></div>
+          <span class="sl-label">Q2 2026 — Discovery</span>
+          <div class="sl-bar-wrap"><div class="sl-bar" data-w="6" style="background:var(--pink);width:0%"></div></div>
+          <span class="sl-num" style="color:var(--pink)">5</span><span class="sl-pct">6%</span>
+        </div>
+        <div class="sl-row">
+          <div class="sl-dot" style="background:var(--wish);border-radius:50%"></div>
+          <span class="sl-label">Q3–Q4 2026</span>
+          <div class="sl-bar-wrap"><div class="sl-bar" data-w="3" style="background:var(--wish);width:0%"></div></div>
+          <span class="sl-num" style="color:var(--wish)">2</span><span class="sl-pct">3%</span>
+        </div>
+        <div class="sl-row">
+          <div class="sl-dot" style="background:var(--dim);border-radius:50%"></div>
+          <span class="sl-label">Backlog (sem quarter)</span>
+          <div class="sl-bar-wrap"><div class="sl-bar" data-w="44" style="background:var(--dim);width:0%"></div></div>
+          <span class="sl-num" style="color:var(--muted)">34</span><span class="sl-pct">44%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SLIDE 3 · TIMELINE MVP
+     ════════════════════════════════════════ -->
+<div class="slide" id="s3">
+  <div class="slide-tag">Linha do Tempo</div>
+  <h2 class="slide-title">Evolução por <span class="grad-text">MVP</span></h2>
+  <p class="slide-sub">Marcos de entrega da migração — cada MVP representa um conjunto funcional entregue em produção</p>
+
+  <div class="mvp-timeline">
+
+    <div class="mvp-row">
+      <div class="mvp-label">
+        <span class="mvp-badge" style="color:var(--done)">MVP 1</span>
+        <span class="mvp-period">Nov 2025</span>
+        <span class="status-pill c-done" style="font-size:9px;padding:2px 7px;border-radius:100px;font-weight:700;display:inline-block;margin-top:4px">✅ Concluído</span>
+      </div>
+      <div class="mvp-content">
+        <div class="mvp-dot" style="background:var(--done);border-color:var(--done)"></div>
+        <div class="mvp-card" style="border-color:rgba(33,194,94,.2)">
+          <div class="mvp-card-title">&#x1F3C1; Piloto B2K — Funcionalidades Base</div>
+          <div class="mvp-card-body">Domínio de bloqueios, carga FIS, embossing, desbloqueio/ativação, home débito, BIN MDES, transações débito, 3DS, TECBAN. Primeiro grupo de usuários em produção no B2K.</div>
+          <div class="mvp-epics">
+            <span class="mvp-chip c-done">CAB2K-888</span><span class="mvp-chip c-done">CAB2K-930</span><span class="mvp-chip c-done">CAB2K-919</span><span class="mvp-chip c-done">CAB2K-921</span><span class="mvp-chip c-done">CAB2K-920</span><span class="mvp-chip c-done">CAB2K-1196</span><span class="mvp-chip c-done">B2KTRA-409</span><span class="mvp-chip c-done">B2KTRA-556</span><span class="mvp-chip c-done">B2KTRA-557</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mvp-row">
+      <div class="mvp-label">
+        <span class="mvp-badge" style="color:var(--done)">MVP 2</span>
+        <span class="mvp-period">Mar 2026</span>
+        <span class="status-pill c-done" style="font-size:9px;padding:2px 7px;border-radius:100px;font-weight:700;display:inline-block;margin-top:4px">✅ Concluído</span>
+      </div>
+      <div class="mvp-content">
+        <div class="mvp-dot" style="background:var(--done);border-color:var(--done)"></div>
+        <div class="mvp-card" style="border-color:rgba(33,194,94,.2)">
+          <div class="mvp-card-title">&#x1F512; Jornadas de Uso e Onboarding</div>
+          <div class="mvp-card-body">Gestão do NFC, 2ª via (perda/roubo), catálogo de bloqueio, testes produtivos. Ampliação da base de usuários no B2K.</div>
+          <div class="mvp-epics">
+            <span class="mvp-chip c-done">CAB2K-925</span><span class="mvp-chip c-done">CAB2K-926</span><span class="mvp-chip c-done">CAB2K-1258</span><span class="mvp-chip c-done">CAB2K-1354</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mvp-row">
+      <div class="mvp-label">
+        <span class="mvp-badge" style="color:var(--done)">MVP 3</span>
+        <span class="mvp-period">Mar 2026</span>
+        <span class="status-pill c-done" style="font-size:9px;padding:2px 7px;border-radius:100px;font-weight:700;display:inline-block;margin-top:4px">✅ Concluído</span>
+      </div>
+      <div class="mvp-content">
+        <div class="mvp-dot" style="background:var(--done);border-color:var(--done)"></div>
+        <div class="mvp-card" style="border-color:rgba(33,194,94,.2)">
+          <div class="mvp-card-title">&#x1F4E7; Push e Cadastro</div>
+          <div class="mvp-card-body">Bloqueio temporário, push cadastral/bloqueio via socket, alteração de endereço com lógica de partner. Independência crescente da FIS.</div>
+          <div class="mvp-epics">
+            <span class="mvp-chip c-done">CAB2K-1078</span><span class="mvp-chip c-done">CAB2K-1089</span><span class="mvp-chip c-done">CAB2K-1061</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mvp-row">
+      <div class="mvp-label">
+        <span class="mvp-badge" style="color:var(--build)">MVP 4</span>
+        <span class="mvp-period">Jun 2026</span>
+        <span class="status-pill c-build" style="font-size:9px;padding:2px 7px;border-radius:100px;font-weight:700;display:inline-block;margin-top:4px;animation:pd 2s infinite">🏗️ Em build</span>
+      </div>
+      <div class="mvp-content">
+        <div class="mvp-dot" style="background:var(--build);border-color:var(--build);box-shadow:0 0 12px rgba(59,130,246,.5)"></div>
+        <div class="mvp-card" style="border-color:rgba(59,130,246,.3)">
+          <div class="mvp-card-title">&#x1F4B3; Crédito, Limites e Catálogo</div>
+          <div class="mvp-card-body">Enable de criação de conta, arquivos de pagamento, atribuição de limite, card de limite na home, push transacional, autorizador de crédito off-us, timeline transacional, geração de fatura.</div>
+          <div class="mvp-epics">
+            <a href="https://picpay.atlassian.net/browse/CAB2K-1280" target="_blank" class="mvp-chip c-build">CAB2K-1280 🏗️</a>
+            <a href="https://picpay.atlassian.net/browse/CAB2K-1288" target="_blank" class="mvp-chip c-build">CAB2K-1288 🏗️</a>
+            <a href="https://picpay.atlassian.net/browse/CAB2K-1432" target="_blank" class="mvp-chip c-pri">CAB2K-1432 🔜</a>
+            <a href="https://picpay.atlassian.net/browse/CAB2K-1433" target="_blank" class="mvp-chip c-pri">CAB2K-1433 🔜</a>
+            <a href="https://picpay.atlassian.net/browse/CAB2K-1434" target="_blank" class="mvp-chip c-pri">CAB2K-1434 🔜</a>
+            <a href="https://picpay.atlassian.net/browse/B2KTRA-551"  target="_blank" class="mvp-chip c-pri">B2KTRA-551 🔜</a>
+            <a href="https://picpay.atlassian.net/browse/B2KTRA-901"  target="_blank" class="mvp-chip c-pri">B2KTRA-901 🔜</a>
+            <a href="https://picpay.atlassian.net/browse/B2KTRA-872"  target="_blank" class="mvp-chip c-disc">B2KTRA-872 🔍</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mvp-row">
+      <div class="mvp-label">
+        <span class="mvp-badge" style="color:var(--pink)">MVP 5</span>
+        <span class="mvp-period">Q3 2026</span>
+        <span class="status-pill c-disc-q" style="font-size:9px;padding:2px 7px;border-radius:100px;font-weight:700;display:inline-block;margin-top:4px">🔬 Discovery</span>
+      </div>
+      <div class="mvp-content">
+        <div class="mvp-dot" style="background:var(--pink);border-color:var(--pink)"></div>
+        <div class="mvp-card" style="border-color:rgba(236,72,153,.2)">
+          <div class="mvp-card-title">&#x1F50D; Novos Produtos — Discovery</div>
+          <div class="mvp-card-body">Parcelados, Microfinanciamento, Cashback, Carteiras Digitais e KAIZEN de Conciliação. Definição de backlog e arquitetura em andamento.</div>
+          <div class="mvp-epics">
+            <a href="https://picpay.atlassian.net/browse/B2KTRA-910" target="_blank" class="mvp-chip c-disc-q">B2KTRA-910 Parcelados</a>
+            <a href="https://picpay.atlassian.net/browse/B2KTRA-911" target="_blank" class="mvp-chip c-disc-q">B2KTRA-911 Microfinancimento</a>
+            <a href="https://picpay.atlassian.net/browse/B2KTRA-912" target="_blank" class="mvp-chip c-disc-q">B2KTRA-912 Cashback</a>
+            <a href="https://picpay.atlassian.net/browse/CAB2K-1445" target="_blank" class="mvp-chip c-disc-q">CAB2K-1445 Carteiras Digitais</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mvp-row">
+      <div class="mvp-label">
+        <span class="mvp-badge" style="color:var(--wish)">Backlog</span>
+        <span class="mvp-period">Q4 2026+</span>
+        <span class="status-pill c-wish" style="font-size:9px;padding:2px 7px;border-radius:100px;font-weight:700;display:inline-block;margin-top:4px">📋 A priorizar</span>
+      </div>
+      <div class="mvp-content">
+        <div class="mvp-dot" style="background:var(--wish);border-color:var(--dim)"></div>
+        <div class="mvp-card">
+          <div class="mvp-card-title">&#x1F4CB; 35 épicos sem Fix Version</div>
+          <div class="mvp-card-body">Cartão virtual, rastreio, limites (Clean, Garantido, On-US, FGTS), tombamento de clientes, home crédito, banners, aviso viagem, underage, AMC001/AMC002, entre outros. Precisam ser priorizados e alocados nos quarters Q3–Q4/26 e 2027.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SLIDE 4 · FRENTES DE TRABALHO
+     ════════════════════════════════════════ -->
+<div class="slide" id="s5">
+  <div class="slide-tag">Gestão de Riscos</div>
+  <h2 class="slide-title">Pontos de <span class="grad-text2">atenção</span></h2>
+  <p class="slide-sub">Riscos identificados que podem impactar o prazo ou a qualidade da migração</p>
+
+  <div class="risks-grid">
+
+    <div class="risk-card r-high">
+      <div class="risk-header">
+        <span class="risk-level rl-high">🔴 Alto</span>
+        <span class="risk-title">Q2/26 sobrecarregado</span>
+      </div>
+      <div class="risk-body">16 épicos com deadline 30/jun/2026 — 6 ainda em Build e 10 apenas Prioritized. Risco real de não entrega do MVP4 no prazo se não houver aceleração.</div>
+      <div class="risk-action"><b>Ação:</b> Revisar capacidade das squads CAB2K e B2KTRA para Q2/26. Priorizar critical path do MVP4.</div>
+    </div>
+
+    <div class="risk-card r-high">
+      <div class="risk-header">
+        <span class="risk-level rl-high">🔴 Alto</span>
+        <span class="risk-title">Geração de Fatura ainda em Discovery</span>
+      </div>
+      <div class="risk-body">B2KTRA-872 (Geração de Fatura) tem due em jun/26 e ainda está em Discovery. Dependência crítica do MVP4 — sem fatura não há ciclo de crédito completo no B2K.</div>
+      <div class="risk-action"><b>Ação:</b> Escalar prioridade e definir data de saída do Discovery imediatamente.</div>
+    </div>
+
+    <div class="risk-card r-high">
+      <div class="risk-header">
+        <span class="risk-level rl-high">🔴 Alto</span>
+        <span class="risk-title">35 épicos sem Fix Version</span>
+      </div>
+      <div class="risk-body">45% dos épicos estão no backlog sem quarter definido. Se não forem priorizados, Q3 e Q4/26 ficarão sobrecarregados ou o prazo de Abr/27 será comprometido.</div>
+      <div class="risk-action"><b>Ação:</b> Sessão de priorização do backlog para Q3–Q4/26 até fim de Q2/26.</div>
+    </div>
+
+    <div class="risk-card r-high">
+      <div class="risk-header">
+        <span class="risk-level rl-high">🔴 Alto</span>
+        <span class="risk-title">Áreas não mapeadas</span>
+      </div>
+      <div class="risk-body">10 áreas fora do escopo atual: Cobrança de Seguro, Bonificação, Bandeira, Prev. Fraude, Open Finance, Growth, Contábil, entre outras. Podem gerar épicos adicionais fora do planejamento.</div>
+      <div class="risk-action"><b>Ação:</b> Workshop de impacto com as áreas não mapeadas até Q3/26.</div>
+    </div>
+
+    <div class="risk-card r-high">
+      <div class="risk-header">
+        <span class="risk-level rl-high">🔴 Alto</span>
+        <span class="risk-title">Tombamento Original → PicPay atrasado</span>
+      </div>
+      <div class="risk-body">Janela prevista era Abr–Jun/26 mas o plano <b>ainda não foi iniciado</b>. Com o tombamento não planejado, a migração dos clientes do Original corre risco de perder a janela ideal.</div>
+      <div class="risk-action"><b>Ação:</b> Iniciar plano de tombamento imediatamente — janela prevista já começou (Abr/26).</div>
+    </div>
+
+    <div class="risk-card r-high">
+      <div class="risk-header">
+        <span class="risk-level rl-high">🔴 Alto</span>
+        <span class="risk-title">Plano de Tombamento sem previsão</span>
+      </div>
+      <div class="risk-body">Estratégia, backup e validações do tombamento geral sem data definida. Sem esse plano, o go-live completo não pode ser executado com segurança antes do deadline de Abr/27.</div>
+      <div class="risk-action"><b>Ação:</b> Definir plano de tombamento até Q3/26 — mínimo para execução em Q4/26.</div>
+    </div>
+
+    <div class="risk-card r-med">
+      <div class="risk-header">
+        <span class="risk-level rl-med">🟡 Médio</span>
+        <span class="risk-title">Clientes Original e Consignado</span>
+      </div>
+      <div class="risk-body">Estratégias para migração dos clientes do banco Original (CAB2K-1063) e do Consignado (CARCN-355) ainda pendentes. Impactam o volume e a complexidade do tombamento final.</div>
+      <div class="risk-action"><b>Ação:</b> Alinhar estratégia com áreas de produto e jurídico até Q3/26.</div>
+    </div>
+
+    <div class="risk-card r-low">
+      <div class="risk-header">
+        <span class="risk-level rl-low">🟢 Baixo</span>
+        <span class="risk-title">MVP5 em Discovery — produtos novos</span>
+      </div>
+      <div class="risk-body">Parcelados, Microfinanciamento e Cashback em discovery. Risco de escopo adicional caso esses produtos não estejam prontos para Q3/26, impactando o cronograma geral.</div>
+      <div class="risk-action"><b>Ação:</b> Resultados do Discovery MVP5 determinam viabilidade de entrega em Q3/26.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SLIDE 6 · SQUADS ENVOLVIDAS
+     ════════════════════════════════════════ -->
+<div class="slide" id="s6">
+  <div class="slide-tag">Ecossistema</div>
+  <h2 class="slide-title">Squads <span class="grad-text">envolvidas</span></h2>
+  <p class="slide-sub">6 squads ativas na migração — distribuição de épicos por projeto Jira</p>
+
+  <div class="squads-grid">
+
+    <div class="squad-card" style="border-top:3px solid #3B82F6">
+      <div class="sq-name" style="color:#3B82F6">CAB2K</div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin:8px 0 4px;">
+        <div class="sq-count" style="color:#3B82F6">51</div>
+        <div class="sq-lbl">épicos · 66%</div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.5">Cartão B2K — squad core da migração. Cobre onboarding, bloqueios, limites, home, push e jornadas de uso.</div>
+      <div class="sq-bar"><div class="sq-fill" style="background:#3B82F6;width:66%"></div></div>
+    </div>
+
+    <div class="squad-card" style="border-top:3px solid #A855F7">
+      <div class="sq-name" style="color:#A855F7">B2KTRA</div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin:8px 0 4px;">
+        <div class="sq-count" style="color:#A855F7">14</div>
+        <div class="sq-lbl">épicos · 18%</div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.5">Transações B2K — autorizador, fatura, timeline de crédito, 3DS, TECBAN e novos produtos (MVP5).</div>
+      <div class="sq-bar"><div class="sq-fill" style="background:#A855F7;width:18%"></div></div>
+    </div>
+
+    <div class="squad-card" style="border-top:3px solid #F59E0B">
+      <div class="sq-name" style="color:#F59E0B">CAC</div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin:8px 0 4px;">
+        <div class="sq-count" style="color:#F59E0B">7</div>
+        <div class="sq-lbl">épicos · 9%</div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.5">Arquitetura Contábil — processos regulatórios, conciliação transacional, adequação de processos (3050, 3060, 5816).</div>
+      <div class="sq-bar"><div class="sq-fill" style="background:#F59E0B;width:9%"></div></div>
+    </div>
+
+    <div class="squad-card" style="border-top:3px solid #21C25E">
+      <div class="sq-name" style="color:#21C25E">TRFSCC</div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin:8px 0 4px;">
+        <div class="sq-count" style="color:#21C25E">3</div>
+        <div class="sq-lbl">épicos · 4%</div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.5">Funil de Cartões — criação de conta B2K, criação de conta integrada com oferta (MVP4).</div>
+      <div class="sq-bar"><div class="sq-fill" style="background:#21C25E;width:4%"></div></div>
+    </div>
+
+    <div class="squad-card" style="border-top:3px solid #64748B">
+      <div class="sq-name" style="color:#94A3B8">TRCSLS</div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin:8px 0 4px;">
+        <div class="sq-count" style="color:#94A3B8">1</div>
+        <div class="sq-lbl">épico · 1%</div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.5">Acompanhamento de testes para nova arquitetura B2K. Validação cross-squad.</div>
+      <div class="sq-bar"><div class="sq-fill" style="background:#64748B;width:1%"></div></div>
+    </div>
+
+    <div class="squad-card" style="border-top:3px solid #EC4899">
+      <div class="sq-name" style="color:#EC4899">CARCN</div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin:8px 0 4px;">
+        <div class="sq-count" style="color:#EC4899">1</div>
+        <div class="sq-lbl">épico · 1%</div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.5">Consignado B2K — migração do produto consignado para a nova plataforma (Q3 2026).</div>
+      <div class="sq-bar"><div class="sq-fill" style="background:#EC4899;width:1%"></div></div>
+    </div>
+
+  </div>
+
+  <!-- Áreas pendentes de mapeamento -->
+  <div style="margin-top:32px;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);border-radius:14px;padding:20px 24px;">
+    <div style="font-size:13px;font-weight:700;color:#FCA5A5;margin-bottom:12px;">⚠️ Áreas ainda sem mapeamento de impacto</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#FCA5A5">Cobrança de Seguro</span>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#FCA5A5">Bonificação</span>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#FCA5A5">Cobrança</span>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#FCA5A5">Renovação Cartão (troca de BIN)</span>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#FCA5A5">Bandeira</span>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#FCD34D">Prev. Fraude</span>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#FCD34D">Canais Atendimento + Service View</span>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#FCD34D">Open Finance</span>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#FCD34D">Growth</span>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#FCD34D">Contábil</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SLIDE 7 · PRÓXIMOS PASSOS
+     ════════════════════════════════════════ -->
+<div class="slide" id="s7">
+  <div class="slide-tag">Próximos Passos</div>
+  <h2 class="slide-title">O que precisa <span class="grad-text">acontecer</span></h2>
+  <p class="slide-sub">Ações prioritárias para garantir o sucesso do programa nos próximos quarters</p>
+
+  <div class="proximos-grid">
+
+<div class="px-card" style="border-top:3px solid var(--pri)"><div class="px-header"><span class="px-icon">&#x1F3D7;</span><span class="px-title">Q2 2026 &mdash; Agora</span><span class="px-period">Abr &rarr; Jun/26</span></div><div class="px-items"><div class="px-item"><div class="px-bullet" style="background:var(--build)"></div><div><b>Entregar MVP4:</b> 16 épicos com deadline 30/jun/26</div></div><div class="px-item"><div class="px-bullet" style="background:var(--cancel)"></div><div><b>Escalar Geração de Fatura</b> (B2KTRA-872) &mdash; sair do Discovery imediatamente</div></div><div class="px-item"><div class="px-bullet" style="background:var(--disc)"></div><div><b>Concluir Discovery MVP5:</b> Parcelados, Microfinanciamento, Cashback, Carteiras</div></div><div class="px-item"><div class="px-bullet" style="background:var(--cancel)"></div><div><b>&#x1F6A8; Tombamento Original &rarr; PicPay:</b> janela Abr&ndash;Jun/26 &mdash; plano ainda não iniciado</div></div><div class="px-item"><div class="px-bullet" style="background:var(--muted)"></div><div>Priorizar 35 épicos do backlog para Q3&ndash;Q4/26</div></div></div></div><div class="px-card" style="border-top:3px solid #A855F7"><div class="px-header"><span class="px-icon">&#x1F52C;</span><span class="px-title">Q3 2026</span><span class="px-period">Jul &rarr; Set/26</span></div><div class="px-items"><div class="px-item"><div class="px-bullet" style="background:var(--disc)"></div><div><b>Iniciar MVP5</b> com produtos validados no Discovery</div></div><div class="px-item"><div class="px-bullet" style="background:var(--pri)"></div><div><b>Consignado B2K</b> (CARCN-355) &mdash; definição e execução</div></div><div class="px-item"><div class="px-bullet" style="background:var(--cancel)"></div><div><b>Workshop de impacto</b> com áreas não mapeadas (Fraude, Open Finance, Growth, Contábil)</div></div><div class="px-item"><div class="px-bullet" style="background:var(--pri)"></div><div><b>Definir Plano de Tombamento</b> geral &mdash; estratégia, backup e validações <em>(sem previsão atual)</em></div></div><div class="px-item"><div class="px-bullet" style="background:var(--build)"></div><div><b>Iniciar Testes de Carga</b> &mdash; previsão Out/26</div></div></div></div><div class="px-card" style="border-top:3px solid var(--cancel)"><div class="px-header"><span class="px-icon">&#x1F3C1;</span><span class="px-title">Q4 2026</span><span class="px-period">Out &rarr; Dez/26</span></div><div class="px-items"><div class="px-item"><div class="px-bullet" style="background:var(--build)"></div><div><b>Testes de Carga em execução</b> &mdash; Out/26 (previsão)</div></div><div class="px-item"><div class="px-bullet" style="background:var(--cancel)"></div><div><b>Executar Plano de Tombamento</b> (dependente da definição em Q3)</div></div><div class="px-item"><div class="px-bullet" style="background:var(--pri)"></div><div>Cartão Adicional/Dependente (CAB2K-1080) e Rastreio (CAB2K-1066)</div></div><div class="px-item"><div class="px-bullet" style="background:var(--muted)"></div><div><b>Definir data de congelamento</b> de novos itens no Vision+</div></div></div></div><div class="px-card" style="border-top:3px solid var(--done)"><div class="px-header"><span class="px-icon">&#x1F680;</span><span class="px-title">Q1&ndash;Q2 2027</span><span class="px-period">Jan &rarr; Abr/27</span></div><div class="px-items"><div class="px-item"><div class="px-bullet" style="background:var(--done)"></div><div><b>Go-live completo</b> &mdash; 100% dos clientes no B2K</div></div><div class="px-item"><div class="px-bullet" style="background:var(--done)"></div><div><b>Descomissionamento</b> progressivo do Vision+</div></div><div class="px-item"><div class="px-bullet" style="background:var(--done)"></div><div>Validações finais e hypercare pós-migração</div></div><div class="px-item"><div class="px-bullet" style="background:var(--cancel)"></div><div><b>Deadline contratual: Abr/2027</b></div></div></div></div></div></div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SLIDE 8 · PLANO TOMBAMENTO Q1/27
+     ════════════════════════════════════════ -->
+<div class="slide" id="s8" style="background:radial-gradient(ellipse at 80% 20%,rgba(239,68,68,.06) 0%,transparent 60%),var(--bg)">
+  <div class="slide-tag">Plano de Ação · Tombamento Q1/27</div>
+  <h2 class="slide-title">O que precisa estar <span class="grad-text2">pronto</span> para tombar</h2>
+  <p class="slide-sub">Tombamento previsto para Q1/2027 (Jan–Mar). Temos 9 meses. Abaixo o plano de ação com pré-requisitos obrigatórios e entregas por quarter.</p>
+
+  <!-- Linha do tempo compacta -->
+  <div style="display:flex;gap:0;margin-bottom:40px;border:1px solid var(--border);border-radius:14px;overflow:hidden;">
+    <div style="flex:1;padding:14px 18px;background:rgba(33,194,94,.06);border-right:1px solid var(--border);text-align:center">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--done);margin-bottom:4px">Hoje → Jun/26</div>
+      <div style="font-size:13px;font-weight:700">MVP4 completo</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:2px">17 épicos ativos</div>
+    </div>
+    <div style="flex:1;padding:14px 18px;background:rgba(168,85,247,.06);border-right:1px solid var(--border);text-align:center">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--disc);margin-bottom:4px">Jul → Set/26</div>
+      <div style="font-size:13px;font-weight:700">MVP5 + Prep.</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:2px">Discovery → Build</div>
+    </div>
+    <div style="flex:1;padding:14px 18px;background:rgba(245,158,11,.06);border-right:1px solid var(--border);text-align:center">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--pri);margin-bottom:4px">Out → Dez/26</div>
+      <div style="font-size:13px;font-weight:700">MVP6 + Teste Carga</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:2px">Plano tombamento</div>
+    </div>
+    <div style="flex:1;padding:14px 18px;background:rgba(239,68,68,.08);text-align:center">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--cancel);margin-bottom:4px">Jan → Mar/27</div>
+      <div style="font-size:13px;font-weight:700">🚀 TOMBAMENTO</div>
+      <div style="font-size:10px;color:var(--cancel);margin-top:2px;font-weight:700">Q1/2027</div>
+    </div>
+  </div>
+
+  <!-- Grid de planos por quarter -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
+
+    <!-- Q2 2026 -->
+    <div style="background:var(--bg2);border:1px solid rgba(59,130,246,.3);border-top:3px solid var(--build);border-radius:12px;padding:18px;">
+      <div style="font-size:13px;font-weight:800;color:var(--build);margin-bottom:4px">Q2 2026</div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:14px">Abr → Jun/26 · <b style="color:var(--cancel)">Crítico</b></div>
+      <div style="display:flex;flex-direction:column;gap:9px;font-size:12px;color:var(--muted)">
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--cancel);flex-shrink:0;margin-top:4px"></div><div><b style="color:var(--text)">Entregar MVP4</b> — 17 épicos (6 build + 10 prioritized + 1 discovery)</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--cancel);flex-shrink:0;margin-top:4px"></div><div><b style="color:var(--cancel)">Resolver GAP crítico:</b> B2KTRA-872 Geração de Fatura sair do Discovery</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--disc);flex-shrink:0;margin-top:4px"></div><div>Concluir Discovery MVP5 (Parcelados, Microfinanciamento, Cashback, Carteiras)</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--cancel);flex-shrink:0;margin-top:4px"></div><div><b style="color:var(--cancel)">Tombamento Original → PicPay</b> — janela Abr–Jun/26 já aberta, plano pendente</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--pri);flex-shrink:0;margin-top:4px"></div><div>Priorizar e alocar 33 épicos do backlog nos quarters Q3–Q4/26</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--muted);flex-shrink:0;margin-top:4px"></div><div>Workshop de impacto com 10 áreas não mapeadas</div></div>
+      </div>
+    </div>
+
+    <!-- Q3 2026 -->
+    <div style="background:var(--bg2);border:1px solid rgba(168,85,247,.3);border-top:3px solid var(--disc);border-radius:12px;padding:18px;">
+      <div style="font-size:13px;font-weight:800;color:var(--disc);margin-bottom:4px">Q3 2026</div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:14px">Jul → Set/26 · Preparação</div>
+      <div style="display:flex;flex-direction:column;gap:9px;font-size:12px;color:var(--muted)">
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--build);flex-shrink:0;margin-top:4px"></div><div><b style="color:var(--text)">MVP5 em Build</b> — Parcelados, Microfinanciamento, Cashback, Carteiras Digitais, Recomposição Limite, 2ª Via Danificado</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--build);flex-shrink:0;margin-top:4px"></div><div><b style="color:var(--text)">Autorizador On-Us</b> (B2KTRA-914) — pré-requisito para tombamento</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--pri);flex-shrink:0;margin-top:4px"></div><div><b style="color:var(--text)">Definir Plano de Tombamento</b> geral — estratégia, backup, rollback e validações</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--pri);flex-shrink:0;margin-top:4px"></div><div><b style="color:var(--text)">Consignado B2K</b> (CARCN-355) — definição e início</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--pri);flex-shrink:0;margin-top:4px"></div><div>Tombamento Clientes (CAB2K-1063) — início do plano de migração em massa</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--cancel);flex-shrink:0;margin-top:4px"></div><div><b style="color:var(--text)">83 GAPs:</b> definir estratégia de resolução e priorização</div></div>
+      </div>
+    </div>
+
+    <!-- Q4 2026 -->
+    <div style="background:var(--bg2);border:1px solid rgba(245,158,11,.3);border-top:3px solid var(--pri);border-radius:12px;padding:18px;">
+      <div style="font-size:13px;font-weight:800;color:var(--pri);margin-bottom:4px">Q4 2026</div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:14px">Out → Dez/26 · Pré-tombamento</div>
+      <div style="display:flex;flex-direction:column;gap:9px;font-size:12px;color:var(--muted)">
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--build);flex-shrink:0;margin-top:4px"></div><div><b style="color:var(--text)">MVP6 em Build</b> — Anuidade, Recuperação Crédito, Upgrade Função/Nível/Variante, Cartão Adicional, Expurgo, Repositório Débito</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--build);flex-shrink:0;margin-top:4px"></div><div><b style="color:var(--text)">Testes de Carga</b> — Out/26 (previsão): todos os cenários com volume real</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--cancel);flex-shrink:0;margin-top:4px"></div><div><b style="color:var(--text)">Executar Plano de Tombamento</b> (dry-run e simulações)</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--cancel);flex-shrink:0;margin-top:4px"></div><div><b style="color:var(--text)">Definir data de congelamento</b> de novos itens no Vision+</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--pri);flex-shrink:0;margin-top:4px"></div><div>AMC001/AMC002 (CAB2K-960) — interfaces cadastrais para tombamento</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--pri);flex-shrink:0;margin-top:4px"></div><div>Validar áreas mapeadas em Q3 com evidências de não-impacto</div></div>
+      </div>
+    </div>
+
+    <!-- Q1 2027 -->
+    <div style="background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.3);border-top:3px solid var(--cancel);border-radius:12px;padding:18px;">
+      <div style="font-size:13px;font-weight:800;color:var(--cancel);margin-bottom:4px">Q1 2027</div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:14px">Jan → Mar/27 · 🚀 TOMBAMENTO</div>
+      <div style="display:flex;flex-direction:column;gap:9px;font-size:12px;color:var(--muted)">
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--done);flex-shrink:0;margin-top:4px"></div><div><b style="color:var(--text)">Pré-requisito:</b> MVP4, MVP5 e MVP6 100% entregues</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--done);flex-shrink:0;margin-top:4px"></div><div><b style="color:var(--text)">Pré-requisito:</b> 83 GAPs resolvidos ou com plano de mitigação</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--done);flex-shrink:0;margin-top:4px"></div><div><b style="color:var(--text)">Pré-requisito:</b> Testes de Carga aprovados</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--done);flex-shrink:0;margin-top:4px"></div><div><b style="color:var(--text)">Pré-requisito:</b> Plano de Tombamento validado com dry-run</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--cancel);flex-shrink:0;margin-top:4px"></div><div><b style="color:var(--cancel)">Tombamento em fases</b> — migração em massa dos clientes Vision+ → B2K</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--cancel);flex-shrink:0;margin-top:4px"></div><div>Hypercare e monitoramento intensivo pós-tombamento</div></div>
+        <div style="display:flex;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--cancel);flex-shrink:0;margin-top:4px"></div><div>Descomissionamento progressivo do Vision+ (deadline contratual: Abr/27)</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Pré-requisitos críticos para tombamento -->
+  <div style="margin-top:32px;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.2);border-radius:14px;padding:20px 24px;">
+    <div style="font-size:14px;font-weight:800;color:var(--cancel);margin-bottom:16px;">🔴 Pré-requisitos obrigatórios para o Tombamento Q1/27</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+      <div style="background:rgba(255,255,255,.03);border-radius:10px;padding:12px 14px;">
+        <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:6px">&#x1F4E6; Funcional</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.6">MVP4 entregue (Jun/26)<br>MVP5 entregue (Set/26)<br>MVP6 entregue (Dez/26)<br>83 GAPs resolvidos/mitigados<br>Autorizador On-Us (B2KTRA-914)</div>
+      </div>
+      <div style="background:rgba(255,255,255,.03);border-radius:10px;padding:12px 14px;">
+        <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:6px">&#x1F9EA; Testes</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.6">Testes de Carga aprovados (Out/26)<br>Teste End-to-End completo<br>Dry-run do tombamento<br>Validação das 10 áreas não mapeadas<br>Plano de rollback testado</div>
+      </div>
+      <div style="background:rgba(255,255,255,.03);border-radius:10px;padding:12px 14px;">
+        <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:6px">&#x1F4CB; Governança</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.6">Plano de Tombamento aprovado<br>Data de congelamento Vision+ definida<br>Estratégia Consignado definida<br>Plano Clientes Original concluído<br>Comunicação aos stakeholders</div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer style="text-align:center;padding:32px;color:var(--dim);font-size:11px;border-top:1px solid var(--border);">
+  BUCS-345 · Migração B2K · Squad PHD · Vitor Marques Gaspar · Gerado em 06/abr/2026
+</footer>
+
+<script>
+// Animações ao carregar
+window.addEventListener('load', () => {
+  // Progress bar capa
+  setTimeout(()=>{ document.getElementById('progMain').style.width='30%'; }, 400);
+
+  // Barras de status
+  setTimeout(()=>{
+    document.querySelectorAll('.sl-bar').forEach(el=>{
+      el.style.width = el.dataset.w + '%';
+    });
+  }, 600);
+});
+
+// Nav active on scroll
+const sections = document.querySelectorAll('.slide');
+const links    = document.querySelectorAll('.nav-link');
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(l=>l.classList.remove('active'));
+      const id = e.target.id;
+      const lnk = document.querySelector(`.nav-link[href="#${id}"]`);
+      if(lnk) lnk.classList.add('active');
+    }
+  });
+},{threshold:0.4});
+sections.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
