@@ -1,5 +1,3 @@
-[b2k-executivo.html](https://github.com/user-attachments/files/26578932/b2k-executivo.html)
-<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
