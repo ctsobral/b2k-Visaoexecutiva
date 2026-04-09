@@ -2,714 +2,637 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Migração B2K — Visão Executiva</title>
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>B2K Roadmap BUCS-345 v2026-04-09</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#070B17;--bg2:#0C1221;
-  --card:rgba(255,255,255,.045);--card2:rgba(255,255,255,.08);
-  --border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.18);
-  --text:#F2F2F7;--muted:#8E92A8;--dim:#404566;
-  --done:#22C55E;--build:#3B82F6;--pri:#F59E0B;
-  --disc:#A855F7;--wish:#64748B;--cancel:#EF4444;--pink:#EC4899;
+  --bg:#12172B;--bg2:#1A2035;--border:rgba(255,255,255,0.09);--border2:rgba(255,255,255,0.18);
+  --text:#F0F0F5;--muted:#8B8FA3;--dim:#3D4160;
+  --done:#21C25E;--build:#3B82F6;--pri:#F59E0B;--disc:#A855F7;--wish:#64748B;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;}
-::-webkit-scrollbar{width:5px;height:5px;}
-::-webkit-scrollbar-thumb{background:var(--dim);border-radius:100px;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(18,23,43,.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);height:44px;display:flex;align-items:center;padding:0 16px;gap:6px;}
+.nbrand{font-weight:800;font-size:14px;color:var(--text);margin-right:8px;}.nbrand span{color:#21C25E;}
+.nsep{width:1px;height:20px;background:var(--border);flex-shrink:0;}
+.nright{margin-left:auto;font-size:11px;color:var(--muted)}.nright b{color:#21C25E;}
+.sf{padding:4px 10px;border-radius:100px;font-size:11px;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .18s;}
+.sf:hover{border-color:var(--border2);color:var(--text);}
+.sf-done{background:rgba(33,194,94,.15);border-color:rgba(33,194,94,.4);color:#21C25E;}
+.sf-build{background:rgba(59,130,246,.15);border-color:rgba(59,130,246,.4);color:#3B82F6;}
+.sf-pri{background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);color:#F59E0B;}
+.sf-disc{background:rgba(168,85,247,.15);border-color:rgba(168,85,247,.4);color:#A855F7;}
+.sf-wish{background:rgba(100,116,139,.15);border-color:rgba(100,116,139,.4);color:#94A3B8;}
+.qbar{position:fixed;top:44px;left:0;right:0;z-index:290;background:rgba(18,23,43,.98);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 16px;display:flex;align-items:center;gap:5px;height:44px;overflow-x:auto;}
+.qbar::-webkit-scrollbar{height:3px;}.qbar::-webkit-scrollbar-thumb{background:var(--dim);border-radius:10px;}
+.qb{flex-shrink:0;padding:5px 14px;border-radius:9px;font-size:12px;font-weight:700;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px;}
+.qb:hover{background:rgba(255,255,255,.04);border-color:var(--border2);color:var(--text);}
+.qb.sel{color:var(--text);}
+.qb[data-q="all"].sel{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);}
+.qb[data-q="Q1 2026"].sel{background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.4);color:#3B82F6;}
+.qb[data-q="Q2 2026"].sel{background:rgba(168,85,247,.12);border-color:rgba(168,85,247,.4);color:#A855F7;}
+.qb[data-q="Q3 2026"].sel{background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.4);color:#F59E0B;}
+.qb[data-q="Q4 2026"].sel{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.4);color:#EF4444;}
+.qb[data-q="Backlog"].sel{background:rgba(100,116,139,.12);border-color:rgba(100,116,139,.4);color:#94A3B8;}
+.qcnt{font-size:10px;padding:2px 6px;border-radius:100px;font-weight:700;}
+.sbar{max-width:100%;margin:0;padding:90px 16px 6px;display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;}
+.sc{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:8px 14px;flex:1;min-width:100px;cursor:pointer;transition:all .2s;}
+.sc:hover{border-color:var(--border2);}
+.sc .lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:3px;}
+.sc .num{font-size:20px;font-weight:900;}
+.sc .sub{font-size:10px;color:var(--muted);margin-top:1px;}
+.main{max-width:100%;margin:0;padding:0 16px 20px;}
+.qtrow{display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap;}
+.qtrow h2{font-size:18px;font-weight:800;}
+.qper{font-size:12px;color:var(--muted);padding:3px 10px;border-radius:100px;background:rgba(255,255,255,.04);border:1px solid var(--border);}
+.leg{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:4px;align-items:center;}
+.leg-i{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);}
+.leg-sw{width:20px;height:8px;border-radius:3px;}
+.gantt{display:grid;grid-template-columns:300px 1fr;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--bg2);align-items:start;}
+.lp{border-right:1px solid var(--border);}
+.lph{height:56px;max-height:56px;min-height:56px;display:flex;align-items:flex-end;padding:6px 10px;border-bottom:1px solid var(--border);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);box-sizing:border-box;}
+.er{display:flex;align-items:center;padding:0 8px;height:58px;max-height:58px;min-height:58px;border-bottom:1px solid var(--border);gap:6px;overflow:hidden;box-sizing:border-box;}
+.er:hover{background:rgba(255,255,255,.025);}
+.er-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.er-key{font-size:10px;color:var(--dim);flex-shrink:0;width:72px;text-decoration:none;font-family:monospace;transition:color .15s;margin-top:1px;display:block;overflow:hidden;text-overflow:ellipsis;}
+.er-key:hover{color:#21C25E;}
+.er-info{flex:1;min-width:0;overflow:hidden;}
+.er-name{font-size:11px;color:var(--text);line-height:1.3;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.er-dates{font-size:9px;color:#4A5170;margin-top:2px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.rp{overflow-x:auto;}.rp::-webkit-scrollbar{height:4px;}.rp::-webkit-scrollbar-thumb{background:var(--dim);border-radius:10px;}
+.gi{position:relative;min-width:600px;}
+.ghq{position:relative;height:28px;border-bottom:1px solid var(--border);background:var(--bg2);}
+.ghm{position:relative;height:28px;border-bottom:1px solid var(--border);background:var(--bg2);}
+.ghqc{display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;border-right:1px solid var(--border);flex-shrink:0;}
+.ghmc{display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-right:1px solid var(--border);flex-shrink:0;}
+.gr{position:relative;height:58px;max-height:58px;min-height:58px;border-bottom:1px solid var(--border);display:flex;align-items:center;box-sizing:border-box;overflow:hidden;}
+.gr:hover{background:rgba(255,255,255,.02);}
+.gc{height:100%;flex-shrink:0;border-right:1px solid rgba(255,255,255,.02);}
+.gbar{position:absolute;height:28px;border-radius:6px;top:50%;transform:translateY(-50%);display:flex;align-items:center;padding:0 7px;font-size:9.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;transition:all .2s;z-index:3;border:1px solid transparent;}
+.gbar:hover{filter:brightness(1.2);transform:translateY(-50%) scaleY(1.08);z-index:20;}
+.gb-done{background:rgba(33,194,94,.22);border-color:rgba(33,194,94,.5);color:#4ADE80;}
+.gb-build{background:rgba(59,130,246,.22);border-color:rgba(59,130,246,.5);color:#60A5FA;}
+.gb-pri{background:rgba(245,158,11,.20);border-color:rgba(245,158,11,.5);color:#FCD34D;}
+.gb-disc{background:rgba(168,85,247,.20);border-color:rgba(168,85,247,.5);color:#C084FC;}
+.gb-wish{background:rgba(100,116,139,.14);border-color:rgba(100,116,139,.4);color:#94A3B8;}
+.today-l{position:absolute;top:0;bottom:0;width:1px;border-left:2px dashed rgba(255,255,255,.2);z-index:15;pointer-events:none;}
+.today-lbl{position:absolute;top:0;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.1);color:rgba(255,255,255,.45);font-size:7.5px;font-weight:700;padding:2px 4px;border-radius:3px;white-space:nowrap;}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px;color:var(--muted);text-align:center;gap:8px;}
+.blt{width:100%;border-collapse:collapse;font-size:12px;}
+.blt th{text-align:left;padding:10px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);border-bottom:1px solid var(--border);}
+.blt td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle;}
+.blt tr:hover td{background:rgba(255,255,255,.02);}
+.blt a{color:var(--muted);text-decoration:none;font-size:11px;font-family:monospace;}.blt a:hover{color:#21C25E;}
+.tt{position:fixed;z-index:1000;background:#161B2E;border:1px solid var(--border2);border-radius:12px;padding:14px 16px;max-width:300px;pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:0 12px 40px rgba(0,0,0,.6);}
+.tt.show{opacity:1;}
+.tt-key{font-size:10px;color:var(--muted);margin-bottom:3px;}
+.tt-title{font-size:13px;font-weight:700;margin-bottom:7px;line-height:1.35;color:var(--text);}
+.tt-badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:100px;font-size:10px;font-weight:700;margin-bottom:9px;}
+.tt-row{display:flex;gap:8px;font-size:11px;color:var(--muted);margin-bottom:3px;}
+.tt-lbl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#63B3ED;min-width:78px;padding-top:1px;}
+.tt-val{color:var(--text);font-weight:500;}
+.tt-desc{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5;border-top:1px solid var(--border);padding-top:8px;}
 
-/* NAV */
-nav{
-  position:sticky;top:0;z-index:200;
-  background:rgba(7,11,23,.97);backdrop-filter:blur(24px);
-  border-bottom:1px solid var(--border);
-  height:56px;display:flex;align-items:center;padding:0 32px;gap:16px;width:100%;
-}
-.nav-brand{font-weight:900;font-size:15px;display:flex;align-items:center;gap:8px;white-space:nowrap;}
-.nav-accent{color:#22C55E;}
-.nav-links{display:flex;gap:2px;overflow-x:auto;flex:1;}
-.nav-links::-webkit-scrollbar{display:none;}
-.nav-link{font-size:12px;font-weight:500;color:var(--muted);text-decoration:none;padding:5px 12px;border-radius:8px;white-space:nowrap;transition:all .15s;}
-.nav-link:hover,.nav-link.active{color:var(--text);background:var(--card2);}
-.nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
-.nav-jira{font-size:11px;color:var(--muted);text-decoration:none;padding:4px 10px;border:1px solid var(--border);border-radius:6px;transition:all .15s;}
-.nav-jira:hover{border-color:var(--border2);color:var(--text);}
-.nav-date{font-size:11px;color:var(--dim);}
+/* Gantt unificado — uma única tabela */
+.gantt-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:10px;background:var(--bg2);}
+.gantt-wrap::-webkit-scrollbar{height:4px;}
+.gantt-wrap::-webkit-scrollbar-thumb{background:var(--dim);border-radius:10px;}
+.gantt-table{border-collapse:collapse;width:100%;min-width:900px;}
+.gantt-table tr{height:58px;}
+.gantt-table td,.gantt-table th{border-bottom:1px solid var(--border);box-sizing:border-box;padding:0;}
+.gantt-table tr:last-child td{border-bottom:none;}
+.gantt-table tr:hover td{background:rgba(255,255,255,.02);}
+/* Coluna fixa esquerda */
+.g-left{width:300px;min-width:300px;max-width:300px;padding:0 8px;vertical-align:middle;position:sticky;left:0;z-index:10;background:var(--bg2);}
+.g-left-hdr{width:300px;min-width:300px;max-width:300px;padding:6px 10px;vertical-align:bottom;position:sticky;left:0;z-index:11;background:var(--bg2);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);height:56px;border-bottom:1px solid var(--border);}
+/* Coluna do gráfico */
+.g-chart{position:relative;vertical-align:middle;}
+.g-chart-hdr{vertical-align:bottom;height:28px;border-bottom:1px solid var(--border);padding:0;background:var(--bg2);}
+.g-chart-hdr2{vertical-align:middle;height:28px;border-bottom:1px solid var(--border);padding:0;background:var(--bg2);}
+/* Conteúdo da célula esquerda */
+.er-wrap{display:flex;align-items:center;gap:6px;height:58px;overflow:hidden;}
+.er-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.er-key{font-size:10px;color:var(--dim);flex-shrink:0;width:72px;text-decoration:none;font-family:monospace;}
+.er-key:hover{color:#21C25E;}
+.er-info{flex:1;min-width:0;overflow:hidden;}
+.er-name{font-size:11px;color:var(--text);line-height:1.3;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.er-dates{font-size:9px;color:#4A5170;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+/* Célula do gráfico */
+.g-cell{position:relative;height:58px;overflow:hidden;}
+.g-bgcol{height:100%;flex-shrink:0;border-right:1px solid rgba(255,255,255,.02);position:absolute;top:0;}
+.today-l{position:absolute;top:0;bottom:0;width:1px;border-left:2px dashed rgba(255,255,255,.2);z-index:15;pointer-events:none;}
+.today-lbl{position:absolute;top:0;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.1);color:rgba(255,255,255,.45);font-size:7px;font-weight:700;padding:2px 4px;border-radius:3px;white-space:nowrap;}
 
-/* SLIDE BASE */
-.slide{
-  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
-  padding:60px 5vw;width:100%;border-bottom:1px solid var(--border);
-}
-.slide:last-child{border-bottom:none;}
-.slide-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-.slide-tag::before{content:'';width:3px;height:14px;border-radius:2px;background:currentColor;opacity:.5;}
-.slide-title{font-size:clamp(28px,3.5vw,50px);font-weight:900;line-height:1.08;letter-spacing:-.5px;margin-bottom:12px;}
-.slide-sub{font-size:15px;color:var(--muted);max-width:800px;line-height:1.75;margin-bottom:36px;}
-.grad{background:linear-gradient(135deg,#22C55E,#3B82F6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.grad2{background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 
-/* STATUS CHIPS */
-.chip{display:inline-flex;align-items:center;font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px;border:1px solid;}
-.c-done{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.3);color:#4ADE80;}
-.c-build{background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.3);color:#60A5FA;}
-.c-pri{background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.3);color:#FCD34D;}
-.c-disc{background:rgba(168,85,247,.12);border-color:rgba(168,85,247,.3);color:#C084FC;}
-.c-wish{background:rgba(100,116,139,.1);border-color:rgba(100,116,139,.3);color:#94A3B8;}
-.c-cancel{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2);color:#FCA5A5;}
-.c-info{background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.2);color:#93C5FD;}
-.c-ok{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.2);color:#86EFAC;}
-.c-warn{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2);color:#FCA5A5;}
-.c-discq{background:rgba(236,72,153,.12);border-color:rgba(236,72,153,.3);color:#F472B6;}
+/* Gantt unificado — uma única tabela */
+.gantt-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:10px;background:var(--bg2);}
+.gantt-wrap::-webkit-scrollbar{height:4px;}
+.gantt-wrap::-webkit-scrollbar-thumb{background:var(--dim);border-radius:10px;}
+.gantt-table{border-collapse:collapse;width:100%;min-width:900px;}
+.gantt-table tr{height:58px;}
+.gantt-table td,.gantt-table th{border-bottom:1px solid var(--border);box-sizing:border-box;padding:0;}
+.gantt-table tr:last-child td{border-bottom:none;}
+.gantt-table tr:hover td{background:rgba(255,255,255,.02);}
+/* Coluna fixa esquerda */
+.g-left{width:300px;min-width:300px;max-width:300px;padding:0 8px;vertical-align:middle;position:sticky;left:0;z-index:10;background:var(--bg2);}
+.g-left-hdr{width:300px;min-width:300px;max-width:300px;padding:6px 10px;vertical-align:bottom;position:sticky;left:0;z-index:11;background:var(--bg2);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);height:56px;border-bottom:1px solid var(--border);}
+/* Coluna do gráfico */
+.g-chart{position:relative;vertical-align:middle;}
+.g-chart-hdr{vertical-align:bottom;height:28px;border-bottom:1px solid var(--border);padding:0;background:var(--bg2);}
+.g-chart-hdr2{vertical-align:middle;height:28px;border-bottom:1px solid var(--border);padding:0;background:var(--bg2);}
+/* Conteúdo da célula esquerda */
+.er-wrap{display:flex;align-items:center;gap:6px;height:58px;overflow:hidden;}
+.er-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.er-key{font-size:10px;color:var(--dim);flex-shrink:0;width:72px;text-decoration:none;font-family:monospace;}
+.er-key:hover{color:#21C25E;}
+.er-info{flex:1;min-width:0;overflow:hidden;}
+.er-name{font-size:11px;color:var(--text);line-height:1.3;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.er-dates{font-size:9px;color:#4A5170;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+/* Célula do gráfico */
+.g-cell{position:relative;height:58px;overflow:hidden;}
+.g-bgcol{height:100%;flex-shrink:0;border-right:1px solid rgba(255,255,255,.02);position:absolute;top:0;}
+.today-l{position:absolute;top:0;bottom:0;width:1px;border-left:2px dashed rgba(255,255,255,.2);z-index:15;pointer-events:none;}
+.today-lbl{position:absolute;top:0;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.1);color:rgba(255,255,255,.45);font-size:7px;font-weight:700;padding:2px 4px;border-radius:3px;white-space:nowrap;}
 
-/* CARDS */
-.card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px 22px;transition:all .2s;}
-.card:hover{border-color:var(--border2);transform:translateY(-2px);}
-
-/* PROGRESS */
-.prog-wrap{background:rgba(255,255,255,.06);border-radius:100px;height:8px;overflow:hidden;margin-bottom:8px;}
-.prog-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,#22C55E,#3B82F6);transition:width 1.3s ease;}
-.prog-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);}
-
-/* AREA TAGS */
-.at{font-size:9px;font-weight:600;padding:3px 8px;border-radius:100px;}
-.at-red{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#FCA5A5;}
-.at-yellow{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#FCD34D;}
-
-/* STATUS BARS */
-.sl-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
-.sl-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
-.sl-label{font-size:14px;font-weight:500;flex:1;}
-.sl-bar-wrap{flex:2;height:7px;background:rgba(255,255,255,.05);border-radius:100px;overflow:hidden;}
-.sl-bar{height:100%;border-radius:100px;transition:width 1.1s ease;}
-.sl-num{font-size:15px;font-weight:800;width:30px;text-align:right;}
-.sl-pct{font-size:11px;color:var(--muted);width:36px;text-align:right;}
-
-/* MVP TIMELINE */
-.tl-wrap{position:relative;padding-left:160px;}
-.tl-line{position:absolute;left:152px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--done),var(--build),var(--pri),var(--disc),var(--wish));opacity:.2;}
-.tl-row{position:relative;margin-bottom:8px;}
-.tl-dot{position:absolute;left:-16px;top:26px;width:14px;height:14px;border-radius:50%;border:2px solid;}
-.tl-label{position:absolute;left:-160px;top:18px;text-align:right;width:140px;}
-.tl-badge{font-size:14px;font-weight:900;display:block;}
-.tl-period{font-size:10px;color:var(--muted);}
-.tl-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px 20px;transition:all .2s;}
-.tl-card:hover{border-color:var(--border2);transform:translateX(4px);}
-.tl-title{font-size:14px;font-weight:800;margin-bottom:6px;}
-.tl-body{font-size:12px;color:var(--muted);line-height:1.7;}
-.tl-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
-.tl-chip{font-size:10px;font-weight:600;padding:2px 9px;border-radius:100px;text-decoration:none;transition:all .15s;}
-.tl-chip:hover{transform:translateY(-1px);}
-
-/* FRENTES */
-.fc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;}
-.fc-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:18px 20px;transition:all .2s;}
-.fc-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.3);}
-.fc-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
-.fc-num{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;}
-.fc-title{font-size:13px;font-weight:800;flex:1;}
-.fc-status{font-size:9px;font-weight:700;padding:3px 8px;border-radius:100px;flex-shrink:0;text-transform:uppercase;letter-spacing:.4px;}
-.fc-items{display:flex;flex-direction:column;gap:8px;margin-top:2px;}
-.fc-item{font-size:11px;color:var(--muted);display:flex;align-items:flex-start;gap:8px;line-height:1.6;}
-.fc-item b{color:var(--text);font-weight:600;}
-.fc-icon{flex-shrink:0;font-size:12px;}
-.at-wrap{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
-
-/* RISCOS */
-.risk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px;}
-.risk-card{border-radius:14px;padding:20px 22px;border:1px solid;transition:all .2s;}
-.risk-card:hover{transform:translateY(-2px);}
-.r-high{background:rgba(239,68,68,.05);border-color:rgba(239,68,68,.18);}
-.r-med{background:rgba(245,158,11,.05);border-color:rgba(245,158,11,.18);}
-.r-low{background:rgba(34,197,94,.04);border-color:rgba(34,197,94,.15);}
-.risk-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
-.risk-lv{font-size:9px;font-weight:700;padding:3px 8px;border-radius:100px;text-transform:uppercase;}
-.lv-high{background:rgba(239,68,68,.2);color:#FCA5A5;}
-.lv-med{background:rgba(245,158,11,.2);color:#FCD34D;}
-.lv-low{background:rgba(34,197,94,.2);color:#86EFAC;}
-.risk-title{font-size:14px;font-weight:800;}
-.risk-body{font-size:12px;color:var(--muted);line-height:1.7;}
-.risk-action{font-size:11px;margin-top:10px;padding:9px 12px;border-radius:8px;background:rgba(255,255,255,.04);border-left:2px solid rgba(255,255,255,.1);}
-.risk-action b{color:var(--text);}
-
-/* SQUADS */
-.sq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
-.sq-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px 22px;transition:all .2s;}
-.sq-card:hover{border-color:var(--border2);}
-.sq-name{font-size:18px;font-weight:900;margin-bottom:4px;letter-spacing:-.3px;}
-.sq-count{font-size:38px;font-weight:900;line-height:1;letter-spacing:-1px;}
-.sq-lbl{font-size:11px;color:var(--muted);}
-.sq-bar{height:4px;border-radius:100px;margin-top:14px;background:rgba(255,255,255,.05);}
-.sq-fill{height:100%;border-radius:100px;}
-
-/* PRÓXIMOS PASSOS */
-.px-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;}
-.px-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:24px 26px;transition:all .2s;}
-.px-card:hover{border-color:var(--border2);}
-.px-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
-.px-icon{font-size:22px;}
-.px-title{font-size:16px;font-weight:900;letter-spacing:-.3px;}
-.px-period{font-size:11px;color:var(--muted);padding:3px 9px;border-radius:6px;background:var(--card);border:1px solid var(--border);}
-.px-items{display:flex;flex-direction:column;gap:10px;}
-.px-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--muted);line-height:1.6;}
-.px-bullet{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px;}
-.px-item b{color:var(--text);font-weight:600;}
-
-/* TOMBAMENTO Q1/27 */
-.tl-phases{display:flex;border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:32px;}
-.tl-phase{flex:1;padding:16px 18px;text-align:center;border-right:1px solid var(--border);}
-.tl-phase:last-child{border-right:none;}
-.tl-phase-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
-.tl-phase-title{font-size:13px;font-weight:800;}
-.tl-phase-sub{font-size:10px;color:var(--muted);margin-top:2px;}
-.prereq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;}
-.prereq-card{background:rgba(255,255,255,.03);border-radius:10px;padding:14px 16px;}
-.prereq-title{font-size:11px;font-weight:800;color:var(--text);margin-bottom:8px;}
-.prereq-item{font-size:11px;color:var(--muted);line-height:1.7;}
-
-/* CAPA */
-#s1{background:radial-gradient(ellipse 80% 60% at 15% 55%,rgba(34,197,94,.07) 0%,transparent 55%),radial-gradient(ellipse 60% 50% at 85% 15%,rgba(59,130,246,.07) 0%,transparent 55%),var(--bg);}
-.capa-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:5vw;align-items:center;}
-.capa-h1{font-size:clamp(44px,5.5vw,78px);font-weight:900;line-height:1.02;letter-spacing:-2px;margin-bottom:20px;}
-.capa-desc{font-size:16px;color:var(--muted);line-height:1.8;margin-bottom:32px;max-width:520px;}
-.meta-row{display:flex;align-items:center;gap:12px;font-size:13px;margin-bottom:10px;}
-.meta-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;border:1px solid var(--border);}
-.meta-lbl{color:var(--muted);font-size:11px;}
-.meta-val{font-weight:700;}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
-.big-stat{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px 22px;transition:border-color .2s;}
-.big-stat:hover{border-color:var(--border2);}
-.big-num{font-size:50px;font-weight:900;line-height:1;letter-spacing:-2px;}
-.big-lbl{font-size:11px;font-weight:600;color:var(--muted);margin-top:6px;text-transform:uppercase;letter-spacing:.5px;}
-.big-sub{font-size:11px;color:var(--dim);margin-top:2px;}
-.chips-row{display:flex;gap:6px;flex-wrap:wrap;}
-
-/* PULSE */
-.pdot{width:7px;height:7px;border-radius:50%;animation:pd 2s infinite;flex-shrink:0;}
-@keyframes pd{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.8)}}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-brand">&#x1F680; <span class="nav-accent">B2K</span> Roadmap</div>
-  <div class="nav-links">
-    <a class="nav-link active" href="#s1">Capa</a>
-    <a class="nav-link" href="#s4">Frentes de Trabalho</a>
-    <a class="nav-link" href="#s2">Status dos &#xc9;picos</a>
-    <a class="nav-link" href="#s3">Timeline MVP</a>
-    <a class="nav-link" href="#s5">Riscos</a>
-    <a class="nav-link" href="#s6">Squads</a>
-    <a class="nav-link" href="#s7">Pr&#xf3;ximos Passos</a>
-    <a class="nav-link" href="#s8" style="color:#EF4444;font-weight:700">&#x1F680; Tombamento Q1/27</a>
-  </div>
-  <div class="nav-right">
-    <span class="nav-date">06/abr/2026</span>
-    <a class="nav-jira" href="https://picpay.atlassian.net/browse/BUCS-345" target="_blank">BUCS-345 &#x2197;</a>
-  </div>
+  <div class="nbrand">&#x1F680; <span>B2K</span> Roadmap</div>
+  <div class="nsep"></div>
+  <button class="sf sf-done"  data-s="done"        onclick="togS(this)">&#x2705; Done</button>
+  <button class="sf sf-build" data-s="build"       onclick="togS(this)">&#x1F3D7; Build</button>
+  <button class="sf sf-pri"   data-s="prioritized" onclick="togS(this)">&#x23ED; Priorizado</button>
+  <button class="sf sf-disc"  data-s="discovery"   onclick="togS(this)">&#x1F50D; Discovery</button>
+  <button class="sf sf-wish"  data-s="wishlist"    onclick="togS(this)">&#x1F4CB; Wishlist</button>
+  <div class="nright">Progresso: <b style="color:#21C25E">25%</b> &middot; 23/91</div>
 </nav>
 
-<!-- ════════ S1 · CAPA ════════ -->
-<div class="slide" id="s1">
-  <div class="capa-grid">
-    <div>
-      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px;">
-        <span style="width:3px;height:14px;background:var(--done);border-radius:2px;display:inline-block"></span>
-        Iniciativa Estrat&#xe9;gica &middot; BUCS-345 &middot; Squad PHD
-      </div>
-      <h1 class="capa-h1">Migra&#xe7;&#xe3;o<br><span class="grad">Vision+</span><br>para B2K</h1>
-      <p class="capa-desc">Migra&#xe7;&#xe3;o das funcionalidades do Vision+ para a nova plataforma B2K, garantindo continuidade dos servi&#xe7;os e maior independ&#xea;ncia da FIS.</p>
-      <div class="meta-row"><div class="meta-icon" style="background:rgba(245,158,11,.1)">&#x1F4C5;</div><div><div class="meta-lbl">Per&#xed;odo</div><div class="meta-val">Jul 2025 &#x2192; Abr 2027</div></div></div>
-      <div class="meta-row"><div class="meta-icon" style="background:rgba(59,130,246,.1)">&#x1F464;</div><div><div class="meta-lbl">Respons&#xe1;vel</div><div class="meta-val">Vitor Marques Gaspar &middot; Squad PHD</div></div></div>
-      <div class="meta-row"><div class="meta-icon" style="background:rgba(34,197,94,.1)">&#x1F4CB;</div><div><div class="meta-lbl">Motiva&#xe7;&#xe3;o</div><div class="meta-val">Contrato com processadora &#x2014; migra&#xe7;&#xe3;o obrigat&#xf3;ria</div></div></div>
-      <div class="meta-row"><div class="meta-icon" style="background:rgba(168,85,247,.1)">&#x1F3D7;</div><div><div class="meta-lbl">Status atual</div><div class="meta-val">MVP4 em andamento</div></div></div>
-    </div>
-    <div>
-      <div class="stat-grid">
-        <div class="big-stat" style="border-top:3px solid var(--text)"><div class="big-num">77</div><div class="big-lbl">&#xc9;picos totais</div><div class="big-sub">na iniciativa</div></div>
-        <div class="big-stat" style="border-top:3px solid var(--done)"><div class="big-num" style="color:var(--done)">23</div><div class="big-lbl">Conclu&#xed;dos</div><div class="big-sub">30% do total</div></div>
-        <div class="big-stat" style="border-top:3px solid var(--build)"><div class="big-num" style="color:var(--build)">6</div><div class="big-lbl">Em Build</div><div class="big-sub">MVP4 &middot; Q2 2026</div></div>
-        <div class="big-stat" style="border-top:3px solid var(--cancel)"><div class="big-num" style="color:var(--cancel);font-size:32px">Abr/27</div><div class="big-lbl">Deadline</div><div class="big-sub">~12 meses</div></div>
-      </div>
-      <div class="big-stat" style="margin-bottom:14px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <span style="font-size:13px;font-weight:700">Progresso Geral</span>
-          <span style="font-size:26px;font-weight:900;color:var(--done);letter-spacing:-1px">30%</span>
-        </div>
-        <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
-        <div class="prog-labels"><span>MVPs 1, 2 e 3 conclu&#xed;dos</span><span>MVP4 em andamento</span></div>
-      </div>
-      <div class="chips-row">
-        <span class="chip c-done">&#x2705; 23 Done</span>
-        <span class="chip c-build">&#x1F3D7; 6 Build</span>
-        <span class="chip c-pri">&#x23ED; 10 Prioritized</span>
-        <span class="chip c-disc">&#x1F50D; 1 Discovery</span>
-        <span class="chip c-wish">&#x1F4CB; 35 Backlog</span>
-        <span class="chip c-cancel">&#x274C; 2 Cancelled</span>
-      </div>
-    </div>
-  </div>
+<div class="qbar">
+  <button class="qb sel" data-q="all"     onclick="selQ(this)">&#x1F5FA; Todos <span class="qcnt" style="background:rgba(255,255,255,.08);color:var(--text)">91</span></button>
+  <button class="qb"     data-q="Q1 2026" onclick="selQ(this)">Q1/26 <span style="font-size:9px;color:var(--muted)">Jan&ndash;Mar</span> <span class="qcnt" style="background:rgba(59,130,246,.15);color:#3B82F6">23</span></button>
+  <button class="qb"     data-q="Q2 2026" onclick="selQ(this)">Q2/26 <span style="font-size:9px;color:var(--muted)">Abr&ndash;Jun</span> <span class="qcnt" style="background:rgba(168,85,247,.15);color:#A855F7">13</span></button>
+  <button class="qb"     data-q="Q3 2026" onclick="selQ(this)">Q3/26 <span style="font-size:9px;color:var(--muted)">Jul&ndash;Set</span> <span class="qcnt" style="background:rgba(245,158,11,.15);color:#F59E0B">11</span></button>
+  <button class="qb"     data-q="Q4 2026" onclick="selQ(this)">Q4/26 <span style="font-size:9px;color:var(--muted)">Out&ndash;Dez</span> <span class="qcnt" style="background:rgba(239,68,68,.15);color:#EF4444">8</span></button>
+  <button class="qb"     data-q="Backlog"  onclick="selQ(this)">&#x1F4CB; Backlog <span class="qcnt" style="background:rgba(100,116,139,.15);color:#94A3B8">2</span></button>
+  <button class="qb" style="background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.35);color:#EF4444;cursor:default;flex-shrink:0;" title="GAPs identificados no Q2/26">
+    &#x26A0; 24 GAPs
+  </button>
 </div>
 
-<!-- ════════ S4 · FRENTES ════════ -->
-<div class="slide" id="s4">
-  <div class="slide-tag">Frentes de Trabalho</div>
-  <h2 class="slide-title">O que est&#xe1; em <span class="grad">paralelo</span></h2>
-  <p class="slide-sub">7 frentes identificadas al&#xe9;m das funcionalidades &#x2014; algumas em andamento, outras ainda pendentes</p>
-  <div class="fc-grid">
-
-    <div class="fc-card">
-      <div class="fc-head">
-        <div class="fc-num" style="background:rgba(34,197,94,.15);color:#22C55E">1</div>
-        <span class="fc-title">Funcionalidades</span>
-        <span class="fc-status" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);color:#93C5FD">Em andamento</span>
-      </div>
-      <div class="fc-items">
-        <div class="fc-item"><span class="fc-icon">&#x2705;</span><span>77 &#xe9;picos mapeados no roadmap</span></div>
-        <div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>Lista n&#xe3;o exaustiva</b> &#x2014; &#xe1;reas ainda descobrindo impactos</span></div>
-        <div class="fc-item"><span class="fc-icon">&#x279C;</span><span>6 squads ativas: CAB2K, B2KTRA, CAC, TRFSCC, TRCSLS, CARCN</span></div>
-      </div>
-    </div>
-
-    <div class="fc-card">
-      <div class="fc-head">
-        <div class="fc-num" style="background:rgba(239,68,68,.15);color:#EF4444">2</div>
-        <span class="fc-title">&#xc1;reas Impactadas</span>
-        <span class="fc-status" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#FCA5A5">Incompleto</span>
-      </div>
-      <div class="fc-items">
-        <div class="fc-item"><span class="fc-icon">&#x2705;</span><span><b>Mapeadas:</b> BU Cart&#xf5;es (todas as squads PHD)</span></div>
-        <div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>N&#xe3;o mapeadas ainda:</b></span></div>
-      </div>
-      <div class="at-wrap">
-        <span class="at at-red">Cobran&#xe7;a de Seguro</span>
-        <span class="at at-red">Bonifica&#xe7;&#xe3;o</span>
-        <span class="at at-red">Cobran&#xe7;a</span>
-        <span class="at at-red">Renova&#xe7;&#xe3;o Cart&#xe3;o (BIN)</span>
-        <span class="at at-red">Bandeira</span>
-        <span class="at at-yellow">Prev. Fraude</span>
-        <span class="at at-yellow">Canais Atendimento + Service View</span>
-        <span class="at at-yellow">Open Finance</span>
-        <span class="at at-yellow">Growth</span>
-        <span class="at at-yellow">Cont&#xe1;bil</span>
-      </div>
-    </div>
-
-    <div class="fc-card">
-      <div class="fc-head">
-        <div class="fc-num" style="background:rgba(168,85,247,.15);color:#A855F7">3</div>
-        <span class="fc-title">Plano de Teste de Carga</span>
-        <span class="fc-status" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#FCA5A5">N&#xe3;o iniciado</span>
-      </div>
-      <div class="fc-items">
-        <div class="fc-item"><span class="fc-icon">&#x1F4C5;</span><span><b>Previs&#xe3;o de in&#xed;cio:</b> Out/2026</span></div>
-        <div class="fc-item"><span class="fc-icon">&#x279C;</span><span><b>Objetivo:</b> Avaliar cen&#xe1;rios, volume, poss&#xed;veis desvios e teste de carga</span></div>
-        <div class="fc-item"><span class="fc-icon">&#x279C;</span><span>Escopo: todas as squads BU Cart&#xf5;es</span></div>
-        <div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span>Demais BUs ainda <b>a mapear</b></span></div>
-      </div>
-    </div>
-
-    <div class="fc-card">
-      <div class="fc-head">
-        <div class="fc-num" style="background:rgba(245,158,11,.15);color:#F59E0B">4</div>
-        <span class="fc-title">Plano de Tombamento</span>
-        <span class="fc-status" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#FCA5A5">N&#xe3;o iniciado &middot; Sem previs&#xe3;o</span>
-      </div>
-      <div class="fc-items">
-        <div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>Estrat&#xe9;gia</b> de tombamento &#x2014; a definir</span></div>
-        <div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>Plano de Backup</b> &#x2014; a definir</span></div>
-        <div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>Valida&#xe7;&#xf5;es</b> &#x2014; a definir</span></div>
-      </div>
-    </div>
-
-    <div class="fc-card">
-      <div class="fc-head">
-        <div class="fc-num" style="background:rgba(59,130,246,.15);color:#3B82F6">5</div>
-        <span class="fc-title">Tombamento Original &#x2192; PicPay</span>
-        <span class="fc-status" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);color:#93C5FD">Em andamento</span>
-      </div>
-      <div class="fc-items">
-        <div class="fc-item"><span class="fc-icon">&#x1F4C5;</span><span><b>Janela de aprova&#xe7;&#xe3;o do Plano:</b> Abr/2026</span></div>
-        <div class="fc-item"><span class="fc-icon">&#x1F3C1;</span><span><b>Janela de execu&#xe7;&#xe3;o:</b> Mai/2026 at&#xe9; Jun/2026</span></div>
-        <div class="fc-item"><span class="fc-icon">&#x279C;</span><span>&#xc9;pico: <a href="https://picpay.atlassian.net/browse/CAB2K-1063" target="_blank" style="color:#60A5FA">CAB2K-1063</a></span></div>
-      </div>
-    </div>
-
-    <div class="fc-card">
-      <div class="fc-head">
-        <div class="fc-num" style="background:rgba(236,72,153,.15);color:#EC4899">6</div>
-        <span class="fc-title">Clientes do Consignado</span>
-        <span class="fc-status" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);color:#93C5FD">Em andamento</span>
-      </div>
-      <div class="fc-items">
-        <div class="fc-item"><span class="fc-icon">&#x1F4C5;</span><span><b>Defini&#xe7;&#xe3;o da estrat&#xe9;gia at&#xe9;:</b> 31/05/2026</span></div>
-        <div class="fc-item"><span class="fc-icon">&#x279C;</span><span>&#xc9;pico: <a href="https://picpay.atlassian.net/browse/CARCN-355" target="_blank" style="color:#60A5FA">CARCN-355 &middot; Q3 2026</a></span></div>
-      </div>
-    </div>
-
-    <div class="fc-card">
-      <div class="fc-head">
-        <div class="fc-num" style="background:rgba(100,116,139,.15);color:#94A3B8">7</div>
-        <span class="fc-title">Controle dos Gaps</span>
-        <span class="fc-status" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);color:#93C5FD">Em acompanhamento</span>
-      </div>
-      <div class="fc-items">
-        <div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>Data de congelamento</b> de novos itens no Vision+ &#x2014; a definir</span></div>
-        <div class="fc-item"><span class="fc-icon">&#x279C;</span><span>Acompanhamento cont&#xed;nuo de itens fora do escopo</span></div>
-        <div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>Definir o plano de aprova&#xe7;&#xe3;o</b> com impacto de novos itens &#x2014; <span style="color:#FCA5A5;font-weight:600">pendente</span></span></div>
-        <div class="fc-item"><span class="fc-icon">&#x1F4CA;</span><span>Saldo atual: <b style="font-size:20px;color:#EF4444;vertical-align:middle">83</b> <b>GAPs</b> identificados</span></div>
-      </div>
-    </div>
-
-  </div>
+<div class="sbar">
+  <div class="sc" onclick="selQByName('all')"><div class="lbl">Total</div><div class="num" style="color:var(--text)">91</div><div class="sub">&#233;picos</div></div>
+  <div class="sc" onclick="selQByName('all')"><div class="lbl">&#x2705; Conclu&#237;dos</div><div class="num" style="color:#21C25E">23</div><div class="sub">25% do total</div></div>
+  <div class="sc" onclick="selQByName('Q2 2026')"><div class="lbl">&#x1F3D7; Build</div><div class="num" style="color:#3B82F6">8</div><div class="sub">Q2/26</div></div>
+  <div class="sc" onclick="selQByName('Q2 2026')"><div class="lbl">&#x23ED; Priorizado</div><div class="num" style="color:#F59E0B">10</div><div class="sub">MVP4</div></div>
+  <div class="sc" onclick="selQByName('Backlog')"><div class="lbl">&#x1F4CB; Backlog</div><div class="num" style="color:#94A3B8">2</div><div class="sub">sem data limite</div></div>
 </div>
 
-<!-- ════════ S2 · STATUS ════════ -->
-<div class="slide" id="s2">
-  <div class="slide-tag">Status dos &#xc9;picos</div>
-  <h2 class="slide-title">Como est&#xe1; o <span class="grad">programa hoje</span></h2>
-  <p class="slide-sub">Distribui&#xe7;&#xe3;o dos 77 &#xe9;picos por status e por quarter de entrega</p>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:start;">
-    <div>
-      <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:18px">Por Status</div>
-      <div class="sl-row"><div class="sl-dot" style="background:var(--done)"></div><span class="sl-label">Done</span><div class="sl-bar-wrap"><div class="sl-bar" data-w="30" style="background:var(--done);width:0%"></div></div><span class="sl-num" style="color:var(--done)">23</span><span class="sl-pct">30%</span></div>
-      <div class="sl-row"><div class="sl-dot" style="background:var(--wish)"></div><span class="sl-label">Backlog / Wishlist</span><div class="sl-bar-wrap"><div class="sl-bar" data-w="45" style="background:var(--wish);width:0%"></div></div><span class="sl-num" style="color:var(--wish)">35</span><span class="sl-pct">45%</span></div>
-      <div class="sl-row"><div class="sl-dot" style="background:var(--pri)"></div><span class="sl-label">Prioritized</span><div class="sl-bar-wrap"><div class="sl-bar" data-w="13" style="background:var(--pri);width:0%"></div></div><span class="sl-num" style="color:var(--pri)">10</span><span class="sl-pct">13%</span></div>
-      <div class="sl-row"><div class="sl-dot" style="background:var(--build)"></div><span class="sl-label">Build</span><div class="sl-bar-wrap"><div class="sl-bar" data-w="8" style="background:var(--build);width:0%"></div></div><span class="sl-num" style="color:var(--build)">6</span><span class="sl-pct">8%</span></div>
-      <div class="sl-row"><div class="sl-dot" style="background:var(--disc)"></div><span class="sl-label">Discovery</span><div class="sl-bar-wrap"><div class="sl-bar" data-w="1" style="background:var(--disc);width:0%"></div></div><span class="sl-num" style="color:var(--disc)">1</span><span class="sl-pct">1%</span></div>
-      <div class="sl-row"><div class="sl-dot" style="background:var(--cancel);opacity:.5"></div><span class="sl-label" style="opacity:.5">Cancelled</span><div class="sl-bar-wrap"><div class="sl-bar" data-w="3" style="background:var(--cancel);opacity:.5;width:0%"></div></div><span class="sl-num" style="color:var(--cancel);opacity:.5">2</span><span class="sl-pct" style="opacity:.5">3%</span></div>
-    </div>
-    <div>
-      <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:18px">Por Quarter (Fix Version)</div>
-      <div class="sl-row"><div class="sl-dot" style="background:var(--done);border-radius:50%"></div><span class="sl-label">Q3 2025 &#x2705;</span><div class="sl-bar-wrap"><div class="sl-bar" data-w="5" style="background:var(--done);width:0%"></div></div><span class="sl-num" style="color:var(--done)">4</span><span class="sl-pct">5%</span></div>
-      <div class="sl-row"><div class="sl-dot" style="background:var(--done);border-radius:50%"></div><span class="sl-label">Q4 2025 &#x2705;</span><div class="sl-bar-wrap"><div class="sl-bar" data-w="17" style="background:var(--done);width:0%"></div></div><span class="sl-num" style="color:var(--done)">13</span><span class="sl-pct">17%</span></div>
-      <div class="sl-row"><div class="sl-dot" style="background:var(--build);border-radius:50%"></div><span class="sl-label">Q1 2026 ~done</span><div class="sl-bar-wrap"><div class="sl-bar" data-w="12" style="background:var(--build);width:0%"></div></div><span class="sl-num" style="color:var(--build)">9</span><span class="sl-pct">12%</span></div>
-      <div class="sl-row"><div class="sl-dot" style="background:var(--pri);border-radius:50%;animation:pd 2s infinite"></div><span class="sl-label">Q2 2026 &#x2014; MVP4 &#x1F534;</span><div class="sl-bar-wrap"><div class="sl-bar" data-w="14" style="background:var(--pri);width:0%"></div></div><span class="sl-num" style="color:var(--pri)">11</span><span class="sl-pct">14%</span></div>
-      <div class="sl-row"><div class="sl-dot" style="background:var(--pink);border-radius:50%"></div><span class="sl-label">Q2 2026 &#x2014; Discovery</span><div class="sl-bar-wrap"><div class="sl-bar" data-w="6" style="background:var(--pink);width:0%"></div></div><span class="sl-num" style="color:var(--pink)">5</span><span class="sl-pct">6%</span></div>
-      <div class="sl-row"><div class="sl-dot" style="background:var(--wish);border-radius:50%"></div><span class="sl-label">Q3&#x2013;Q4 2026</span><div class="sl-bar-wrap"><div class="sl-bar" data-w="3" style="background:var(--wish);width:0%"></div></div><span class="sl-num" style="color:var(--wish)">2</span><span class="sl-pct">3%</span></div>
-      <div class="sl-row"><div class="sl-dot" style="background:var(--dim);border-radius:50%"></div><span class="sl-label">Backlog (sem quarter)</span><div class="sl-bar-wrap"><div class="sl-bar" data-w="44" style="background:var(--dim);width:0%"></div></div><span class="sl-num" style="color:var(--muted)">33</span><span class="sl-pct">43%</span></div>
-    </div>
+<div class="main" id="main">
+  <div class="qtrow">
+    <h2 id="qTitle" style="color:var(--text)">&#x1F5FA; Todos os Quarters</h2>
+    <span class="qper" id="qPer">Jan 2026 &rarr; Dez 2026</span>
+    <span style="font-size:12px;color:var(--muted)" id="qCnt"></span>
   </div>
+  <div class="leg">
+    <div class="leg-i"><div class="leg-sw" style="background:rgba(33,194,94,.35);border:1px solid rgba(33,194,94,.5)"></div>Done</div>
+    <div class="leg-i"><div class="leg-sw" style="background:rgba(59,130,246,.35);border:1px solid rgba(59,130,246,.5)"></div>Build</div>
+    <div class="leg-i"><div class="leg-sw" style="background:rgba(245,158,11,.3);border:1px solid rgba(245,158,11,.5)"></div>Priorizado</div>
+    <div class="leg-i"><div class="leg-sw" style="background:rgba(168,85,247,.3);border:1px solid rgba(168,85,247,.5)"></div>Discovery</div>
+    <div class="leg-i"><div class="leg-sw" style="background:rgba(100,116,139,.25);border:1px solid rgba(100,116,139,.4)"></div>Wishlist</div>
+    <div class="leg-i" style="margin-left:auto"><div style="width:16px;height:0;border-top:2px dashed rgba(255,255,255,.2);display:inline-block;vertical-align:middle;margin-right:4px"></div>Hoje</div>
+  </div>
+  <div id="mount"></div>
 </div>
 
-<!-- ════════ S3 · TIMELINE MVP ════════ -->
-<div class="slide" id="s3">
-  <div class="slide-tag">Linha do Tempo</div>
-  <h2 class="slide-title">Evolu&#xe7;&#xe3;o por <span class="grad">MVP</span></h2>
-  <p class="slide-sub">Marcos de entrega da migra&#xe7;&#xe3;o &#x2014; cada MVP representa um conjunto funcional entregue em produ&#xe7;&#xe3;o</p>
-  <div class="tl-wrap">
-    <div class="tl-line"></div>
-
-    <div class="tl-row">
-      <div class="tl-label"><span class="tl-badge" style="color:var(--done)">MVP 1</span><span class="tl-period">Nov 2025</span></div>
-      <div class="tl-dot" style="background:var(--done);border-color:var(--done)"></div>
-      <div class="tl-card" style="border-color:rgba(34,197,94,.2)">
-        <div class="tl-title">&#x1F3C1; Piloto B2K &#x2014; Funcionalidades Base <span class="chip c-done" style="font-size:9px;padding:2px 7px;vertical-align:middle">&#x2705; Conclu&#xed;do</span></div>
-        <div class="tl-body">Dom&#xed;nio de bloqueios, carga FIS, embossing, desbloqueio/ativa&#xe7;&#xe3;o, home d&#xe9;bito, BIN MDES, transa&#xe7;&#xf5;es d&#xe9;bito, 3DS, TECBAN.</div>
-        <div class="tl-chips"><span class="chip c-done" style="font-size:9px;padding:2px 8px">CAB2K-888</span><span class="chip c-done" style="font-size:9px;padding:2px 8px">CAB2K-930</span><span class="chip c-done" style="font-size:9px;padding:2px 8px">CAB2K-919</span><span class="chip c-done" style="font-size:9px;padding:2px 8px">CAB2K-921</span><span class="chip c-done" style="font-size:9px;padding:2px 8px">B2KTRA-409</span><span class="chip c-done" style="font-size:9px;padding:2px 8px">B2KTRA-556</span><span class="chip c-done" style="font-size:9px;padding:2px 8px">B2KTRA-557</span></div>
-      </div>
-    </div>
-
-    <div class="tl-row" style="margin-top:12px">
-      <div class="tl-label"><span class="tl-badge" style="color:var(--done)">MVP 2</span><span class="tl-period">Mar 2026</span></div>
-      <div class="tl-dot" style="background:var(--done);border-color:var(--done)"></div>
-      <div class="tl-card" style="border-color:rgba(34,197,94,.2)">
-        <div class="tl-title">&#x1F512; Jornadas de Uso e Onboarding <span class="chip c-done" style="font-size:9px;padding:2px 7px;vertical-align:middle">&#x2705; Conclu&#xed;do</span></div>
-        <div class="tl-body">Gest&#xe3;o do NFC, 2&#xaa; via (perda/roubo), cat&#xe1;logo de bloqueio, testes produtivos. Amplia&#xe7;&#xe3;o da base no B2K.</div>
-        <div class="tl-chips"><span class="chip c-done" style="font-size:9px;padding:2px 8px">CAB2K-925</span><span class="chip c-done" style="font-size:9px;padding:2px 8px">CAB2K-926</span><span class="chip c-done" style="font-size:9px;padding:2px 8px">CAB2K-1258</span><span class="chip c-done" style="font-size:9px;padding:2px 8px">CAB2K-1354</span></div>
-      </div>
-    </div>
-
-    <div class="tl-row" style="margin-top:12px">
-      <div class="tl-label"><span class="tl-badge" style="color:var(--done)">MVP 3</span><span class="tl-period">Mar 2026</span></div>
-      <div class="tl-dot" style="background:var(--done);border-color:var(--done)"></div>
-      <div class="tl-card" style="border-color:rgba(34,197,94,.2)">
-        <div class="tl-title">&#x1F4E7; Push e Cadastro <span class="chip c-done" style="font-size:9px;padding:2px 7px;vertical-align:middle">&#x2705; Conclu&#xed;do</span></div>
-        <div class="tl-body">Bloqueio tempor&#xe1;rio, push cadastral/bloqueio via socket, altera&#xe7;&#xe3;o de endere&#xe7;o com l&#xf3;gica de partner.</div>
-        <div class="tl-chips"><span class="chip c-done" style="font-size:9px;padding:2px 8px">CAB2K-1078</span><span class="chip c-done" style="font-size:9px;padding:2px 8px">CAB2K-1089</span><span class="chip c-done" style="font-size:9px;padding:2px 8px">CAB2K-1061</span></div>
-      </div>
-    </div>
-
-    <div class="tl-row" style="margin-top:12px">
-      <div class="tl-label"><span class="tl-badge" style="color:var(--build)">MVP 4</span><span class="tl-period">Jun 2026</span></div>
-      <div class="tl-dot" style="background:var(--build);border-color:var(--build);box-shadow:0 0 14px rgba(59,130,246,.6)"></div>
-      <div class="tl-card" style="border-color:rgba(59,130,246,.3)">
-        <div class="tl-title">&#x1F4B3; Cr&#xe9;dito, Limites e Cat&#xe1;logo <span class="chip c-build" style="font-size:9px;padding:2px 7px;vertical-align:middle">&#x1F3D7; Em build</span></div>
-        <div class="tl-body">Enable de cria&#xe7;&#xe3;o de conta, arquivos de pagamento, atribui&#xe7;&#xe3;o de limite, card de limite na home, push transacional, autorizador off-us, timeline de cr&#xe9;dito, gera&#xe7;&#xe3;o de fatura.</div>
-        <div class="tl-chips">
-          <a href="https://picpay.atlassian.net/browse/CAB2K-1280" target="_blank" class="chip c-build tl-chip" style="font-size:9px;padding:2px 8px">CAB2K-1280 &#x1F3D7;</a>
-          <a href="https://picpay.atlassian.net/browse/CAB2K-1288" target="_blank" class="chip c-build tl-chip" style="font-size:9px;padding:2px 8px">CAB2K-1288 &#x1F3D7;</a>
-          <a href="https://picpay.atlassian.net/browse/B2KTRA-872"  target="_blank" class="chip c-disc tl-chip"  style="font-size:9px;padding:2px 8px">B2KTRA-872 &#x1F50D;</a>
-          <a href="https://picpay.atlassian.net/browse/B2KTRA-901"  target="_blank" class="chip c-pri tl-chip"   style="font-size:9px;padding:2px 8px">B2KTRA-901 &#x23ED;</a>
-          <a href="https://picpay.atlassian.net/browse/B2KTRA-551"  target="_blank" class="chip c-pri tl-chip"   style="font-size:9px;padding:2px 8px">B2KTRA-551 &#x23ED;</a>
-          <a href="https://picpay.atlassian.net/browse/CAB2K-1432" target="_blank" class="chip c-pri tl-chip"   style="font-size:9px;padding:2px 8px">CAB2K-1432 &#x23ED;</a>
-          <a href="https://picpay.atlassian.net/browse/CAB2K-1433" target="_blank" class="chip c-pri tl-chip"   style="font-size:9px;padding:2px 8px">CAB2K-1433 &#x23ED;</a>
-          <a href="https://picpay.atlassian.net/browse/CAB2K-1434" target="_blank" class="chip c-pri tl-chip"   style="font-size:9px;padding:2px 8px">CAB2K-1434 &#x23ED;</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="tl-row" style="margin-top:12px">
-      <div class="tl-label"><span class="tl-badge" style="color:var(--pink)">MVP 5</span><span class="tl-period">Q3 2026</span></div>
-      <div class="tl-dot" style="background:var(--pink);border-color:var(--pink)"></div>
-      <div class="tl-card" style="border-color:rgba(236,72,153,.2)">
-        <div class="tl-title">&#x1F50D; Novos Produtos &#x2014; Discovery <span class="chip c-discq" style="font-size:9px;padding:2px 7px;vertical-align:middle">&#x1F52C; Discovery</span></div>
-        <div class="tl-body">Parcelados, Microfinanciamento, Cashback, Carteiras Digitais e KAIZEN de Concilia&#xe7;&#xe3;o. Backlog e arquitetura em defini&#xe7;&#xe3;o.</div>
-        <div class="tl-chips">
-          <a href="https://picpay.atlassian.net/browse/B2KTRA-910" target="_blank" class="chip c-discq tl-chip" style="font-size:9px;padding:2px 8px">B2KTRA-910 Parcelados</a>
-          <a href="https://picpay.atlassian.net/browse/B2KTRA-911" target="_blank" class="chip c-discq tl-chip" style="font-size:9px;padding:2px 8px">B2KTRA-911 Microfinanciamento</a>
-          <a href="https://picpay.atlassian.net/browse/B2KTRA-912" target="_blank" class="chip c-discq tl-chip" style="font-size:9px;padding:2px 8px">B2KTRA-912 Cashback</a>
-          <a href="https://picpay.atlassian.net/browse/CAB2K-1445" target="_blank" class="chip c-discq tl-chip" style="font-size:9px;padding:2px 8px">CAB2K-1445 Carteiras Digitais</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="tl-row" style="margin-top:12px">
-      <div class="tl-label"><span class="tl-badge" style="color:var(--wish)">Backlog</span><span class="tl-period">Q4 2026+</span></div>
-      <div class="tl-dot" style="background:var(--wish);border-color:var(--dim)"></div>
-      <div class="tl-card">
-        <div class="tl-title">&#x1F4CB; 33 &#xe9;picos sem Fix Version <span class="chip c-wish" style="font-size:9px;padding:2px 7px;vertical-align:middle">&#x1F4CB; A priorizar</span></div>
-        <div class="tl-body">Cart&#xe3;o virtual, rastreio, limites, tombamento de clientes, home cr&#xe9;dito, AMC001/002, underage, banners, carteira digital, anuidade, recupera&#xe7;&#xe3;o de cr&#xe9;dito, upgrade de fun&#xe7;&#xe3;o/n&#xed;vel/variante. Precisam de Fix Version e quarter.</div>
-      </div>
-    </div>
-
-  </div>
+<div class="tt" id="tt">
+  <div class="tt-key" id="ttKey"></div>
+  <div class="tt-title" id="ttTitle"></div>
+  <div class="tt-badge" id="ttBadge"></div>
+  <div class="tt-row"><span class="tt-lbl">START DATE</span><span class="tt-val" id="ttStart"></span></div>
+  <div class="tt-row"><span class="tt-lbl">DATA LIMITE</span><span class="tt-val" id="ttDue"></span></div>
+  <div class="tt-row"><span class="tt-lbl">Respons.</span><span class="tt-val" id="ttAsg"></span></div>
+  <div class="tt-row"><span class="tt-lbl">Quarter</span><span class="tt-val" id="ttQ"></span></div>
+  <div class="tt-row"><span class="tt-lbl">MVP</span><span class="tt-val" id="ttMvp"></span></div>
+  <div class="tt-desc" id="ttDesc"></div>
 </div>
-
-<!-- ════════ S5 · RISCOS ════════ -->
-<div class="slide" id="s5">
-  <div class="slide-tag">Gest&#xe3;o de Riscos</div>
-  <h2 class="slide-title">Pontos de <span class="grad2">aten&#xe7;&#xe3;o</span></h2>
-  <p class="slide-sub">Riscos identificados que podem impactar o prazo ou a qualidade da migra&#xe7;&#xe3;o</p>
-  <div class="risk-grid">
-
-    <div class="risk-card r-high">
-      <div class="risk-head"><span class="risk-lv lv-high">&#x1F534; Alto</span><span class="risk-title">Q2/26 sobrecarregado</span></div>
-      <div class="risk-body">16 &#xe9;picos com deadline 30/jun/2026 &#x2014; 6 em Build e 10 Prioritized. Risco real de n&#xe3;o entrega do MVP4 no prazo.</div>
-      <div class="risk-action"><b>A&#xe7;&#xe3;o:</b> Revisar capacidade das squads CAB2K e B2KTRA para Q2/26. Priorizar critical path do MVP4.</div>
-    </div>
-
-    <div class="risk-card r-high">
-      <div class="risk-head"><span class="risk-lv lv-high">&#x1F534; Alto</span><span class="risk-title">Gera&#xe7;&#xe3;o de Fatura ainda em Discovery</span></div>
-      <div class="risk-body">B2KTRA-872 tem due em jun/26 e est&#xe1; em Discovery. Depend&#xea;ncia cr&#xed;tica do MVP4 &#x2014; sem fatura n&#xe3;o h&#xe1; ciclo de cr&#xe9;dito completo.</div>
-      <div class="risk-action"><b>A&#xe7;&#xe3;o:</b> Escalar prioridade e definir sa&#xed;da do Discovery imediatamente.</div>
-    </div>
-
-    <div class="risk-card r-high">
-      <div class="risk-head"><span class="risk-lv lv-high">&#x1F534; Alto</span><span class="risk-title">33 &#xe9;picos sem Fix Version</span></div>
-      <div class="risk-body">43% dos &#xe9;picos no backlog sem quarter. Se n&#xe3;o priorizados, Q3 e Q4/26 ficam sobrecarregados ou o prazo de Abr/27 &#xe9; comprometido.</div>
-      <div class="risk-action"><b>A&#xe7;&#xe3;o:</b> Sess&#xe3;o de prioriza&#xe7;&#xe3;o at&#xe9; fim de Q2/26.</div>
-    </div>
-
-    <div class="risk-card r-high">
-      <div class="risk-head"><span class="risk-lv lv-high">&#x1F534; Alto</span><span class="risk-title">10 &#xe1;reas sem mapeamento</span></div>
-      <div class="risk-body">Cobran&#xe7;a de Seguro, Bonifica&#xe7;&#xe3;o, Bandeira, Prev. Fraude, Open Finance, Growth, Cont&#xe1;bil e outras. Podem gerar &#xe9;picos adicionais fora do planejamento.</div>
-      <div class="risk-action"><b>A&#xe7;&#xe3;o:</b> Workshop de impacto com &#xe1;reas n&#xe3;o mapeadas at&#xe9; Q3/26.</div>
-    </div>
-
-    <div class="risk-card r-med">
-      <div class="risk-head"><span class="risk-lv lv-med">&#x1F7E1; M&#xe9;dio</span><span class="risk-title">Tombamento Original &#x2192; PicPay em andamento</span></div>
-      <div class="risk-body">Processo iniciado. <b>Aprova&#xe7;&#xe3;o do plano: Abr/26</b>. <b>Execu&#xe7;&#xe3;o: Mai&#x2013;Jun/26</b>. Monitorar cumprimento das janelas.</div>
-      <div class="risk-action"><b>A&#xe7;&#xe3;o:</b> Garantir aprova&#xe7;&#xe3;o em Abr/26 e execu&#xe7;&#xe3;o dentro da janela Mai&#x2013;Jun/26.</div>
-    </div>
-
-    <div class="risk-card r-med">
-      <div class="risk-head"><span class="risk-lv lv-med">&#x1F7E1; M&#xe9;dio</span><span class="risk-title">Consignado &#x2014; estrat&#xe9;gia at&#xe9; 31/05/26</span></div>
-      <div class="risk-body">Estrat&#xe9;gia em defini&#xe7;&#xe3;o com prazo at&#xe9; <b>31/05/2026</b>. Atraso impacta o planejamento do tombamento final e execu&#xe7;&#xe3;o em Q3/26.</div>
-      <div class="risk-action"><b>A&#xe7;&#xe3;o:</b> Garantir entrega da estrat&#xe9;gia at&#xe9; 31/05/26. Escalar se houver impedimento.</div>
-    </div>
-
-    <div class="risk-card r-med">
-      <div class="risk-head"><span class="risk-lv lv-med">&#x1F7E1; M&#xe9;dio</span><span class="risk-title">Plano de Tombamento sem previs&#xe3;o</span></div>
-      <div class="risk-body">Sem plano, o go-live completo n&#xe3;o pode ser executado com seguran&#xe7;a antes do deadline de Abr/27.</div>
-      <div class="risk-action"><b>A&#xe7;&#xe3;o:</b> Definir plano at&#xe9; Q3/26 para dry-run em Q4/26.</div>
-    </div>
-
-    <div class="risk-card r-med">
-      <div class="risk-head"><span class="risk-lv lv-med">&#x1F7E1; M&#xe9;dio</span><span class="risk-title">Teste de Carga n&#xe3;o iniciado</span></div>
-      <div class="risk-body">Sem teste aprovado n&#xe3;o h&#xe1; tombamento seguro. Previs&#xe3;o Out/26 &#x2014; demais BUs ainda a mapear.</div>
-      <div class="risk-action"><b>A&#xe7;&#xe3;o:</b> Iniciar planejamento com BU Cart&#xf5;es em Q2/26.</div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ════════ S6 · SQUADS ════════ -->
-<div class="slide" id="s6">
-  <div class="slide-tag">Ecossistema</div>
-  <h2 class="slide-title">Squads <span class="grad">envolvidas</span></h2>
-  <p class="slide-sub">6 squads ativas na migra&#xe7;&#xe3;o &#x2014; distribui&#xe7;&#xe3;o de &#xe9;picos por projeto Jira</p>
-  <div class="sq-grid">
-    <div class="sq-card" style="border-top:3px solid #3B82F6"><div class="sq-name" style="color:#3B82F6">CAB2K</div><div style="display:flex;align-items:baseline;gap:8px;margin:8px 0 4px"><div class="sq-count" style="color:#3B82F6">50</div><div class="sq-lbl">&#xe9;picos &middot; 65%</div></div><div style="font-size:11px;color:var(--muted);line-height:1.5">Squad core da migra&#xe7;&#xe3;o. Onboarding, bloqueios, limites, home, push e jornadas de uso.</div><div class="sq-bar"><div class="sq-fill" style="background:#3B82F6;width:65%"></div></div></div>
-    <div class="sq-card" style="border-top:3px solid #A855F7"><div class="sq-name" style="color:#A855F7">B2KTRA</div><div style="display:flex;align-items:baseline;gap:8px;margin:8px 0 4px"><div class="sq-count" style="color:#A855F7">14</div><div class="sq-lbl">&#xe9;picos &middot; 18%</div></div><div style="font-size:11px;color:var(--muted);line-height:1.5">Transa&#xe7;&#xf5;es B2K &#x2014; autorizador, fatura, timeline de cr&#xe9;dito, 3DS, TECBAN e MVP5.</div><div class="sq-bar"><div class="sq-fill" style="background:#A855F7;width:18%"></div></div></div>
-    <div class="sq-card" style="border-top:3px solid #F59E0B"><div class="sq-name" style="color:#F59E0B">CAC</div><div style="display:flex;align-items:baseline;gap:8px;margin:8px 0 4px"><div class="sq-count" style="color:#F59E0B">7</div><div class="sq-lbl">&#xe9;picos &middot; 9%</div></div><div style="font-size:11px;color:var(--muted);line-height:1.5">Arquitetura Cont&#xe1;bil &#x2014; processos regulat&#xf3;rios e concilia&#xe7;&#xe3;o transacional.</div><div class="sq-bar"><div class="sq-fill" style="background:#F59E0B;width:9%"></div></div></div>
-    <div class="sq-card" style="border-top:3px solid #22C55E"><div class="sq-name" style="color:#22C55E">TRFSCC</div><div style="display:flex;align-items:baseline;gap:8px;margin:8px 0 4px"><div class="sq-count" style="color:#22C55E">3</div><div class="sq-lbl">&#xe9;picos &middot; 4%</div></div><div style="font-size:11px;color:var(--muted);line-height:1.5">Funil de Cart&#xf5;es &#x2014; cria&#xe7;&#xe3;o de conta B2K e conta integrada com oferta (MVP4).</div><div class="sq-bar"><div class="sq-fill" style="background:#22C55E;width:4%"></div></div></div>
-    <div class="sq-card" style="border-top:3px solid #64748B"><div class="sq-name" style="color:#94A3B8">TRCSLS</div><div style="display:flex;align-items:baseline;gap:8px;margin:8px 0 4px"><div class="sq-count" style="color:#94A3B8">1</div><div class="sq-lbl">&#xe9;pico &middot; 1%</div></div><div style="font-size:11px;color:var(--muted);line-height:1.5">Acompanhamento de testes para nova arquitetura B2K.</div><div class="sq-bar"><div class="sq-fill" style="background:#64748B;width:1%"></div></div></div>
-    <div class="sq-card" style="border-top:3px solid #EC4899"><div class="sq-name" style="color:#EC4899">CARCN</div><div style="display:flex;align-items:baseline;gap:8px;margin:8px 0 4px"><div class="sq-count" style="color:#EC4899">1</div><div class="sq-lbl">&#xe9;pico &middot; 1%</div></div><div style="font-size:11px;color:var(--muted);line-height:1.5">Consignado B2K &#x2014; migra&#xe7;&#xe3;o do produto consignado (Q3 2026).</div><div class="sq-bar"><div class="sq-fill" style="background:#EC4899;width:1%"></div></div></div>
-  </div>
-  <div style="margin-top:28px;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);border-radius:14px;padding:18px 22px">
-    <div style="font-size:13px;font-weight:700;color:#FCA5A5;margin-bottom:12px">&#x26A0;&#xFE0F; &#xc1;reas ainda sem mapeamento de impacto</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px">
-      <span class="at at-red">Cobran&#xe7;a de Seguro</span><span class="at at-red">Bonifica&#xe7;&#xe3;o</span><span class="at at-red">Cobran&#xe7;a</span><span class="at at-red">Renova&#xe7;&#xe3;o Cart&#xe3;o (BIN)</span><span class="at at-red">Bandeira</span><span class="at at-yellow">Prev. Fraude</span><span class="at at-yellow">Canais Atendimento + Service View</span><span class="at at-yellow">Open Finance</span><span class="at at-yellow">Growth</span><span class="at at-yellow">Cont&#xe1;bil</span>
-    </div>
-  </div>
-</div>
-
-<!-- ════════ S7 · PRÓXIMOS PASSOS ════════ -->
-<div class="slide" id="s7">
-  <div class="slide-tag">Pr&#xf3;ximos Passos</div>
-  <h2 class="slide-title">O que precisa <span class="grad">acontecer</span></h2>
-  <p class="slide-sub">A&#xe7;&#xf5;es priorit&#xe1;rias para garantir o sucesso do programa nos pr&#xf3;ximos quarters</p>
-  <div class="px-grid">
-
-    <div class="px-card" style="border-top:3px solid var(--pri)">
-      <div class="px-head"><span class="px-icon">&#x1F3D7;</span><span class="px-title">Q2 2026 &#x2014; Agora</span><span class="px-period">Abr &#x2192; Jun/26</span></div>
-      <div class="px-items">
-        <div class="px-item"><div class="px-bullet" style="background:var(--build)"></div><div><b>Entregar MVP4:</b> 16 &#xe9;picos com deadline 30/jun/26</div></div>
-        <div class="px-item"><div class="px-bullet" style="background:var(--cancel)"></div><div><b>Escalar Gera&#xe7;&#xe3;o de Fatura</b> (B2KTRA-872) &#x2014; sair do Discovery imediatamente</div></div>
-        <div class="px-item"><div class="px-bullet" style="background:var(--disc)"></div><div><b>Concluir Discovery MVP5:</b> Parcelados, Microfinanciamento, Cashback, Carteiras</div></div>
-        <div class="px-item"><div class="px-bullet" style="background:var(--build)"></div><div><b>&#x1F7E2; Tombamento Original:</b> aprovar plano Abr/26 &#x2192; executar Mai&#x2013;Jun/26</div></div>
-        <div class="px-item"><div class="px-bullet" style="background:var(--build)"></div><div><b>&#x1F7E2; Consignado:</b> definir estrat&#xe9;gia at&#xe9; 31/05/2026</div></div>
-        <div class="px-item"><div class="px-bullet" style="background:var(--muted)"></div><div>Priorizar 33 &#xe9;picos do backlog para Q3&#x2013;Q4/26</div></div>
-      </div>
-    </div>
-
-    <div class="px-card" style="border-top:3px solid var(--disc)">
-      <div class="px-head"><span class="px-icon">&#x1F52C;</span><span class="px-title">Q3 2026</span><span class="px-period">Jul &#x2192; Set/26</span></div>
-      <div class="px-items">
-        <div class="px-item"><div class="px-bullet" style="background:var(--disc)"></div><div><b>Iniciar MVP5</b> com produtos validados no Discovery</div></div>
-        <div class="px-item"><div class="px-bullet" style="background:var(--pri)"></div><div><b>Consignado B2K</b> (CARCN-355) &#x2014; execu&#xe7;&#xe3;o</div></div>
-        <div class="px-item"><div class="px-bullet" style="background:var(--cancel)"></div><div><b>Workshop de impacto</b> com &#xe1;reas n&#xe3;o mapeadas</div></div>
-        <div class="px-item"><div class="px-bullet" style="background:var(--pri)"></div><div><b>Definir Plano de Tombamento</b> &#x2014; estrat&#xe9;gia, backup e valida&#xe7;&#xf5;es</div></div>
-        <div class="px-item"><div class="px-bullet" style="background:var(--build)"></div><div><b>Iniciar Testes de Carga</b> &#x2014; previs&#xe3;o Out/26</div></div>
-      </div>
-    </div>
-
-    <div class="px-card" style="border-top:3px solid var(--cancel)">
-      <div class="px-head"><span class="px-icon">&#x1F3C1;</span><span class="px-title">Q4 2026</span><span class="px-period">Out &#x2192; Dez/26</span></div>
-      <div class="px-items">
-        <div class="px-item"><div class="px-bullet" style="background:var(--build)"></div><div><b>Testes de Carga em execu&#xe7;&#xe3;o</b> &#x2014; Out/26</div></div>
-        <div class="px-item"><div class="px-bullet" style="background:var(--cancel)"></div><div><b>Executar Plano de Tombamento</b> (dry-run + valida&#xe7;&#xe3;o)</div></div>
-        <div class="px-item"><div class="px-bullet" style="background:var(--pri)"></div><div>Cart&#xe3;o Adicional (CAB2K-1080) e Rastreio (CAB2K-1066)</div></div>
-        <div class="px-item"><div class="px-bullet" style="background:var(--muted)"></div><div><b>Definir data de congelamento</b> de novos itens no Vision+</div></div>
-      </div>
-    </div>
-
-    <div class="px-card" style="border-top:3px solid var(--done)">
-      <div class="px-head"><span class="px-icon">&#x1F680;</span><span class="px-title">Q1&#x2013;Q2 2027</span><span class="px-period">Jan &#x2192; Abr/27</span></div>
-      <div class="px-items">
-        <div class="px-item"><div class="px-bullet" style="background:var(--done)"></div><div><b>Go-live completo</b> &#x2014; 100% dos clientes no B2K</div></div>
-        <div class="px-item"><div class="px-bullet" style="background:var(--done)"></div><div><b>Descomissionamento</b> progressivo do Vision+</div></div>
-        <div class="px-item"><div class="px-bullet" style="background:var(--done)"></div><div>Valida&#xe7;&#xf5;es finais e hypercare p&#xf3;s-migra&#xe7;&#xe3;o</div></div>
-        <div class="px-item"><div class="px-bullet" style="background:var(--cancel)"></div><div><b>Deadline contratual: Abr/2027</b></div></div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ════════ S8 · TOMBAMENTO Q1/27 ════════ -->
-<div class="slide" id="s8" style="background:radial-gradient(ellipse at 80% 20%,rgba(239,68,68,.06) 0%,transparent 60%),var(--bg)">
-  <div class="slide-tag">Plano de A&#xe7;&#xe3;o &middot; Tombamento Q1/27</div>
-  <h2 class="slide-title">O que precisa estar <span class="grad2">pronto</span> para tombar</h2>
-  <p class="slide-sub">Tombamento previsto para Q1/2027. Temos 9 meses. Pr&#xe9;-requisitos e entregas por quarter.</p>
-
-  <div class="tl-phases">
-    <div class="tl-phase" style="background:rgba(34,197,94,.06)"><div class="tl-phase-lbl" style="color:var(--done)">Hoje &#x2192; Jun/26</div><div class="tl-phase-title">MVP4 completo</div><div class="tl-phase-sub">17 &#xe9;picos ativos</div></div>
-    <div class="tl-phase" style="background:rgba(168,85,247,.06)"><div class="tl-phase-lbl" style="color:var(--disc)">Jul &#x2192; Set/26</div><div class="tl-phase-title">MVP5 + Prepara&#xe7;&#xe3;o</div><div class="tl-phase-sub">Discovery &#x2192; Build</div></div>
-    <div class="tl-phase" style="background:rgba(245,158,11,.06)"><div class="tl-phase-lbl" style="color:var(--pri)">Out &#x2192; Dez/26</div><div class="tl-phase-title">MVP6 + Teste de Carga</div><div class="tl-phase-sub">Plano tombamento</div></div>
-    <div class="tl-phase" style="background:rgba(239,68,68,.08)"><div class="tl-phase-lbl" style="color:var(--cancel)">Jan &#x2192; Mar/27</div><div class="tl-phase-title">&#x1F680; TOMBAMENTO</div><div class="tl-phase-sub" style="color:var(--cancel);font-weight:700">Q1/2027</div></div>
-  </div>
-
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:28px">
-    <div class="card" style="border-top:3px solid var(--build)">
-      <div style="font-size:13px;font-weight:800;color:var(--build);margin-bottom:12px">Q2 2026 &#x2014; Cr&#xed;tico</div>
-      <div style="font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:8px">
-        <div>&#x1F534; <b style="color:var(--text)">Entregar MVP4</b> &#x2014; 17 &#xe9;picos (deadline 30/jun)</div>
-        <div>&#x1F534; <b style="color:var(--text)">B2KTRA-872 Fatura</b> sair do Discovery</div>
-        <div>&#x1F7E2; <b style="color:var(--text)">Tombamento Original</b>: aprovar Abr/26, executar Mai&#x2013;Jun/26</div>
-        <div>&#x1F7E2; <b style="color:var(--text)">Consignado</b>: estrat&#xe9;gia at&#xe9; 31/05/26</div>
-        <div>&#x279C; Concluir Discovery MVP5</div>
-        <div>&#x279C; Priorizar 33 &#xe9;picos do backlog</div>
-      </div>
-    </div>
-    <div class="card" style="border-top:3px solid var(--disc)">
-      <div style="font-size:13px;font-weight:800;color:var(--disc);margin-bottom:12px">Q3 2026 &#x2014; Constru&#xe7;&#xe3;o</div>
-      <div style="font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:8px">
-        <div>&#x279C; <b style="color:var(--text)">MVP5 em Build</b>: Parcelados, Microfinanciamento, Cashback</div>
-        <div>&#x279C; <b style="color:var(--text)">Autorizador On-Us</b> (B2KTRA-914) &#x2014; pr&#xe9;-requisito tombamento</div>
-        <div>&#x279C; <b style="color:var(--text)">Definir Plano de Tombamento</b>: estrat&#xe9;gia, backup, rollback</div>
-        <div>&#x279C; Workshop impacto com &#xe1;reas n&#xe3;o mapeadas</div>
-        <div>&#x279C; Iniciar Testes de Carga (previs&#xe3;o Out/26)</div>
-        <div>&#x279C; Tombamento Clientes (CAB2K-1063) &#x2014; plano de migra&#xe7;&#xe3;o</div>
-      </div>
-    </div>
-    <div class="card" style="border-top:3px solid var(--pri)">
-      <div style="font-size:13px;font-weight:800;color:var(--pri);margin-bottom:12px">Q4 2026 &#x2014; Pr&#xe9;-tombamento</div>
-      <div style="font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:8px">
-        <div>&#x279C; <b style="color:var(--text)">MVP6 em Build</b>: Anuidade, Recupera&#xe7;&#xe3;o Cr&#xe9;dito, Upgrades, Cart&#xe3;o Adicional</div>
-        <div>&#x279C; <b style="color:var(--text)">Testes de Carga</b> em execu&#xe7;&#xe3;o (Out/26)</div>
-        <div>&#x279C; <b style="color:var(--text)">Dry-run do tombamento</b> + plano de rollback</div>
-        <div>&#x279C; <b style="color:var(--text)">Congelamento</b> de novos itens no Vision+</div>
-        <div>&#x279C; AMC001/002 (CAB2K-960) &#x2014; interfaces cadastrais</div>
-      </div>
-    </div>
-    <div class="card" style="border-top:3px solid var(--cancel);background:rgba(239,68,68,.04)">
-      <div style="font-size:13px;font-weight:800;color:var(--cancel);margin-bottom:12px">Q1 2027 &#x2014; &#x1F680; Tombamento</div>
-      <div style="font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:8px">
-        <div>&#x2705; MVP4 + MVP5 + MVP6 entregues</div>
-        <div>&#x2705; 83 GAPs resolvidos / mitigados</div>
-        <div>&#x2705; Testes de Carga aprovados</div>
-        <div>&#x2705; Plano de Tombamento validado com dry-run</div>
-        <div>&#x1F534; <b style="color:var(--text)">Tombamento em fases</b> &#x2014; migra&#xe7;&#xe3;o Vision+ &#x2192; B2K</div>
-        <div>&#x279C; Hypercare e monitoramento p&#xf3;s-tombamento</div>
-      </div>
-    </div>
-  </div>
-
-  <div style="background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.2);border-radius:14px;padding:20px 24px">
-    <div style="font-size:14px;font-weight:800;color:var(--cancel);margin-bottom:16px">&#x1F534; Pr&#xe9;-requisitos obrigat&#xf3;rios para o Tombamento</div>
-    <div class="prereq-grid">
-      <div class="prereq-card"><div class="prereq-title">&#x1F4E6; Funcional</div><div class="prereq-item">MVP4 entregue (Jun/26)<br>MVP5 entregue (Set/26)<br>MVP6 entregue (Dez/26)<br>83 GAPs resolvidos/mitigados<br>Autorizador On-Us (B2KTRA-914)</div></div>
-      <div class="prereq-card"><div class="prereq-title">&#x1F9EA; Testes</div><div class="prereq-item">Testes de Carga aprovados (Out/26)<br>Teste End-to-End completo<br>Dry-run do tombamento<br>Valida&#xe7;&#xe3;o das &#xe1;reas n&#xe3;o mapeadas<br>Plano de rollback testado</div></div>
-      <div class="prereq-card"><div class="prereq-title">&#x1F4CB; Governan&#xe7;a</div><div class="prereq-item">Plano de Tombamento aprovado<br>Data de congelamento Vision+ definida<br>Estrat&#xe9;gia Consignado definida (31/05/26)<br>Tombamento Original executado (Mai&#x2013;Jun/26)<br>Comunica&#xe7;&#xe3;o aos stakeholders</div></div>
-    </div>
-  </div>
-</div>
-
-<footer style="text-align:center;padding:32px;color:var(--dim);font-size:11px;border-top:1px solid var(--border)">
-  BUCS-345 &middot; Migra&#xe7;&#xe3;o B2K &middot; Squad PHD &middot; Vitor Marques Gaspar &middot; Gerado em 06/abr/2026
-</footer>
 
 <script>
-// Progress bar
-window.addEventListener('load',()=>{
-  setTimeout(()=>{
-    const p=document.getElementById('prog');
-    if(p) p.style.width='30%';
-    document.querySelectorAll('.sl-bar').forEach(el=>{
-      el.style.width=(el.dataset.w||0)+'%';
-    });
-  },400);
+// ===================================================
+// DADOS — 70 epicos — Jira 2026-04-07
+// start = created  |  due = duedate
+// ===================================================
+var G2 = [
+  {key:"CAB2K-1196",name:"Homologa\u00e7\u00e3o - MVP1",status:"done",mvp:"MVP1 - B2K",start:"2025-10-28",due:"2025-11-18",assignee:"",quarter:"Q1 2026"},
+  {key:"CAB2K-1129",name:"Cadastramento do BIN B2K - MDES",status:"done",mvp:"MVP1 - B2K",start:"2025-09-29",due:"2025-10-31",assignee:"Vitor Marques Gaspar",quarter:"Q1 2026"},
+  {key:"CAB2K-1052",name:"Criar Contas e Cart\u00f5es Piloto",status:"done",mvp:"MVP1 - B2K",start:"2025-09-30",due:"2025-10-14",assignee:"",quarter:"Q1 2026"},
+  {key:"CAB2K-888",name:"Prepara\u00e7\u00e3o de base de Homologa\u00e7\u00e3o - Carregar Conta FIS",status:"done",mvp:"MVP1 - B2K",start:"2025-07-07",due:"2025-09-30",assignee:"",quarter:"Q1 2026"},
+  {key:"B2KTRA-557",name:"Uso - Autentica\u00e7\u00e3o 3DS",status:"done",mvp:"MVP1 - B2K",start:"2025-10-20",due:"2025-10-22",assignee:"",quarter:"Q1 2026"},
+  {key:"TRFSCC-1501",name:"[MVP2] -Cria\u00e7\u00e3o de Conta B2K",status:"done",mvp:"MVP2 - B2K",start:"2025-08-18",due:"2026-02-23",assignee:"",quarter:"Q1 2026"},
+  {key:"CAB2K-1354",name:"[MVP2] Testes Produtivos",status:"done",mvp:"MVP2 - B2K",start:"2026-01-27",due:"2026-03-10",assignee:"",quarter:"Q1 2026"},
+  {key:"CAB2K-926",name:"[MVP2] Uso - 2\u00aa Via (Perda / Roubo / Extravio)  -  B2k",status:"done",mvp:"MVP2 - B2K",start:"2025-11-18",due:"2026-03-10",assignee:"",quarter:"Q1 2026"},
+  {key:"CAB2K-925",name:"[MVP2] Onboarding - Gest\u00e3o do NFC -",status:"done",mvp:"MVP2 - B2K",start:"2025-12-13",due:"2026-01-20",assignee:"",quarter:"Q1 2026"},
+  {key:"CAB2K-924",name:"Onboarding - Troca de Senha/Esqueci minha senha",status:"done",mvp:"MVP2 - B2K",start:"2025-11-04",due:"2025-12-02",assignee:"",quarter:"Q1 2026"},
+  {key:"CAB2K-921",name:"Onboarding - Desbloqueio/Ativa\u00e7\u00e3o",status:"done",mvp:"MVP2 - B2K",start:"2025-09-30",due:"2025-10-28",assignee:"",quarter:"Q1 2026"},
+  {key:"CAB2K-920",name:"Uso - Home D\u00e9bito",status:"done",mvp:"MVP2 - B2K",start:"2025-09-02",due:"2025-11-18",assignee:"",quarter:"Q1 2026"},
+  {key:"CAB2K-919",name:"Onboarding - Emiss\u00e3o/Embossing de Cart\u00e3o F\u00edsico",status:"done",mvp:"MVP2 - B2K",start:"2025-09-30",due:"2025-11-14",assignee:"Vitor Marques Gaspar",quarter:"Q1 2026"},
+  {key:"B2KTRA-556",name:"Uso - Saque TECBAN",status:"done",mvp:"MVP2 - B2K",start:"2025-10-06",due:"2025-11-04",assignee:"",quarter:"Q1 2026"},
+  {key:"B2KTRA-409",name:"Uso - Transa\u00e7\u00f5es + Notifica\u00e7\u00e3o D\u00e9bito",status:"done",mvp:"MVP2 - B2K",start:"2025-08-13",due:"2025-10-06",assignee:"",quarter:"Q1 2026"},
+  {key:"TRCSLS-857",name:"[B2K] Acompanhamento de Testes para Nova Arquitetura B2K",status:"done",mvp:"MVP3 - B2K",start:"2025-12-01",due:"2026-01-19",assignee:"Jean Pandolfi",quarter:"Q1 2026"},
+  {key:"CAC-1431",name:"Analise e documenta\u00e7\u00e3o do processo de concilia\u00e7\u00e3o transacional financeira",status:"done",mvp:"MVP3 - B2K",start:"2025-09-15",due:"2025-12-23",assignee:"",quarter:"Q1 2026"},
+  {key:"CAC-1361",name:"[MVP3] - Adequa\u00e7\u00e3o processos para B2K - POC 6308",status:"done",mvp:"MVP3 - B2K",start:"2025-10-06",due:"2026-04-01",assignee:"Carla Teixeira Cavalcanti",quarter:"Q1 2026"},
+  {key:"CAB2K-1258",name:"[OKR2 - Ser o Melhor] Arquitetura de Cat\u00e1logo de Bloqueio",status:"done",mvp:"MVP3 - B2K",start:"2025-12-03",due:"2026-02-03",assignee:"",quarter:"Q1 2026"},
+  {key:"CAB2K-1089",name:"[ MVP3]- Push Cadastral/Bloqueio -",status:"done",mvp:"MVP3 - B2K",start:"2025-12-25",due:"2026-03-16",assignee:"",quarter:"Q1 2026"},
+  {key:"CAB2K-1078",name:"[OKR 2 - Ser o Melhor] Bloqueio Tempor\u00e1rio",status:"done",mvp:"MVP3 - B2K",start:"2026-01-20",due:"2026-03-03",assignee:"",quarter:"Q1 2026"},
+  {key:"CAB2K-1061",name:"[MVP3] Altera\u00e7\u00e3o de Endere\u00e7o -",status:"done",mvp:"MVP3 - B2K",start:"2025-12-25",due:"2026-03-16",assignee:"",quarter:"Q1 2026"},
+  {key:"CAB2K-930",name:"Dom\u00ednio de Bloqueios",status:"done",mvp:"MVP3 - B2K",start:"2025-08-18",due:"2025-09-28",assignee:"",quarter:"Q1 2026"},
+  {key:"CAC-2070",name:"[MVP4] - Regulat\u00f3rio - P1",status:"build",mvp:"MVP4 - B2K",start:"2026-04-09",due:"2026-05-08",assignee:"",quarter:"Q2 2026"},
+  {key:"CAC-2057",name:"[MVP4] -B2K - Adequa\u00e7\u00e3o Processos -  5816",status:"build",mvp:"MVP4 - B2K",start:"2026-04-01",due:"2026-04-24",assignee:"Carla Teixeira Cavalcanti",quarter:"Q2 2026"},
+  {key:"CAC-2056",name:"[MVP4] - B2K - Adequa\u00e7\u00e3o Processos - Descontinua\u00e7\u00e3o ARQConcilia\u00e7\u00e3o",status:"build",mvp:"MVP4 - B2K",start:"2026-04-01",due:"2026-04-24",assignee:"Carla Teixeira Cavalcanti",quarter:"Q2 2026"},
+  {key:"CAC-2042",name:"[MVP4] - B2K - Adequa\u00e7\u00e3o Processos - 3060 e DECRED",status:"build",mvp:"MVP4 - B2K",start:"2026-04-01",due:"2026-04-24",assignee:"Carla Teixeira Cavalcanti",quarter:"Q2 2026"},
+  {key:"CAC-1975",name:"[MVP4] Adequa\u00e7\u00e3o Processos - 3050_B2k",status:"build",mvp:"MVP4 - B2K",start:"2026-04-01",due:"2026-04-24",assignee:"Carla Teixeira Cavalcanti",quarter:"Q2 2026"},
+  {key:"CAB2K-1456",name:"[MVP4] - 18 GAPs",status:"build",mvp:"MVP4 - B2K",start:"2026-04-06",due:"2026-06-30",assignee:"",quarter:"Q2 2026"},
+  {key:"CAB2K-1288",name:"[MVP4] Arquivos de Pagamento B2K - Migra\u00e7\u00e3o da Gera\u00e7\u00e3o e Concilia\u00e7\u00e3o de Pagamentos",status:"build",mvp:"MVP4 - B2K",start:"2026-01-01",due:"2026-05-31",assignee:"",quarter:"Q2 2026"},
+  {key:"CAB2K-1280",name:"[MVP4] Enable Cria\u00e7\u00e3o de Conta (Cat\u00e1logo de Produtos)",status:"build",mvp:"MVP4 - B2K",start:"2026-02-03",due:"2026-05-05",assignee:"",quarter:"Q2 2026"},
+  {key:"CAB2K-1432",name:"[MVP4] Atribui\u00e7\u00e3o de Limite Conta Nova",status:"discovery",mvp:"MVP4 - B2K",start:"2026-04-08",due:"2026-05-20",assignee:"",quarter:"Q2 2026"},
+  {key:"B2KTRA-872",name:"[MVP4] Gera\u00e7\u00e3o de Fatura_B2K",status:"discovery",mvp:"MVP4 - B2K",start:"2026-04-06",due:"2026-06-26",assignee:"",quarter:"Q2 2026"},
+  {key:"TRFSCC-1953",name:"[MVP4] - Cria\u00e7\u00e3o de Conta integrada com Oferta - B2K",status:"prioritized",mvp:"MVP4 - B2K",start:"2026-04-20",due:"2026-06-30",assignee:"",quarter:"Q2 2026"},
+  {key:"CAC-2071",name:"[MVP4] - Cont\u00e1bil - P1",status:"prioritized",mvp:"MVP4 - B2K",start:"2026-04-20",due:"2026-05-15",assignee:"",quarter:"Q2 2026"},
+  {key:"CAB2K-1434",name:"[MVP4] Push Transacional",status:"prioritized",mvp:"MVP4 - B2K",start:"2026-05-04",due:"2026-06-30",assignee:"",quarter:"Q2 2026"},
+  {key:"CAB2K-1433",name:"[MVP4] Card de Limite na Home",status:"prioritized",mvp:"MVP4 - B2K",start:"2026-06-01",due:"2026-06-30",assignee:"",quarter:"Q2 2026"},
+  {key:"B2KTRA-901",name:"[MVP4] Autorizador de Cr\u00e9dito Off Us_B2K",status:"prioritized",mvp:"MVP4 - B2K",start:"2026-05-18",due:"2026-06-26",assignee:"",quarter:"Q2 2026"},
+  {key:"B2KTRA-551",name:"[MVP4] Timeline Transacional Cr\u00e9dito_ B2K",status:"prioritized",mvp:"MVP4 - B2K",start:"2026-06-01",due:"2026-06-26",assignee:"",quarter:"Q2 2026"},
+  {key:"CAC-2073",name:"[MVP4] - Concilia\u00e7\u00e3o - P1",status:"wishlist",mvp:"MVP4 - B2K",start:"2026-05-18",due:"2026-06-05",assignee:"",quarter:"Q2 2026"},
+  {key:"CAB2K-1445",name:"[MVP5] Discovery - Carteiras Digitais",status:"prioritized",mvp:"MVP5 - B2K",start:"2026-05-01",due:"2026-06-30",assignee:"",quarter:"Q3 2026"},
+  {key:"B2KTRA-912",name:"[MVP 5] Discovery Cashback",status:"prioritized",mvp:"MVP5 - B2K",start:"2026-04-01",due:"2026-05-29",assignee:"",quarter:"Q3 2026"},
+  {key:"B2KTRA-911",name:"[MVP5] Discovery Microfinanciamento",status:"prioritized",mvp:"MVP5 - B2K",start:"2026-04-01",due:"2026-05-15",assignee:"",quarter:"Q3 2026"},
+  {key:"B2KTRA-910",name:"[MVP 5] Discovery Parcelados",status:"prioritized",mvp:"MVP5 - B2K",start:"2026-04-01",due:"2026-06-30",assignee:"",quarter:"Q3 2026"},
+  {key:"TRFSCC-1969",name:"[MVP5] - Cria\u00e7\u00e3o de Conta -  Incluir Fallback B2K",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-01",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAC-2091",name:"[MVP6] - Informacional - Regulat\u00f3rio - P4",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-10-05",due:"2026-12-18",assignee:"",quarter:"Q3 2026"},
+  {key:"CAC-2090",name:"[MVP6] - Informacional - Pagamento - P4",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-10-05",due:"2026-12-18",assignee:"",quarter:"Q3 2026"},
+  {key:"CAC-2089",name:"[MVP6] - Informacional - Faturas - P4",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-10-05",due:"2026-12-18",assignee:"",quarter:"Q3 2026"},
+  {key:"CAC-2088",name:"[MVP6] - Informacional - Limites - P4",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-10-05",due:"2026-12-18",assignee:"",quarter:"Q3 2026"},
+  {key:"CAC-2086",name:"[MVP6] - Informacional - Cobran\u00e7a - P4",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-10-05",due:"2026-12-18",assignee:"",quarter:"Q3 2026"},
+  {key:"CAC-2085",name:"[MVP6] - Informacional - Autorizadores - P4",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-10-05",due:"2026-12-18",assignee:"",quarter:"Q3 2026"},
+  {key:"CAC-2084",name:"[MVP6] - Informacional - Conta - P4",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-10-05",due:"2026-12-18",assignee:"",quarter:"Q3 2026"},
+  {key:"CAC-2083",name:"[MVP6] - Informacional - B2K - P4",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-10-05",due:"2026-12-18",assignee:"",quarter:"Q3 2026"},
+  {key:"CAC-2082",name:"[MVP5] - Informacional - Faturas - P3",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-06",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAC-2081",name:"[MVP5] - Informacional - Cobran\u00e7a - P3",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-06",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAC-2080",name:"[MVP5] - Informacional - B2K - P3",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-06",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAC-2079",name:"[MVP5] - Informacional - Autorizadores - P3",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-06",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAC-2078",name:"[MVP5] - Informacional - Conta - P3",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-06",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAC-2077",name:"[MVP5] - Concilia\u00e7\u00e3o - P2",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-06",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAC-2076",name:"[MVP5] - Cont\u00e1bil - P2",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-06",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAC-2075",name:"[MVP5] - Regulat\u00f3rio - P2",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-06",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAC-2072",name:"[MVP5] - Informacional - Cobran\u00e7a - P2",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-06",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAB2K-1446",name:"[MVP5] - Pagamento de Fatura",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-01",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAB2K-1435",name:"[MVP5] - Recomposi\u00e7\u00e3o de Limite",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-01",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAB2K-1265",name:"[MVP5] - Uso - 2\u00aa Via (Danificado)",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-01",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAB2K-1090",name:"[MVP5] - Integra\u00e7\u00e3o com Time de Dados",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-01",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAB2K-1086",name:"[MVP5] - Limites Cross (CDT / FGTS / ON-US)",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-01",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAB2K-1084",name:"[MVP5] - Limite Garantido",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-01",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAB2K-1083",name:"[MVP5] - Ajuste/Manuten\u00e7\u00e3o de Limite",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-01",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAB2K-1071",name:"[MVP5] - Carteira Digital (Wallet)",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-01",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAB2K-1065",name:"[MVP5] - Cart\u00e3o Virtual",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-01",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAB2K-1060",name:"[MVP6] -  Carregar JwtToken (ID_CARTAO)",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-01",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CAB2K-960",name:"[MVP5] - Arquivos de Interface AMC001/AMC002",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-01",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"B2KTRA-917",name:"[MVP 5] Cashback",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-01",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"B2KTRA-916",name:"[MVP 5]  Parcelados",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-01",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"B2KTRA-915",name:"[MVP5]  MicroFinanciamento",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-01",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"B2KTRA-914",name:"[MVP5] Autorizador de Cr\u00e9dito On Us_B2K",status:"wishlist",mvp:"MVP5 - B2K",start:"2026-07-01",due:"2026-09-30",assignee:"",quarter:"Q3 2026"},
+  {key:"CARCN-355",name:"[Q3] Consignado - B2K",status:"wishlist",mvp:"MVP6 - B2K",start:"2025-06-24",due:"",assignee:"Mariana Alves Machado Monteiro",quarter:"Backlog"},
+  {key:"CAC-2087",name:"[MVP6] - Regulat\u00f3rio - P4",status:"wishlist",mvp:"MVP6 - B2K",start:"2026-10-05",due:"2026-12-18",assignee:"",quarter:"Q4 2026"},
+  {key:"CAB2K-1451",name:"[MVP6] - Recupera\u00e7\u00e3o de Credito",status:"wishlist",mvp:"MVP6 - B2K",start:"2026-10-01",due:"2026-12-31",assignee:"",quarter:"Q4 2026"},
+  {key:"CAB2K-1450",name:"[MVP6] - Anuidade",status:"wishlist",mvp:"MVP6 - B2K",start:"2026-10-01",due:"2026-12-31",assignee:"",quarter:"Q4 2026"},
+  {key:"CAB2K-1447",name:"[MVP6] - Expurgo",status:"wishlist",mvp:"MVP6 - B2K",start:"2026-10-01",due:"2026-12-31",assignee:"",quarter:"Q4 2026"},
+  {key:"CAB2K-1282",name:"[MVP6] - Upgrade de Fun\u00e7\u00e3o (Ativa\u00e7\u00e3o do Cr\u00e9dito)",status:"wishlist",mvp:"MVP6 - B2K",start:"2026-10-01",due:"2026-12-31",assignee:"",quarter:"Q4 2026"},
+  {key:"CAB2K-1281",name:"[MVP6] - Cota\u00e7\u00e3o do Dolar",status:"wishlist",mvp:"MVP6 - B2K",start:"2026-10-01",due:"2026-12-31",assignee:"",quarter:"Q4 2026"},
+  {key:"CAB2K-1087",name:"[MVP6] - Upgrade de N\u00edvel (N1/N2/N3)",status:"wishlist",mvp:"MVP6 - B2K",start:"2026-10-01",due:"2026-12-31",assignee:"",quarter:"Q4 2026"},
+  {key:"CAB2K-1080",name:"[MVP6] - Cart\u00e3o Adicional / Dependente",status:"wishlist",mvp:"MVP6 - B2K",start:"2026-10-01",due:"2026-12-31",assignee:"",quarter:"Q4 2026"},
+  {key:"CAB2K-1077",name:"[MVP6] - Upgrade de Variante (Produto/Subproduto)",status:"wishlist",mvp:"MVP6 - B2K",start:"2026-10-01",due:"2026-12-31",assignee:"",quarter:"Q4 2026"},
+  {key:"CAB2K-1066",name:"[MVP6] - Arquivo de AR (Rastreio)",status:"wishlist",mvp:"MVP6 - B2K",start:"2026-10-01",due:"2026-12-31",assignee:"",quarter:"Q4 2026"},
+  {key:"CAB2K-1063",name:"[MVP6] - Tombamento de Clientes",status:"wishlist",mvp:"MVP6 - B2K",start:"2026-10-01",due:"2026-12-31",assignee:"",quarter:"Q4 2026"},
+  {key:"CAB2K-1062",name:"[MVP6] - Reposit\u00f3rio de D\u00e9bito",status:"wishlist",mvp:"MVP6 - B2K",start:"2026-10-01",due:"2026-12-31",assignee:"",quarter:"Q4 2026"},
+  {key:"CAB2K-1070",name:"[Externo] - Conta D\u00e9bito - Underage + FOPAG",status:"wishlist",mvp:"Backlog",start:"2025-09-12",due:"",assignee:"",quarter:"Backlog"},
+];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// MAP
+var EMAP = {};
+G2.forEach(function(e){ EMAP[e.key]=e; });
+
+// STATUS config
+var ST = {
+  done:       {cls:"gb-done", dot:"#21C25E", lbl:"Done"},
+  build:      {cls:"gb-build",dot:"#3B82F6", lbl:"Build"},
+  prioritized:{cls:"gb-pri",  dot:"#F59E0B", lbl:"Priorizado"},
+  discovery:  {cls:"gb-disc", dot:"#A855F7", lbl:"Discovery"},
+  wishlist:   {cls:"gb-wish", dot:"#64748B", lbl:"Wishlist"},
+  validation: {cls:"gb-wish", dot:"#F97316", lbl:"Validation"}
+};
+
+// QUARTER RANGES — start/end com margem visual
+var QR = {
+  "Q1 2026":{s:"2025-12-15",e:"2026-04-15",color:"#3B82F6",period:"Jan \u2013 Mar 2026"},
+  "Q2 2026":{s:"2026-02-15",e:"2026-07-15",color:"#A855F7",period:"Abr \u2013 Jun 2026"},
+  "Q3 2026":{s:"2026-06-15",e:"2026-10-15",color:"#F59E0B",period:"Jul \u2013 Set 2026"},
+  "Q4 2026":{s:"2026-09-15",e:"2027-01-15",color:"#EF4444",period:"Out \u2013 Dez 2026"},
+  "all":    {s:"2025-06-01",e:"2027-02-01",color:"#F0F0F5",period:"Jan 2026 \u2013 Dez 2026"}
+};
+
+// QBANDS — faixas visuais no eixo de tempo
+var QBANDS = [
+  {l:"Q1/26",s:"2026-01-01",e:"2026-03-31",c:"color:#3B82F6;background:rgba(59,130,246,.06)"},
+  {l:"Q2/26",s:"2026-04-01",e:"2026-06-30",c:"color:#A855F7;background:rgba(168,85,247,.06)"},
+  {l:"Q3/26",s:"2026-07-01",e:"2026-09-30",c:"color:#F59E0B;background:rgba(245,158,11,.06)"},
+  {l:"Q4/26",s:"2026-10-01",e:"2026-12-31",c:"color:#EF4444;background:rgba(239,68,68,.06)"},
+];
+
+// STATE
+var AQ = "all";
+var AS = {done:true,build:true,prioritized:true,discovery:true,wishlist:true,validation:true};
+
+// ── DATE HELPERS — T12:00:00 evita shift de timezone ──────────────────────
+function sd(s){ return s ? new Date(s + "T12:00:00") : null; }
+function fmtL(s){ // long — para tooltip
+  if(!s) return "--";
+  return sd(s).toLocaleDateString("pt-BR",{day:"2-digit",month:"short",year:"numeric"});
+}
+function fmtS(s){ // short — para painel
+  if(!s) return "--";
+  return sd(s).toLocaleDateString("pt-BR",{day:"2-digit",month:"short",year:"2-digit"});
+}
+function pct(s,tlS,TOTAL){
+  if(!s) return null;
+  return Math.max(0,Math.min(100,(sd(s)-tlS)/TOTAL*100));
+}
+function todayStr(){
+  var n=new Date();
+  return n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0")+"-"+String(n.getDate()).padStart(2,"0");
+}
+
+// ── QUARTER SELECT ──────────────────────────────────────────────────────────
+function selQ(btn){
+  var q = btn.getAttribute("data-q");
+  AQ = q;
+  document.querySelectorAll(".qb").forEach(function(b){b.classList.remove("sel");});
+  btn.classList.add("sel");
+  var qr = QR[q];
+  var titles = {
+    "all":"&#x1F5FA; Todos os Quarters",
+    "Q1 2026":"&#x26C4; Q1/26","Q2 2026":"&#x1F338; Q2/26",
+    "Q3 2026":"&#x2600; Q3/26","Q4 2026":"&#x1F342; Q4/26",
+    "Backlog":"&#x1F4CB; Backlog"
+  };
+  document.getElementById("qTitle").innerHTML = titles[q]||q;
+  document.getElementById("qTitle").style.color = qr ? qr.color : "#94A3B8";
+  document.getElementById("qPer").textContent = qr ? qr.period : "Sem data definida";
+  render();
+}
+function selQByName(q){
+  var btn = document.querySelector(".qb[data-q=\""+q+"\"]");
+  if(btn) selQ(btn);
+}
+
+// ── STATUS TOGGLE ───────────────────────────────────────────────────────────
+function togS(btn){
+  var s = btn.getAttribute("data-s");
+  var on = Object.values(AS).filter(Boolean).length;
+  if(AS[s] && on===1) return;
+  AS[s] = !AS[s];
+  var map = {done:"sf-done",build:"sf-build",prioritized:"sf-pri",discovery:"sf-disc",wishlist:"sf-wish"};
+  btn.className = "sf" + (AS[s] ? " " + (map[s]||"") : "");
+  render();
+}
+
+// ── RENDER ──────────────────────────────────────────────────────────────────
+function render(){
+  var mount = document.getElementById("mount");
+  var filtered = G2.filter(function(e){
+    if(!AS[e.status]) return false;
+    if(AQ==="all") return true;
+    return e.quarter===AQ;
+  });
+  document.getElementById("qCnt").textContent = filtered.length+" \u00e9picos";
+  if(AQ==="Backlog"){ renderBacklog(filtered,mount); return; }
+  if(!filtered.length){
+    mount.innerHTML="<div class=\"empty\"><div style=\"font-size:36px\">&#x1F50D;</div><div style=\"font-size:14px;font-weight:600;color:var(--text)\">Nenhum \u00e9pico para este filtro</div></div>";
+    return;
+  }
+  var qr=QR[AQ]||QR["all"];
+  var tlS=sd(qr.s), tlE=sd(qr.e);
+  var TOTAL=tlE-tlS, TDAYS=TOTAL/86400000;
+  var months=[], mc=new Date(tlS.getFullYear(),tlS.getMonth(),1);
+  while(+new Date(mc)<=+tlE){ months.push(new Date(mc)); mc.setMonth(mc.getMonth()+1); }
+  function mw(m){
+    var d1=new Date(m.getFullYear(),m.getMonth(),1);
+    var d2=new Date(m.getFullYear(),m.getMonth()+1,0);
+    var s2=Math.max(+d1,+tlS), e2=Math.min(+d2,+tlE);
+    return Math.max(0,(e2-s2)/TOTAL*100);
+  }
+  var todayP=pct(todayStr(),tlS,TOTAL);
+  // Header row 1: quarters
+  var qHdr="<tr><th class=\"g-left-hdr\">\u00c9pico / Start \u2192 Limite</th>";
+  var QBANDS_CELLS=QBANDS.map(function(qb){
+    var qs=sd(qb.s),qe=sd(qb.e);
+    if(+qe<+tlS||+qs>+tlE) return "";
+    var l=Math.max(0,(+qs-+tlS)/TOTAL*100);
+    var r=Math.min(100,(+qe-+tlS)/TOTAL*100);
+    var w=(r-l).toFixed(2);
+    if(w<=0) return "";
+    return "<th class=\"g-chart-hdr\" colspan=\"1\" style=\"position:absolute;left:"+l.toFixed(2)+"%;width:"+w+"%;height:28px;"+qb.c+";display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;border-right:1px solid var(--border);\">"+qb.l+"</th>";
+  }).join("");
+  // Usar uma div absoluta para os quarter bands sobre a linha de meses
+  // Header row 1: quarters como div overlay
+  var qBandsHtml="<div style=\"position:absolute;top:0;left:0;right:0;height:28px;pointer-events:none;\">"+
+    QBANDS.map(function(qb){
+      var qs=sd(qb.s),qe=sd(qb.e);
+      if(+qe<+tlS||+qs>+tlE) return "";
+      var l=Math.max(0,(+qs-+tlS)/TOTAL*100);
+      var r2=Math.min(100,(+qe-+tlS)/TOTAL*100);
+      var w=(r2-l).toFixed(2);
+      if(w<=0) return "";
+      return "<div style=\"position:absolute;left:"+l.toFixed(2)+"%;width:"+w+"%;height:100%;"+qb.c+";display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;border-right:1px solid var(--border);\">"+qb.l+"</div>";
+    }).join("")+
+  "</div>";
+  // Header row 2: meses
+  var mHdr = months.map(function(m){
+    var d1str=m.getFullYear()+"-"+String(m.getMonth()+1).padStart(2,"0")+"-01";
+    var lp=pct(d1str,tlS,TOTAL);
+    var w=mw(m).toFixed(2);
+    var lbl=m.toLocaleDateString("pt-BR",{month:"short",year:"2-digit"}).toUpperCase();
+    return "<div style=\"position:absolute;left:"+lp.toFixed(2)+"%;width:"+w+"%;height:28px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-right:1px solid var(--border);box-sizing:border-box;\">"+lbl+"</div>";
+  }).join("");
+  // Linha de hoje
+  var todayHtml=(todayP!==null&&todayP>=0&&todayP<=100)
+    ?"<div class=\"today-l\" style=\"left:"+todayP.toFixed(2)+"%\"><div class=\"today-lbl\">Hoje</div></div>":
+    "";
+  // Montar tabela
+  var rows=filtered.map(function(epic){
+    var sm=ST[epic.status]||ST.wishlist;
+    var sp=pct(epic.start,tlS,TOTAL);
+    var ep=pct(epic.due,tlS,TOTAL);
+    var startFmt=fmtS(epic.start);
+    var dueFmt=fmtS(epic.due);
+    // Barra
+    var bar="";
+    if(sp!==null&&ep!==null){
+      var bw=Math.max(0.5,ep-sp);
+      var lbl=bw>4?(epic.name.length>40?epic.name.slice(0,38)+"\u2026":epic.name):"";
+      var ek=epic.key;
+      bar="<div class=\"gbar "+sm.cls+"\" style=\"left:"+sp.toFixed(2)+"%;width:"+bw.toFixed(2)+"%\" "+
+          "onmouseenter=\"showTT(event,'"+ek+"')\" onmouseleave=\"hideTT()\" "+
+          "onclick=\"window.open('https://picpay.atlassian.net/browse/"+ek+"','_blank')\">"+lbl+"</div>";
+    } else if(sp!==null){
+      var ek2=epic.key;
+      bar="<div class=\"gbar "+sm.cls+"\" style=\"left:"+sp.toFixed(2)+"%;width:1%\" "+
+          "onmouseenter=\"showTT(event,'"+ek2+"')\" onmouseleave=\"hideTT()\">&#x25C6;</div>";
+    }
+    return "<tr>"+
+      "<td class=\"g-left\">"+
+        "<div class=\"er-wrap\">"+
+          "<div class=\"er-dot\" style=\"background:"+sm.dot+"\"></div>"+
+          "<a class=\"er-key\" href=\"https://picpay.atlassian.net/browse/"+epic.key+"\" target=\"_blank\">"+epic.key+"</a>"+
+          "<div class=\"er-info\">"+
+            "<div class=\"er-name\">"+epic.name+"</div>"+
+            "<div class=\"er-dates\">"+startFmt+" &#x2192; "+dueFmt+"</div>"+
+          "</div>"+
+        "</div>"+
+      "</td>"+
+      "<td class=\"g-chart\">"+
+        "<div class=\"g-cell\" style=\"position:relative;height:58px;\">"+
+          todayHtml+bar+
+        "</div>"+
+      "</td>"+
+    "</tr>";
+  }).join("");
+  // Chart width = 100% do container menos 300px da coluna fixa
+  var chartW = "calc(100% - 300px)";
+  mount.innerHTML=
+    "<div class=\"gantt-wrap\">"+
+      "<table class=\"gantt-table\">"+
+        "<thead>"+
+          "<tr style=\"height:28px;\">"+
+            "<th class=\"g-left-hdr\" rowspan=\"2\">\u00c9pico / Start \u2192 Limite</th>"+
+            "<th style=\"padding:0;border-bottom:1px solid var(--border);height:28px;position:relative;\">"+
+              "<div style=\"position:relative;height:28px;overflow:hidden;\">"+qBandsHtml+"</div>"+
+            "</th>"+
+          "</tr>"+
+          "<tr style=\"height:28px;\">"+
+            "<th style=\"padding:0;border-bottom:1px solid var(--border);height:28px;position:relative;\">"+
+              "<div style=\"position:relative;height:28px;overflow:hidden;\">"+todayHtml+mHdr+"</div>"+
+            "</th>"+
+          "</tr>"+
+        "</thead>"+
+        "<tbody>"+rows+"</tbody>"+
+      "</table>"+
+    "</div>";
+  // Scroll para hoje
+  setTimeout(function(){
+    var w=mount.querySelector(".gantt-wrap");
+    if(!w) return;
+    var tbl=w.querySelector(".gantt-table");
+    if(!tbl||todayP===null) return;
+    var chartWidth=tbl.offsetWidth-300;
+    w.scrollLeft=Math.max(0,chartWidth*todayP/100-w.offsetWidth/3);
+  },80);
+}
+
+function renderBacklog(filtered, mount){
+  if(!filtered.length){
+    mount.innerHTML = "<div class=\"empty\"><div style=\"font-size:36px\">&#x1F4CB;</div><div style=\"font-size:14px;font-weight:600;color:var(--text)\">Nenhum épico no backlog</div></div>";
+    return;
+  }
+  var rows = filtered.map(function(e){
+    var sm = ST[e.status]||ST.wishlist;
+    return "<tr>" +
+      "<td><a href=\"https://picpay.atlassian.net/browse/"+e.key+"\" target=\"_blank\">"+e.key+"</a></td>" +
+      "<td style=\"color:var(--text);font-size:12px\">"+e.name+"</td>" +
+      "<td><span style=\"color:"+sm.dot+";font-size:11px;font-weight:600\">"+sm.lbl+"</span></td>" +
+      "<td style=\"font-size:11px;color:var(--muted)\">"+fmtL(e.start)+"</td>" +
+      "<td style=\"color:#F59E0B;font-size:11px\">Aguardando duedate no Jira</td>" +
+      "</tr>";
+  }).join("");
+
+  mount.innerHTML =
+    "<div style=\"background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;\">" +
+      "<div style=\"padding:12px 16px;border-bottom:1px solid var(--border);font-size:13px;color:var(--muted)\">" +
+        "&#x26A0; <b style=\"color:var(--text)\">"+filtered.length+" épicos</b> sem <b style=\"color:#F59E0B\">Data limite</b> no Jira" +
+      "</div>" +
+      "<div style=\"overflow-x:auto\">" +
+        "<table class=\"blt\">" +
+          "<thead><tr><th>Key</th><th>Épico</th><th>Status</th><th>Start date</th><th>Situação</th></tr></thead>" +
+          "<tbody>"+rows+"</tbody>" +
+        "</table>" +
+      "</div>" +
+    "</div>";
+}
+
+// ── TOOLTIP ──────────────────────────────────────────────────────────────────
+var TT = document.getElementById("tt");
+function showTT(evt, key){
+  var e = EMAP[key];
+  if(!e) return;
+  var sm = ST[e.status]||ST.wishlist;
+  document.getElementById("ttKey").textContent   = key;
+  document.getElementById("ttTitle").textContent = e.name;
+  var b = document.getElementById("ttBadge");
+  b.textContent = sm.lbl;
+  b.style.cssText = "background:rgba(255,255,255,.06);color:"+sm.dot+";border:1px solid "+sm.dot+"44;";
+  // START DATE = epic.start (created no Jira)
+  document.getElementById("ttStart").textContent = fmtL(e.start);
+  // DATA LIMITE = epic.due (duedate no Jira)
+  document.getElementById("ttDue").textContent   = fmtL(e.due);
+  document.getElementById("ttAsg").textContent   = e.assignee || "Sem responsável";
+  document.getElementById("ttQ").textContent     = e.quarter;
+  document.getElementById("ttMvp").textContent   = e.mvp;
+  var d = document.getElementById("ttDesc");
+  d.textContent = e.desc || "";
+  d.style.display = e.desc ? "block" : "none";
+  TT.classList.add("show");
+  posT(evt);
+}
+function hideTT(){ TT.classList.remove("show"); }
+function posT(evt){
+  var x=evt.clientX+16, y=evt.clientY-60;
+  TT.style.left = (x+320>window.innerWidth ? x-340 : x)+"px";
+  TT.style.top  = Math.max(8, Math.min(y, window.innerHeight-240))+"px";
+}
+document.addEventListener("mousemove",function(e){
+  if(TT.classList.contains("show")) posT(e);
 });
 
-// Nav active on scroll
-const slides=document.querySelectorAll('.slide');
-const links=document.querySelectorAll('.nav-link');
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      links.forEach(l=>l.classList.remove('active'));
-      const id=e.target.id;
-      const lnk=document.querySelector('.nav-link[href="#'+id+'"]');
-      if(lnk) lnk.classList.add('active');
-    }
-  });
-},{threshold:0.35});
-slides.forEach(s=>obs.observe(s));
+// INIT
+render();
 </script>
 </body>
 </html>
