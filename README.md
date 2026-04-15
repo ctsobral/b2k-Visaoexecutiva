@@ -229,25 +229,25 @@ nav{
     </div>
     <div>
       <div class="stat-grid">
-        <div class="big-stat" style="border-top:3px solid var(--text)"><div class="big-num">94</div><div class="big-lbl">&#xc9;picos totais</div><div class="big-sub">na iniciativa</div></div>
+        <div class="big-stat" style="border-top:3px solid var(--text)"><div class="big-num">95</div><div class="big-lbl">&#xc9;picos totais</div><div class="big-sub">na iniciativa</div></div>
         <div class="big-stat" style="border-top:3px solid var(--done)"><div class="big-num" style="color:var(--done)">23</div><div class="big-lbl">Conclu&#xed;dos</div><div class="big-sub">30% do total</div></div>
-        <div class="big-stat" style="border-top:3px solid var(--build)"><div class="big-num" style="color:var(--build)">8</div><div class="big-lbl">Em Build</div><div class="big-sub">MVP4 &middot; Q2 2026</div></div>
+        <div class="big-stat" style="border-top:3px solid var(--build)"><div class="big-num" style="color:var(--build)">9</div><div class="big-lbl">Em Build</div><div class="big-sub">MVP4 &middot; Q2 2026</div></div>
         <div class="big-stat" style="border-top:3px solid var(--cancel)"><div class="big-num" style="color:var(--cancel);font-size:32px">Abr/27</div><div class="big-lbl">Deadline</div><div class="big-sub">~12 meses</div></div>
       </div>
       <div class="big-stat" style="margin-bottom:14px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
           <span style="font-size:13px;font-weight:700">Progresso Geral</span>
-          <span style="font-size:26px;font-weight:900;color:var(--done);letter-spacing:-1px">30%</span>
+          <span style="font-size:26px;font-weight:900;color:var(--done);letter-spacing:-1px">15%</span>
         </div>
         <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
         <div class="prog-labels"><span>MVPs 1, 2 e 3 conclu&#xed;dos</span><span>MVP4 em andamento</span></div>
       </div>
       <div class="chips-row">
         <span class="chip c-done">&#x2705; 23 Done</span>
-        <span class="chip c-build">&#x1F3D7; 8 Build</span>
+        <span class="chip c-build">&#x1F3D7; 9 Build</span>
         <span class="chip c-pri">&#x23ED; 10 Prioritized</span>
-        <span class="chip c-disc">&#x1F50D; 2 Discovery</span>
-        <span class="chip c-wish">&#x1F4CB; 48 Backlog</span>
+        <span class="chip c-disc">&#x1F50D; 1 Discovery</span>
+        <span class="chip c-wish">&#x1F4CB; 49 Backlog</span>
         <span class="chip c-cancel">&#x274C; 3 Cancelled</span>
       </div>
     </div>
@@ -258,27 +258,137 @@ nav{
 <div class="slide" id="s4">
   <div class="slide-tag">Frentes de Trabalho</div>
   <h2 class="slide-title">O que est&#xe1; em <span class="grad">paralelo</span></h2>
-  <p class="slide-sub">7 frentes identificadas al&#xe9;m das funcionalidades &#x2014; algumas em andamento, outras ainda pendentes</p>
-    <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;display:flex;align-items:center;gap:8px;"><span style="width:3px;height:12px;background:var(--build);border-radius:2px;display:inline-block"></span>Em andamento</div><div class="fc-grid" style="margin-bottom:28px">    <div class="fc-card"><div class="fc-head"><div class="fc-num" style="background:rgba(59,130,246,.15);color:#3B82F6">5</div><span class="fc-title">Tombamento Original &#x2192; PicPay</span><span class="fc-status" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);color:#93C5FD">Em andamento</span></div><div class="fc-items"><div class="fc-item"><span class="fc-icon">&#x1F4C5;</span><span><b>Janela de aprova&#xe7;&#xe3;o do Plano:</b> Abr/2026</span></div><div class="fc-item"><span class="fc-icon">&#x1F3C1;</span><span><b>Janela de execu&#xe7;&#xe3;o:</b> Mai/2026 at&#xe9; Jun/2026</span></div><div class="fc-item"><span class="fc-icon">&#x279C;</span><span>&#xc9;pico: <a href="https://picpay.atlassian.net/browse/CAB2K-1063" target="_blank" style="color:#60A5FA">CAB2K-1063</a></span></div></div></div>    <div class="fc-card"><div class="fc-head"><div class="fc-num" style="background:rgba(236,72,153,.15);color:#EC4899">6</div><span class="fc-title">Clientes do Consignado</span><span class="fc-status" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);color:#93C5FD">Em andamento</span></div><div class="fc-items"><div class="fc-item"><span class="fc-icon">&#x1F4C5;</span><span><b>Defini&#xe7;&#xe3;o da estrat&#xe9;gia at&#xe9;:</b> 30/06/2026</span></div><div class="fc-item"><span class="fc-icon">&#x279C;</span><span>&#xc9;pico: <a href="https://picpay.atlassian.net/browse/CARCN-355" target="_blank" style="color:#60A5FA">CARCN-355 &middot; Q3 2026</a></span></div></div></div>    <div class="fc-card"><div class="fc-head"><div class="fc-num" style="background:rgba(34,197,94,.15);color:#22C55E">1</div><span class="fc-title">Funcionalidades</span><span class="fc-status" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);color:#93C5FD">Em andamento</span></div><div class="fc-items"><div class="fc-item"><span class="fc-icon">&#x2705;</span><span>94 &#xe9;picos mapeados no roadmap</span></div><div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>Lista n&#xe3;o exaustiva</b> &#x2014; &#xe1;reas ainda descobrindo impactos</span></div><div class="fc-item"><span class="fc-icon">&#x279C;</span><span>6 squads ativas: CAB2K, B2KTRA, CAC, TRFSCC, TRCSLS, CARCN</span></div></div></div>    <div class="fc-card"><div class="fc-head"><div class="fc-num" style="background:rgba(239,68,68,.15);color:#EF4444">2</div><span class="fc-title">&#xc1;reas Impactadas</span><span class="fc-status" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#FCA5A5">Incompleto</span></div><div class="fc-items"><div class="fc-item"><span class="fc-icon">&#x2705;</span><span><b>Mapeadas:</b> BU Cart&#xf5;es (todas as squads PHD)</span></div><div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>N&#xe3;o mapeadas ainda:</b></span></div></div><div class="at-wrap"><span class="at at-red">Cobran&#xe7;a de Seguro</span><span class="at at-red">Bonifica&#xe7;&#xe3;o</span><span class="at at-red">Cobran&#xe7;a</span><span class="at at-red">Renova&#xe7;&#xe3;o Cart&#xe3;o (BIN)</span><span class="at at-red">Bandeira</span><span class="at at-yellow">Prev. Fraude</span><span class="at at-yellow">Canais Atendimento + Service View</span><span class="at at-yellow">Open Finance</span><span class="at at-yellow">Growth</span><span class="at at-yellow">Cont&#xe1;bil</span><span class="at at-yellow">Squad de neg&#xf3;cio dentro da BU</span></div></div>    <div class="fc-card"><div class="fc-head"><div class="fc-num" style="background:rgba(100,116,139,.15);color:#94A3B8">7</div><span class="fc-title">Controle dos Gaps</span><span class="fc-status" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);color:#93C5FD">Em acompanhamento</span></div><div class="fc-items"><div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>Data de congelamento</b> de novos itens no Vision+ &#x2014; a definir</span></div><div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>Definir o plano de aprova&#xe7;&#xe3;o</b> com impacto de novos itens &#x2014; <span style="color:#FCA5A5;font-weight:600">pendente</span></span></div><div class="fc-item"><span class="fc-icon">&#x1F4CA;</span><span>Saldo atual: <b style="font-size:20px;color:#EF4444;vertical-align:middle">89</b> <b>GAPs</b> identificados</span></div></div></div>  </div>  <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;display:flex;align-items:center;gap:8px;margin-top:8px;"><span style="width:3px;height:12px;background:var(--cancel);border-radius:2px;display:inline-block"></span>N&#xe3;o iniciado</div>  <div class="fc-grid">    <div class="fc-card"><div class="fc-head"><div class="fc-num" style="background:rgba(168,85,247,.15);color:#A855F7">3</div><span class="fc-title">Plano de Teste de Carga</span><span class="fc-status" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#FCA5A5">N&#xe3;o iniciado</span></div><div class="fc-items"><div class="fc-item"><span class="fc-icon">&#x1F4C5;</span><span><b>Previs&#xe3;o de in&#xed;cio:</b> Out/2026</span></div><div class="fc-item"><span class="fc-icon">&#x279C;</span><span><b>Objetivo:</b> Avaliar cen&#xe1;rios, volume, poss&#xed;veis desvios e teste de carga</span></div><div class="fc-item"><span class="fc-icon">&#x279C;</span><span>Escopo: todas as squads BU Cart&#xf5;es</span></div><div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span>Demais BUs ainda <b>a mapear</b></span></div></div></div>    <div class="fc-card"><div class="fc-head"><div class="fc-num" style="background:rgba(245,158,11,.15);color:#F59E0B">4</div><span class="fc-title">Plano de Tombamento</span><span class="fc-status" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#FCA5A5">N&#xe3;o iniciado &middot; Sem previs&#xe3;o</span></div><div class="fc-items"><div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>Estrat&#xe9;gia</b> de tombamento &#x2014; a definir</span></div><div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>Plano de Backup</b> &#x2014; a definir</span></div><div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>Valida&#xe7;&#xf5;es</b> &#x2014; a definir</span></div></div></div>
+  <p class="slide-sub">6 frentes identificadas &#x2014; em andamento primeiro, n&#xe3;o iniciado depois</p>
 
-</div>
-</div>
+  <!-- EM ANDAMENTO -->
+  <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;display:flex;align-items:center;gap:8px;">
+    <span style="width:3px;height:12px;background:var(--build);border-radius:2px;display:inline-block"></span>
+    Em andamento
+  </div>
+  <div class="fc-grid" style="margin-bottom:32px">
 
+    <!-- 1 -->
+    <div class="fc-card">
+      <div class="fc-head">
+        <div class="fc-num" style="background:rgba(34,197,94,.15);color:#22C55E">1</div>
+        <span class="fc-title">Funcionalidades</span>
+        <span class="fc-status" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);color:#93C5FD">Em andamento</span>
+      </div>
+      <div class="fc-items">
+        <div class="fc-item"><span class="fc-icon">&#x2705;</span><span>95 &#xe9;picos mapeados no roadmap</span></div>
+        <div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>Lista n&#xe3;o exaustiva</b> &#x2014; &#xe1;reas ainda descobrindo impactos</span></div>
+        <div class="fc-item"><span class="fc-icon">&#x279C;</span><span>6 squads ativas: CAB2K, B2KTRA, CAC, TRFSCC, TRCSLS, CARCN</span></div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="fc-card">
+      <div class="fc-head">
+        <div class="fc-num" style="background:rgba(239,68,68,.15);color:#EF4444">2</div>
+        <span class="fc-title">&#xc1;reas Impactadas</span>
+        <span class="fc-status" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#FCA5A5">Incompleto</span>
+      </div>
+      <div class="fc-items">
+        <div class="fc-item"><span class="fc-icon">&#x2705;</span><span><b>Mapeadas:</b> BU Cart&#xf5;es (todas as squads PHD)</span></div>
+        <div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>N&#xe3;o mapeadas ainda:</b></span></div>
+      </div>
+      <div class="at-wrap">
+        <span class="at at-red">Cobran&#xe7;a de Seguro</span>
+        <span class="at at-red">Bonifica&#xe7;&#xe3;o</span>
+        <span class="at at-red">Cobran&#xe7;a</span>
+        <span class="at at-red">Renova&#xe7;&#xe3;o Cart&#xe3;o (BIN)</span>
+        <span class="at at-red">Bandeira</span>
+        <span class="at at-yellow">Prev. Fraude</span>
+        <span class="at at-yellow">Canais Atendimento + Service View</span>
+        <span class="at at-yellow">Open Finance</span>
+        <span class="at at-yellow">Growth</span>
+        <span class="at at-yellow">Cont&#xe1;bil</span>
+        <span class="at at-yellow">Squad de neg&#xf3;cio dentro da BU</span>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="fc-card">
+      <div class="fc-head">
+        <div class="fc-num" style="background:rgba(59,130,246,.15);color:#3B82F6">3</div>
+        <span class="fc-title">Tombamento Original &#x2192; PicPay</span>
+        <span class="fc-status" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);color:#93C5FD">Em andamento</span>
+      </div>
+      <div class="fc-items">
+        <div class="fc-item"><span class="fc-icon">&#x1F4C5;</span><span><b>Janela de aprova&#xe7;&#xe3;o do Plano:</b> Abr/2026</span></div>
+        <div class="fc-item"><span class="fc-icon">&#x1F3C1;</span><span><b>Janela de execu&#xe7;&#xe3;o:</b> Mai/2026 at&#xe9; Jun/2026</span></div>
+        <div class="fc-item"><span class="fc-icon">&#x279C;</span><span>&#xc9;pico: <a href="https://picpay.atlassian.net/browse/CAB2K-1063" target="_blank" style="color:#60A5FA">CAB2K-1063</a></span></div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="fc-card">
+      <div class="fc-head">
+        <div class="fc-num" style="background:rgba(236,72,153,.15);color:#EC4899">4</div>
+        <span class="fc-title">Clientes do Consignado</span>
+        <span class="fc-status" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);color:#93C5FD">Em andamento</span>
+      </div>
+      <div class="fc-items">
+        <div class="fc-item"><span class="fc-icon">&#x1F4C5;</span><span><b>Defini&#xe7;&#xe3;o da estrat&#xe9;gia at&#xe9;:</b> 30/06/2026</span></div>
+        <div class="fc-item"><span class="fc-icon">&#x279C;</span><span>&#xc9;pico: <a href="https://picpay.atlassian.net/browse/CARCN-355" target="_blank" style="color:#60A5FA">CARCN-355 &middot; Q3 2026</a></span></div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="fc-card">
+      <div class="fc-head">
+        <div class="fc-num" style="background:rgba(100,116,139,.15);color:#94A3B8">5</div>
+        <span class="fc-title">Controle dos Gaps</span>
+        <span class="fc-status" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);color:#93C5FD">Em acompanhamento</span>
+      </div>
+      <div class="fc-items">
+        <div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>Data de congelamento</b> de novos itens no Vision+ &#x2014; a definir</span></div>
+        <div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>Definir o plano de aprova&#xe7;&#xe3;o</b> com impacto de novos itens &#x2014; <span style="color:#FCA5A5;font-weight:600">pendente</span></span></div>
+        <div class="fc-item"><span class="fc-icon">&#x1F4CA;</span><span>PicPay: <b style="font-size:18px;color:#EF4444;vertical-align:middle">89</b> <b>GAPs</b></span></div>
+        <div class="fc-item"><span class="fc-icon">&#x1F4CA;</span><span>Consignado: GAPs a mapear</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- NÃO INICIADO -->
+  <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;display:flex;align-items:center;gap:8px;">
+    <span style="width:3px;height:12px;background:var(--cancel);border-radius:2px;display:inline-block"></span>
+    N&#xe3;o iniciado
+  </div>
+  <div class="fc-grid">
+
+    <!-- 6 -->
+    <div class="fc-card" style="border-top:3px solid rgba(168,85,247,.4)">
+      <div class="fc-head">
+        <div class="fc-num" style="background:rgba(168,85,247,.15);color:#A855F7">6</div>
+        <span class="fc-title">Plano de Migra&#xe7;&#xe3;o do B2K</span>
+        <span class="fc-status" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#FCA5A5">N&#xe3;o iniciado</span>
+      </div>
+      <div class="fc-items">
+        <div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>Plano Teste de Carga</b> &#x2014; n&#xe3;o iniciado &middot; previs&#xe3;o Out/2026</span></div>
+        <div class="fc-item"><span class="fc-icon">&#x26A0;&#xFE0F;</span><span><b>Plano Operacional</b> &#x2014; n&#xe3;o iniciado &middot; sem previs&#xe3;o</span></div>
+        <div class="fc-item"><span class="fc-icon">&#x279C;</span><span>Envolve todas as squads BU Cart&#xf5;es + demais BUs a mapear</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
 <!-- ════════ S2 · STATUS ════════ -->
 <div class="slide" id="s2">
   <div class="slide-tag">Status dos &#xc9;picos</div>
   <h2 class="slide-title">Como est&#xe1; o <span class="grad">programa hoje</span></h2>
-  <p class="slide-sub">Distribui&#xe7;&#xe3;o dos 94 &#xe9;picos por status e por quarter de entrega</p>
+  <p class="slide-sub">Distribui&#xe7;&#xe3;o dos 95 &#xe9;picos por status e por quarter de entrega</p>
 
   <!-- CARDS DE RESUMO TOPO -->
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:40px;">
     <div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:16px 18px;text-align:center;">
-      <div style="font-size:34px;font-weight:900;color:#4ADE80;letter-spacing:-1px">23</div>
+      <div style="font-size:34px;font-weight:900;color:#4ADE80;letter-spacing:-1px">3</div>
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-top:4px">Done</div>
       <div style="font-size:11px;color:var(--done);margin-top:2px;font-weight:600">24%</div>
     </div>
     <div style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:12px;padding:16px 18px;text-align:center;">
-      <div style="font-size:34px;font-weight:900;color:#60A5FA;letter-spacing:-1px">8</div>
+      <div style="font-size:34px;font-weight:900;color:#60A5FA;letter-spacing:-1px">9</div>
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-top:4px">Build</div>
       <div style="font-size:11px;color:var(--build);margin-top:2px;font-weight:600">8%</div>
     </div>
@@ -288,12 +398,12 @@ nav{
       <div style="font-size:11px;color:var(--pri);margin-top:2px;font-weight:600">11%</div>
     </div>
     <div style="background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.2);border-radius:12px;padding:16px 18px;text-align:center;">
-      <div style="font-size:34px;font-weight:900;color:#C084FC;letter-spacing:-1px">2</div>
+      <div style="font-size:34px;font-weight:900;color:#C084FC;letter-spacing:-1px">1</div>
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-top:4px">Discovery</div>
       <div style="font-size:11px;color:var(--disc);margin-top:2px;font-weight:600">2%</div>
     </div>
     <div style="background:rgba(100,116,139,.06);border:1px solid rgba(100,116,139,.2);border-radius:12px;padding:16px 18px;text-align:center;">
-      <div style="font-size:34px;font-weight:900;color:#94A3B8;letter-spacing:-1px">48</div>
+      <div style="font-size:34px;font-weight:900;color:#94A3B8;letter-spacing:-1px">49</div>
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-top:4px">Wishlist</div>
       <div style="font-size:11px;color:var(--wish);margin-top:2px;font-weight:600">51%</div>
     </div>
@@ -309,25 +419,25 @@ nav{
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
       <div>
         <div style="font-size:14px;font-weight:800;margin-bottom:2px">Progresso Geral do Programa</div>
-        <div style="font-size:12px;color:var(--muted)">23 de 94 &#xe9;picos conclu&#xed;dos</div>
+        <div style="font-size:12px;color:var(--muted)">23 de 95 &#xe9;picos conclu&#xed;dos</div>
       </div>
       <div style="font-size:40px;font-weight:900;color:var(--done);letter-spacing:-2px">24%</div>
     </div>
     <!-- Barra segmentada por status -->
     <div style="display:flex;height:12px;border-radius:100px;overflow:hidden;gap:2px;margin-bottom:10px;">
       <div style="background:var(--done);flex:23" title="Done: 23"></div>
-      <div style="background:var(--build);flex:8" title="Build: 8"></div>
+      <div style="background:var(--build);flex:9" title="Build: 8"></div>
       <div style="background:var(--pri);flex:10" title="Prioritized: 10"></div>
-      <div style="background:var(--disc);flex:2" title="Discovery: 2"></div>
-      <div style="background:var(--wish);flex:48;opacity:.4" title="Wishlist: 48"></div>
+      <div style="background:var(--disc);flex:1" title="Discovery: 2"></div>
+      <div style="background:var(--wish);flex:49;opacity:.4" title="Wishlist: 48"></div>
       <div style="background:var(--cancel);flex:3;opacity:.3" title="Cancelled: 3"></div>
     </div>
     <div style="display:flex;gap:20px;flex-wrap:wrap;">
       <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--done);display:inline-block"></span>Done 23</div>
-      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--build);display:inline-block"></span>Build 8</div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--build);display:inline-block"></span>Build 9</div>
       <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--pri);display:inline-block"></span>Prioritized 10</div>
-      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--disc);display:inline-block"></span>Discovery 2</div>
-      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--wish);opacity:.5;display:inline-block"></span>Wishlist 48</div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--disc);display:inline-block"></span>Discovery 1</div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--wish);opacity:.5;display:inline-block"></span>Wishlist 49</div>
       <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);opacity:.6"><span style="width:10px;height:10px;border-radius:2px;background:var(--cancel);display:inline-block"></span>Cancelled 3</div>
     </div>
   </div>
@@ -405,7 +515,7 @@ nav{
           <span style="font-size:13px;font-weight:800;color:var(--muted)">Backlog</span>
           <span style="font-size:10px;padding:2px 8px;border-radius:100px;background:rgba(100,116,139,.15);color:#94A3B8;font-weight:700">&#x1F4CB; A priorizar</span>
         </div>
-        <div style="font-size:32px;font-weight:900;color:var(--muted);letter-spacing:-1px">29</div>
+        <div style="font-size:32px;font-weight:900;color:var(--muted);letter-spacing:-1px">30</div>
         <div style="font-size:11px;color:var(--muted);margin-top:2px">sem Fix Version</div>
         <div style="height:4px;background:rgba(64,69,102,.3);border-radius:100px;margin-top:10px;overflow:hidden;"><div style="height:100%;width:100%;background:var(--dim);border-radius:100px;"></div></div>
       </div>
@@ -699,7 +809,7 @@ nav{
 </div>
 
 <footer style="text-align:center;padding:32px;color:var(--dim);font-size:11px;border-top:1px solid var(--border)">
-  BUCS-345 &middot; Migra&#xe7;&#xe3;o B2K &middot; Squad PHD &middot; Vitor Marques Gaspar &middot; Gerado em 09/04/2026 20:45
+  BUCS-345 &middot; Migra&#xe7;&#xe3;o B2K &middot; Squad PHD &middot; Vitor Marques Gaspar &middot; Gerado em 15/04/2026 16:36
 </footer>
 
 <script>
