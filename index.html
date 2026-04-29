@@ -190,6 +190,34 @@ nav{
 .pdot{width:7px;height:7px;border-radius:50%;animation:pd 2s infinite;flex-shrink:0;}
 @keyframes pd{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.8)}}
 </style>
+
+  <script>
+    // Verifica autenticação antes de renderizar
+    const SESSION_KEY = 'b2k_auth_session';
+    const CORRECT_PASSWORD = 'B2K2026';
+    const SESSION_DURATION = 24 * 60 * 60 * 1000;
+    
+    function checkAuth() {
+      const session = localStorage.getItem(SESSION_KEY);
+      if (!session) {
+        window.location.href = '/auth.html';
+        return false;
+      }
+      const [token, timestamp] = session.split('|');
+      const now = Date.now();
+      if (now - parseInt(timestamp) >= SESSION_DURATION || token !== btoa(CORRECT_PASSWORD)) {
+        localStorage.removeItem(SESSION_KEY);
+        window.location.href = '/auth.html';
+        return false;
+      }
+      return true;
+    }
+    
+    // Redireciona se não autenticado
+    if (!checkAuth()) {
+      document.documentElement.innerHTML = '';
+    }
+  </script>
 </head>
 <body>
 
@@ -841,3 +869,4 @@ slides.forEach(s=>obs.observe(s));
 </script>
 </body>
 </html>
+
